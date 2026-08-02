@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { serviceAreaNames } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -29,7 +28,6 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <Breadcrumbs items={[{ label: "About" }]} />
       <Hero
         eyebrow="About Ironmark Exteriors"
         title="Built on Trust, Backed by Craftsmanship"

@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import GoogleReviews from "@/components/GoogleReviews";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { serviceAreas, services, business } from "@/lib/data";
 
 type Params = Promise<{ slug: string }>;
@@ -52,7 +51,6 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(areaSchema) }}
       />
-      <Breadcrumbs items={[{ label: "Service Areas", href: "/service-areas" }, { label: area.name }]} />
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
         title={`Exterior Services in ${area.name}, ON`}

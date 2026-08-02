@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { serviceAreas, serviceAreaNames, business } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -14,7 +13,6 @@ export const metadata: Metadata = {
 export default function ServiceAreasPage() {
   return (
     <>
-      <Breadcrumbs items={[{ label: "Service Areas" }]} />
       <Hero
         eyebrow="Where We Work"
         title="Our Service Areas"

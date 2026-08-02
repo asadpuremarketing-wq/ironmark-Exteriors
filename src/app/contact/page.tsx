@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import LeadForm from "@/components/LeadForm";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { business } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -14,7 +13,6 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Breadcrumbs items={[{ label: "Contact" }]} />
       <Hero
         eyebrow="Get In Touch"
         title="Request a Free Estimate"

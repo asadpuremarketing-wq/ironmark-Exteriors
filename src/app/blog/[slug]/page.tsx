@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import CTA from "@/components/CTA";
 import { blogPosts, getBlogPost } from "@/lib/blog";
 import { business, services } from "@/lib/data";
@@ -110,7 +109,6 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <Breadcrumbs items={[{ label: "Blog", href: "/blog" }, { label: post.title }]} />
 
       <section className="relative overflow-hidden bg-navy-950 py-16 sm:py-20">
         <div

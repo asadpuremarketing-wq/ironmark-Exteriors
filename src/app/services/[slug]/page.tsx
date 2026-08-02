@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import GoogleReviews from "@/components/GoogleReviews";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { services, serviceAreas, serviceAreaNames, business } from "@/lib/data";
 
 type Params = Promise<{ slug: string }>;
@@ -54,7 +53,6 @@ export default async function ServicePage({ params }: { params: Params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
-      <Breadcrumbs items={[{ label: service.name }]} />
       <Hero
         eyebrow="Hamilton, ON & Surrounding Areas"
         title={`${service.name} Services in Hamilton, ON`}

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/Hero";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { blogPosts } from "@/lib/blog";
 import { business } from "@/lib/data";
 
@@ -26,7 +25,6 @@ export default function BlogIndexPage() {
 
   return (
     <>
-      <Breadcrumbs items={[{ label: "Blog" }]} />
       <Hero
         eyebrow="Resources"
         title="Home Exterior Tips & Advice"

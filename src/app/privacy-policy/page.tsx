@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { business } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -15,7 +14,6 @@ const EFFECTIVE_DATE = "July 28, 2026";
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Breadcrumbs items={[{ label: "Privacy Policy" }]} />
       <Hero
         eyebrow="Legal"
         title="Privacy Policy"
