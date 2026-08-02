@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { internalNotificationEmail, customerConfirmationEmail } from "@/lib/emailTemplates";
 
 export type LeadPayload = {
@@ -13,10 +13,17 @@ export type LeadPayload = {
 };
 
 const LEAD_INBOX = "ironmarkexteriors@gmail.com";
-// Resend requires a verified sending domain to send from your own address.
-// Until ironmarkexteriors.ca is verified in Resend, this uses their shared
-// test sender, which works but shows "via resend.dev" to recipients.
-const FROM_ADDRESS = "Ironmark Exteriors <onboarding@resend.dev>";
+
+function getTransporter() {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_APP_PASSWORD;
+  if (!user || !pass) return null;
+
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: { user, pass },
+  });
+}
 
 export async function POST(request: Request) {
   let body: LeadPayload;
@@ -50,16 +57,15 @@ export async function POST(request: Request) {
     receivedAt: new Date().toISOString(),
   });
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const transporter = getTransporter();
 
-  if (!apiKey) {
+  if (!transporter) {
     console.warn(
-      "[New Lead] RESEND_API_KEY is not set — email notifications were skipped."
+      "[New Lead] GMAIL_USER / GMAIL_APP_PASSWORD are not set — email notifications were skipped."
     );
     return NextResponse.json({ ok: true });
   }
 
-  const resend = new Resend(apiKey);
   const leadData = {
     name: body.name,
     phone: body.phone,
@@ -69,32 +75,27 @@ export async function POST(request: Request) {
     source: body.source,
   };
 
-  const emailTasks: Promise<unknown>[] = [];
+  const fromAddress = `"Ironmark Exteriors" <${process.env.GMAIL_USER}>`;
 
   const internal = internalNotificationEmail(leadData);
-  emailTasks.push(
-    resend.emails.send({
-      from: FROM_ADDRESS,
+  const confirmation = customerConfirmationEmail(leadData);
+
+  const results = await Promise.allSettled([
+    transporter.sendMail({
+      from: fromAddress,
       to: LEAD_INBOX,
-      replyTo: body.email || undefined,
+      replyTo: body.email,
       subject: internal.subject,
       html: internal.html,
-    })
-  );
+    }),
+    transporter.sendMail({
+      from: fromAddress,
+      to: body.email,
+      subject: confirmation.subject,
+      html: confirmation.html,
+    }),
+  ]);
 
-  if (body.email?.trim()) {
-    const confirmation = customerConfirmationEmail(leadData);
-    emailTasks.push(
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: body.email,
-        subject: confirmation.subject,
-        html: confirmation.html,
-      })
-    );
-  }
-
-  const results = await Promise.allSettled(emailTasks);
   results.forEach((result, i) => {
     if (result.status === "rejected") {
       console.error(`[New Lead] Email task ${i} failed:`, result.reason);
