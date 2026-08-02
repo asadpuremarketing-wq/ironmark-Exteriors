@@ -44,6 +44,9 @@ export const metadata: Metadata = {
       "Licensed & insured exterior renovation company serving Hamilton, ON and surrounding areas. Free estimates.",
     images: ["/images/logo.png"],
   },
+  verification: {
+    google: "cXng2Euq7r0hACxNmV1YOxmDmlSwCCzhrEDqiA0_6Q8",
+  },
 };
 
 const localBusinessSchema = {
