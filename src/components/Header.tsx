@@ -97,6 +97,12 @@ export default function Header() {
               Service Areas
             </Link>
             <Link
+              href="/blog"
+              className="text-sm font-semibold text-brand-silver transition hover:text-white"
+            >
+              Blog
+            </Link>
+            <Link
               href="/contact"
               className="text-sm font-semibold text-brand-silver transition hover:text-white"
             >
@@ -188,6 +194,13 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
             >
               Service Areas
+            </Link>
+            <Link
+              href="/blog"
+              className="rounded px-2 py-3 text-sm font-semibold text-brand-silver hover:bg-navy-800 hover:text-white"
+              onClick={() => setMobileOpen(false)}
+            >
+              Blog
             </Link>
             <Link
               href="/contact"

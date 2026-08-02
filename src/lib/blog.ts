@@ -1,0 +1,182 @@
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishedDate: string; // ISO
+  readTime: string;
+  category: string;
+  relatedService?: string; // service slug
+  content: string[]; // paragraphs; strings starting with "## " render as subheadings, "- " as list items
+};
+
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "signs-you-need-a-new-roof",
+    title: "7 Signs You Need a New Roof (Not Just a Repair)",
+    excerpt:
+      "Not sure if that leak is a quick fix or a sign of bigger problems? Here's how to tell the difference between a roof repair and a full replacement.",
+    publishedDate: "2026-06-02",
+    readTime: "5 min read",
+    category: "Roofing",
+    relatedService: "roofing",
+    content: [
+      "Every roof eventually reaches a point where patching the next leak stops making financial sense. The tricky part is knowing when you've crossed that line. Here are the signs worth paying attention to.",
+      "## 1. Your roof is nearing or past its expected lifespan",
+      "Most asphalt shingle roofs in Ontario are rated for 20-25 years, though harsh winters, ice damming, and wind exposure can shorten that. If you don't know how old your roof is, checking your home's inspection report or asking your realtor from when you purchased is a good starting point.",
+      "## 2. Shingles are curling, cracking, or missing granules",
+      "Curling or clawing shingles mean the material is losing flexibility and its ability to shed water. If you find granules collecting in your gutters or at the base of downspouts, the protective coating is wearing away faster than it should.",
+      "## 3. You're seeing daylight in the attic",
+      "Head up to the attic on a sunny day with the lights off. Any pinpricks of light coming through the roof deck mean water can get through too — even if you haven't noticed a leak yet.",
+      "## 4. Repeated leaks in different spots",
+      "One leak is a repair. Leaks that keep showing up in new locations after each storm usually mean the underlying roofing system — not just a single shingle or flashing point — has failed.",
+      "## 5. Sagging rooflines",
+      "A roof deck that visibly sags between rafters is a structural concern, not a cosmetic one, and should be assessed promptly.",
+      "## 6. Moss, algae, or dark streaking across large areas",
+      "Some staining is cosmetic, but widespread moss growth can trap moisture against the shingles and accelerate deterioration underneath.",
+      "## 7. Your energy bills have crept up",
+      "Aging roofing and ventilation systems lose their ability to regulate attic temperature, which can show up as higher heating and cooling costs.",
+      "## When in doubt, get a professional opinion",
+      "A quick inspection can usually tell you whether you're looking at a targeted repair or a full replacement — and catching it early is almost always cheaper than waiting for a leak to cause interior damage.",
+      "Ironmark Exteriors offers free roof inspections and estimates for homeowners across Hamilton, Stoney Creek, Burlington, Ancaster, and Dundas. If any of the signs above sound familiar, reach out and we'll take a look.",
+    ],
+  },
+  {
+    slug: "vinyl-vs-fiber-cement-siding",
+    title: "Vinyl vs. Fiber Cement Siding: Which Is Right for Your Home?",
+    excerpt:
+      "Both are popular siding choices for Ontario homes, but they differ in cost, durability, maintenance, and style. Here's how to decide.",
+    publishedDate: "2026-06-16",
+    readTime: "6 min read",
+    category: "Siding",
+    relatedService: "siding",
+    content: [
+      "Siding is one of the biggest visual and functional upgrades you can make to a home's exterior, and vinyl and fiber cement are the two most common options homeowners in our area choose between. Neither is universally better — the right pick depends on your priorities.",
+      "## Vinyl siding",
+      "Vinyl is the most widely installed siding material in North America for good reason: it's affordable, low-maintenance, and comes in a wide range of colors and profiles.",
+      "- Lower upfront cost than fiber cement",
+      "- Never needs painting — color is baked into the material",
+      "- Resistant to rot and insect damage",
+      "- Lighter weight, generally faster to install",
+      "- Can fade over time with prolonged sun exposure",
+      "- Less impact-resistant than fiber cement in extreme weather",
+      "## Fiber cement siding",
+      "Fiber cement (like James Hardie board) is a composite of cement, sand, and cellulose fibers, engineered to mimic the look of wood without the maintenance burden.",
+      "- Higher upfront cost, but often adds more resale value",
+      "- Extremely durable — resists fire, impact, and pests",
+      "- Holds paint well and can be refreshed with a new color down the road",
+      "- Heavier material, typically requires more labor to install",
+      "- Needs occasional repainting or resealing over its lifespan",
+      "## Our take",
+      "If you want the lowest-maintenance option and are working with a tighter budget, vinyl is a proven, reliable choice. If you're prioritizing long-term durability, a more premium look, or planning to stay in the home for decades, fiber cement is worth the investment.",
+      "We install and repair both vinyl and fiber cement siding for homes throughout Hamilton and the surrounding areas. If you're not sure which fits your home and budget, we're happy to walk through the options during a free estimate.",
+    ],
+  },
+  {
+    slug: "how-often-clean-gutters",
+    title: "How Often Should You Clean Your Gutters in Ontario?",
+    excerpt:
+      "Clogged gutters cause more home damage than most homeowners realize. Here's a practical cleaning schedule for Ontario's climate.",
+    publishedDate: "2026-06-30",
+    readTime: "4 min read",
+    category: "Gutters",
+    relatedService: "gutters",
+    content: [
+      "Gutters have one job: move water away from your roof, siding, and foundation. When they're clogged, that water backs up and ends up exactly where you don't want it — behind fascia boards, into your basement, or pooling around your foundation.",
+      "## A general cleaning schedule",
+      "- Late spring: after trees have finished flowering and shedding seed pods",
+      "- Late fall: after most leaves have dropped, before winter freeze",
+      "- After major storms: high winds can knock debris into gutters even outside the usual seasons",
+      "Homes surrounded by mature trees may need an additional mid-summer check, while homes with few nearby trees can often get away with the two seasonal cleanings alone.",
+      "## Signs your gutters need attention now",
+      "- Water spilling over the sides during rain instead of flowing through downspouts",
+      "- Sagging or pulling-away gutter sections",
+      "- Plant growth visible in the gutter itself",
+      "- Water stains or streaking on the siding beneath the gutter line",
+      "## Gutter guards can reduce (not eliminate) the work",
+      "Gutter guards cut down significantly on debris buildup, especially on homes with heavy tree cover, but they don't remove the need for occasional maintenance entirely — fine debris and granules can still accumulate over time.",
+      "## Why this matters more than it seems",
+      "Overflowing gutters are one of the most common — and most preventable — causes of fascia rot, basement leaks, and foundation issues we see on service calls. A cleaning that takes an hour or two twice a year is far cheaper than the repairs that follow years of neglect.",
+      "Ironmark Exteriors offers gutter cleaning, repair, and gutter guard installation for homeowners across Hamilton, Stoney Creek, Burlington, Ancaster, and Dundas.",
+    ],
+  },
+  {
+    slug: "best-time-to-paint-house-exterior",
+    title: "When Is the Best Time to Paint Your House Exterior in Ontario?",
+    excerpt:
+      "Timing your exterior paint job around Ontario's weather makes a real difference in how long the finish lasts. Here's what to consider.",
+    publishedDate: "2026-07-07",
+    readTime: "4 min read",
+    category: "Painting",
+    relatedService: "painting",
+    content: [
+      "Exterior paint doesn't just need dry weather to go on — it needs the right temperature and humidity range to cure properly. Get the timing wrong and even a good paint job can fail early through peeling, blistering, or poor adhesion.",
+      "## The ideal window",
+      "Late spring through early fall is generally the most reliable stretch in our climate, once overnight temperatures are consistently staying above the range most exterior paints require to cure, and before the first fall frost.",
+      "## Why temperature swings matter",
+      "Paint applied when it's too cold won't cure properly and can crack prematurely. Paint applied in direct, intense midday heat can dry too fast on the surface before it's bonded properly underneath, leading to poor adhesion.",
+      "## Humidity and rain matter too",
+      "Freshly applied paint needs dry time before rain hits it — most products need several hours of dry weather minimum, and high humidity slows curing even without rain. A trustworthy painting crew will track the forecast closely rather than just checking for clear skies on the day of.",
+      "## Don't ignore surface prep",
+      "Regardless of timing, the paint job is only as good as the prep work underneath — scraping loose paint, sanding rough spots, and priming bare wood or repaired areas. Rushed prep is the most common reason a paint job fails early, more often than timing issues.",
+      "## Planning ahead helps",
+      "Because the good-weather window is limited, painting contractors in our area tend to book up through the summer months. If you're planning an exterior paint job, reaching out in early spring gives you the best shot at your preferred timing.",
+      "Ironmark Exteriors provides exterior painting for homes throughout Hamilton and surrounding areas, including full house painting, trim and soffit work, and deck staining.",
+    ],
+  },
+  {
+    slug: "prepare-home-exterior-for-winter",
+    title: "How to Prepare Your Home's Exterior for an Ontario Winter",
+    excerpt:
+      "A little prep in the fall can prevent a lot of expensive damage once the snow and ice arrive. Here's a practical exterior winterizing checklist.",
+    publishedDate: "2026-07-21",
+    readTime: "5 min read",
+    category: "Maintenance",
+    content: [
+      "Ontario winters are hard on a home's exterior — freeze-thaw cycles, ice damming, and heavy snow loads all put stress on roofing, siding, and gutters. A fall walkthrough can catch small issues before they become winter emergencies.",
+      "## 1. Clear and inspect the gutters",
+      "Clogged gutters are one of the leading causes of ice dams, where melting snow refreezes at the roof edge and forces water back under the shingles. Clean gutters drain properly and reduce that risk significantly.",
+      "## 2. Check the roof for loose or damaged shingles",
+      "Any shingle that's loose, cracked, or missing before winter is an entry point for water once snow starts melting and refreezing on the roof. This is the easiest time of year to catch and fix it.",
+      "## 3. Inspect flashing around chimneys, vents, and skylights",
+      "These transition points are common leak sources. A quick visual check — or a professional inspection — can catch gaps before they let water in during a thaw.",
+      "## 4. Look at siding for gaps or damage",
+      "Cracked or loose siding panels let moisture behind the wall assembly, where it can freeze and cause more damage than the original crack. Small repairs now are far cheaper than what follows a winter of freeze-thaw cycles.",
+      "## 5. Trim back tree branches near the roofline",
+      "Heavy snow and ice can snap overhanging branches, and a falling limb can do serious damage to shingles or gutters.",
+      "## 6. Make sure downspouts direct water away from the foundation",
+      "Water that pools near the foundation and then freezes can contribute to cracking over time. Downspout extensions are a simple, inexpensive fix.",
+      "## When to call a professional",
+      "If you're not comfortable getting on a ladder, or you notice anything that looks like more than routine wear, a professional inspection before winter is worth the peace of mind — it's far easier to fix a problem in October than in the middle of a January thaw.",
+      "Ironmark Exteriors offers free exterior inspections for homeowners in Hamilton, Stoney Creek, Burlington, Ancaster, and Dundas heading into the winter season.",
+    ],
+  },
+  {
+    slug: "benefits-of-pressure-washing-before-selling",
+    title: "Why Pressure Washing Is One of the Best ROI Home Improvements Before Selling",
+    excerpt:
+      "Curb appeal sells houses. Here's why a professional pressure wash is one of the cheapest, fastest ways to improve first impressions.",
+    publishedDate: "2026-07-28",
+    readTime: "4 min read",
+    category: "Pressure Washing",
+    relatedService: "pressure-washing",
+    content: [
+      "When homeowners think about improving curb appeal before listing, they often jump straight to landscaping or a fresh coat of paint. Pressure washing is cheaper, faster, and often makes a bigger visual difference than either.",
+      "## First impressions happen in seconds",
+      "Buyers form an opinion about a home before they even walk through the front door. Dirt, algae staining, and grime buildup on siding, walkways, and driveways read as neglect — even if the home is well maintained inside.",
+      "## What pressure washing actually removes",
+      "- Algae and mold streaking on siding, especially on north-facing walls",
+      "- Dirt and grime buildup on driveways and walkways",
+      "- Pollen and organic staining on decks and fences",
+      "- Grime accumulated in gutter exteriors and soffits",
+      "## It's also good prep work",
+      "If you're planning to paint before selling, pressure washing is a necessary first step — paint doesn't adhere well over dirt and mildew, so this isn't just cosmetic, it protects the investment in a fresh paint job too.",
+      "## A same-day improvement",
+      "Unlike landscaping or renovations that take weeks, a professional pressure wash is typically a same-day service with an immediate, visible result — which makes it one of the best value-for-time improvements before putting a home on the market.",
+      "Ironmark Exteriors provides pressure washing for siding, driveways, walkways, decks, and fences across Hamilton, Stoney Creek, Burlington, Ancaster, and Dundas.",
+    ],
+  },
+];
+
+export function getBlogPost(slug: string) {
+  return blogPosts.find((p) => p.slug === slug);
+}

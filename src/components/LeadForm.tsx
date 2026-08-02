@@ -121,20 +121,19 @@ export default function LeadForm({ variant = "full", source, className = "" }: P
         </div>
       </div>
 
-      {variant === "full" && (
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor={`email-${source}`} className="text-sm font-semibold text-navy-900">
-            Email
-          </label>
-          <input
-            id={`email-${source}`}
-            name="email"
-            type="email"
-            placeholder="you@example.com"
-            className={inputClasses}
-          />
-        </div>
-      )}
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor={`email-${source}`} className="text-sm font-semibold text-navy-900">
+          Email
+        </label>
+        <input
+          id={`email-${source}`}
+          name="email"
+          type="email"
+          required
+          placeholder="you@example.com"
+          className={inputClasses}
+        />
+      </div>
 
       <div className="flex flex-col gap-1.5">
         <label htmlFor={`service-${source}`} className="text-sm font-semibold text-navy-900">

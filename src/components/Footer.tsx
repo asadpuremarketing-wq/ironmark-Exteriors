@@ -87,6 +87,9 @@ export default function Footer() {
             © {new Date().getFullYear()} {business.name}. All rights reserved.
           </span>
           <div className="flex items-center gap-4">
+            <Link href="/blog" className="hover:text-white">
+              Blog
+            </Link>
             <Link href="/privacy-policy" className="hover:text-white">
               Privacy Policy
             </Link>
