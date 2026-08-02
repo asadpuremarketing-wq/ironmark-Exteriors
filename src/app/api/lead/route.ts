@@ -5,8 +5,8 @@ import { internalNotificationEmail, customerConfirmationEmail } from "@/lib/emai
 export type LeadPayload = {
   name: string;
   phone: string;
-  email?: string;
-  service?: string;
+  email: string;
+  service: string;
   message?: string;
   source?: string;
   company?: string; // honeypot
@@ -32,9 +32,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  if (!body.name?.trim() || !body.phone?.trim()) {
+  if (
+    !body.name?.trim() ||
+    !body.phone?.trim() ||
+    !body.email?.trim() ||
+    !body.service?.trim()
+  ) {
     return NextResponse.json(
-      { error: "Name and phone are required." },
+      { error: "Name, phone, email, and service are required." },
       { status: 400 }
     );
   }

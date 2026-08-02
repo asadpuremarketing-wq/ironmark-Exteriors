@@ -139,7 +139,13 @@ export default function LeadForm({ variant = "full", source, className = "" }: P
         <label htmlFor={`service-${source}`} className="text-sm font-semibold text-navy-900">
           Service Needed
         </label>
-        <select id={`service-${source}`} name="service" className={inputClasses} defaultValue="">
+        <select
+          id={`service-${source}`}
+          name="service"
+          required
+          className={inputClasses}
+          defaultValue=""
+        >
           <option value="" disabled>
             Select a service
           </option>
@@ -152,20 +158,18 @@ export default function LeadForm({ variant = "full", source, className = "" }: P
         </select>
       </div>
 
-      {variant === "full" && (
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor={`message-${source}`} className="text-sm font-semibold text-navy-900">
-            Message
-          </label>
-          <textarea
-            id={`message-${source}`}
-            name="message"
-            rows={4}
-            placeholder="Tell us a bit about your project..."
-            className={inputClasses}
-          />
-        </div>
-      )}
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor={`message-${source}`} className="text-sm font-semibold text-navy-900">
+          Message <span className="font-normal text-navy-900/40">(Optional)</span>
+        </label>
+        <textarea
+          id={`message-${source}`}
+          name="message"
+          rows={4}
+          placeholder="Tell us a bit about your project..."
+          className={inputClasses}
+        />
+      </div>
 
       {status === "error" && (
         <p className="text-sm font-medium text-red-600">{errorMsg}</p>
