@@ -5,7 +5,8 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import GoogleReviews from "@/components/GoogleReviews";
-import { services, serviceAreas } from "@/lib/data";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { services, serviceAreas, serviceAreaNames, business } from "@/lib/data";
 
 type Params = Promise<{ slug: string }>;
 
@@ -17,9 +18,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
+  const title = `${service.name} in Hamilton, ON`;
+  const description = `${service.shortDescription} Serving ${serviceAreaNames} and surrounding areas. Licensed & insured — get a free estimate today.`;
   return {
-    title: service.name,
-    description: service.shortDescription,
+    title,
+    description,
+    alternates: { canonical: `/services/${service.slug}` },
+    openGraph: { title, description, url: `${business.siteUrl}/services/${service.slug}` },
   };
 }
 
@@ -28,11 +33,31 @@ export default async function ServicePage({ params }: { params: Params }) {
   const service = services.find((s) => s.slug === slug);
   if (!service) notFound();
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: service.name,
+    name: `${service.name} Services`,
+    description: service.description,
+    provider: {
+      "@type": "RoofingContractor",
+      name: business.name,
+      telephone: business.phone,
+      url: business.siteUrl,
+    },
+    areaServed: serviceAreas.map((a) => `${a.name}, ${a.province}`),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <Breadcrumbs items={[{ label: service.name }]} />
       <Hero
-        eyebrow="Our Services"
-        title={service.name}
+        eyebrow="Hamilton, ON & Surrounding Areas"
+        title={`${service.name} Services in Hamilton, ON`}
         subtitle={service.shortDescription}
       />
 
@@ -40,9 +65,14 @@ export default async function ServicePage({ params }: { params: Params }) {
         <div className="container-max grid items-start gap-12 md:grid-cols-2">
           <div>
             <h2 className="text-2xl font-extrabold text-navy-900">
-              About Our {service.name} Service
+              About Our {service.name} Service in Hamilton, ON
             </h2>
             <p className="mt-4 text-navy-900/75">{service.description}</p>
+            <p className="mt-4 text-navy-900/75">
+              We proudly provide {service.name.toLowerCase()} services to
+              homeowners throughout {serviceAreaNames} and the surrounding
+              areas.
+            </p>
 
             <ul className="mt-8 flex flex-col gap-3">
               {service.bullets.map((b) => (

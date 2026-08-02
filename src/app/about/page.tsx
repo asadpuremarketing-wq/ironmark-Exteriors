@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { serviceAreaNames } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description:
-    "Learn about Ironmark Exteriors — a Hamilton-based exterior renovation company committed to quality craftsmanship and trustworthy service.",
+  description: `Learn about Ironmark Exteriors — a Hamilton-based roofing, siding & exterior renovation company serving ${serviceAreaNames} with quality craftsmanship and honest service.`,
+  alternates: { canonical: "/about" },
 };
 
 const values = [
@@ -27,6 +29,7 @@ const values = [
 export default function AboutPage() {
   return (
     <>
+      <Breadcrumbs items={[{ label: "About" }]} />
       <Hero
         eyebrow="About Ironmark Exteriors"
         title="Built on Trust, Backed by Craftsmanship"

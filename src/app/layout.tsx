@@ -21,24 +21,28 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(business.siteUrl),
   title: {
-    default: "Ironmark Exteriors | Roofing, Siding & Exterior Renovations in Hamilton, ON",
+    default: "Ironmark Exteriors | Roofing, Siding & Exterior Contractor in Hamilton, ON",
     template: "%s | Ironmark Exteriors",
   },
   description:
-    "Ironmark Exteriors provides roofing, siding, gutters, windows, painting, and pressure washing for homeowners in Hamilton, Stoney Creek, Burlington, Ancaster, Dundas and surrounding areas.",
+    "Ironmark Exteriors provides roofing, siding, gutters, windows, painting, and pressure washing for homeowners in Hamilton, Stoney Creek, Burlington, Ancaster, Dundas and surrounding areas. Licensed & insured — free estimates.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: business.name,
-    title: "Ironmark Exteriors | Roofing, Siding & Exterior Renovations in Hamilton, ON",
+    title: "Ironmark Exteriors | Roofing, Siding & Exterior Contractor in Hamilton, ON",
     description:
       "Licensed & insured exterior renovation company serving Hamilton, Stoney Creek, Burlington, Ancaster, and Dundas. Free estimates.",
+    url: business.siteUrl,
     locale: "en_CA",
+    images: [{ url: "/images/logo.png", width: 1044, height: 280, alt: business.name }],
   },
   twitter: {
     card: "summary",
-    title: "Ironmark Exteriors | Roofing, Siding & Exterior Renovations",
+    title: "Ironmark Exteriors | Roofing, Siding & Exterior Contractor",
     description:
       "Licensed & insured exterior renovation company serving Hamilton, ON and surrounding areas. Free estimates.",
+    images: ["/images/logo.png"],
   },
 };
 
@@ -51,6 +55,8 @@ const localBusinessSchema = {
   url: business.siteUrl,
   telephone: business.phone,
   email: business.email,
+  image: `${business.siteUrl}/images/logo.png`,
+  logo: `${business.siteUrl}/images/logo.png`,
   address: {
     "@type": "PostalAddress",
     ...business.postalAddress,

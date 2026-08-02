@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import LeadForm from "@/components/LeadForm";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { business } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Ironmark Exteriors for a free estimate on roofing, siding, gutters, windows, painting, or pressure washing.",
+    "Get in touch with Ironmark Exteriors for a free estimate on roofing, siding, gutters, windows, painting, or pressure washing in Hamilton, ON and surrounding areas.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
   return (
     <>
+      <Breadcrumbs items={[{ label: "Contact" }]} />
       <Hero
         eyebrow="Get In Touch"
         title="Request a Free Estimate"

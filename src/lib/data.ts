@@ -155,3 +155,6 @@ export const serviceAreas: ServiceArea[] = [
       "From historic homes to new builds, Ironmark Exteriors delivers dependable exterior services to homeowners across Dundas and the surrounding area.",
   },
 ];
+
+export const serviceAreaNames = serviceAreas.map((a) => a.name).join(", ");
+

@@ -2,17 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
-import { serviceAreas } from "@/lib/data";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { serviceAreas, serviceAreaNames, business } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Service Areas",
-  description:
-    "Ironmark Exteriors proudly serves Hamilton, Stoney Creek, Burlington, Ancaster, Dundas, and surrounding areas.",
+  description: `${business.name} proudly serves ${serviceAreaNames} and surrounding areas with roofing, siding, gutters, windows, painting, and pressure washing.`,
+  alternates: { canonical: "/service-areas" },
 };
 
 export default function ServiceAreasPage() {
   return (
     <>
+      <Breadcrumbs items={[{ label: "Service Areas" }]} />
       <Hero
         eyebrow="Where We Work"
         title="Our Service Areas"

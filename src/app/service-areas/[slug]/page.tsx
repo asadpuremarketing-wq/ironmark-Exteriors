@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import GoogleReviews from "@/components/GoogleReviews";
-import { serviceAreas, services } from "@/lib/data";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { serviceAreas, services, business } from "@/lib/data";
 
 type Params = Promise<{ slug: string }>;
 
@@ -16,9 +17,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const area = serviceAreas.find((a) => a.slug === slug);
   if (!area) return {};
+  const title = `Exterior Services in ${area.name}, ${area.province}`;
+  const description = `${area.blurb} Licensed & insured. Free estimates on roofing, siding, gutters, windows, painting, and pressure washing.`;
   return {
-    title: `${area.name}, ${area.province} Exterior Services`,
-    description: area.blurb,
+    title,
+    description,
+    alternates: { canonical: `/service-areas/${area.slug}` },
+    openGraph: { title, description, url: `${business.siteUrl}/service-areas/${area.slug}` },
   };
 }
 
@@ -27,11 +32,30 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
   const area = serviceAreas.find((a) => a.slug === slug);
   if (!area) notFound();
 
+  const areaSchema = {
+    "@context": "https://schema.org",
+    "@type": "RoofingContractor",
+    name: `${business.name} — ${area.name}`,
+    description: area.blurb,
+    telephone: business.phone,
+    url: `${business.siteUrl}/service-areas/${area.slug}`,
+    areaServed: { "@type": "City", name: `${area.name}, ${area.province}` },
+    makesOffer: services.map((s) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: s.name },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(areaSchema) }}
+      />
+      <Breadcrumbs items={[{ label: "Service Areas", href: "/service-areas" }, { label: area.name }]} />
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
-        title={`Exterior Services in ${area.name}`}
+        title={`Exterior Services in ${area.name}, ON`}
         subtitle={area.blurb}
       />
 
