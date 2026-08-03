@@ -54,7 +54,7 @@ export default function Hero({
 
       <div
         className={`container-max relative py-14 sm:py-20 md:py-28 ${
-          formSlot ? "grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14" : ""
+          formSlot ? "grid items-start gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14" : ""
         }`}
       >
         <div className={formSlot ? "" : "max-w-2xl"}>
