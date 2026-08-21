@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { business, services, serviceAreas } from "@/lib/data";
+import { business, services, serviceAreas, gutterCleaningAreaSlugs } from "@/lib/data";
 import { blogPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -29,6 +29,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  const gutterCleaningRoutes: MetadataRoute.Sitemap = [
+    { url: `${base}/gutter-cleaning`, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    ...gutterCleaningAreaSlugs.map((slug) => ({
+      url: `${base}/gutter-cleaning/${slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 1,
+    })),
+  ];
+
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((p) => ({
     url: `${base}/blog/${p.slug}`,
     lastModified: new Date(p.publishedDate),
@@ -36,5 +46,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...areaRoutes, ...blogRoutes];
+  return [...staticRoutes, ...serviceRoutes, ...areaRoutes, ...gutterCleaningRoutes, ...blogRoutes];
 }

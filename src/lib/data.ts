@@ -154,7 +154,52 @@ export const serviceAreas: ServiceArea[] = [
     blurb:
       "From historic homes to new builds, Ironmark Exteriors delivers dependable exterior services to homeowners across Dundas and the surrounding area.",
   },
+  {
+    slug: "brantford",
+    name: "Brantford",
+    province: "ON",
+    blurb:
+      "Ironmark Exteriors provides trusted roofing, siding, gutter, and exterior renovation services to homeowners throughout Brantford.",
+  },
+  {
+    slug: "grimsby",
+    name: "Grimsby",
+    province: "ON",
+    blurb:
+      "Homeowners across Grimsby rely on Ironmark Exteriors for quality roofing, siding, gutter, and exterior maintenance services.",
+  },
+  {
+    slug: "st-catharines",
+    name: "St. Catharines",
+    province: "ON",
+    blurb:
+      "Ironmark Exteriors serves St. Catharines homeowners with dependable roofing, siding, gutter, and exterior renovation work.",
+  },
+  {
+    slug: "niagara-falls",
+    name: "Niagara Falls",
+    province: "ON",
+    blurb:
+      "From roofing to gutter maintenance, Ironmark Exteriors helps homeowners across Niagara Falls protect and maintain their homes' exteriors.",
+  },
 ];
 
 export const serviceAreaNames = serviceAreas.map((a) => a.name).join(", ");
+
+// Cities where the $99/$199 Gutter Cleaning promotion is specifically
+// marketed and given its own dedicated landing page for local SEO.
+export const gutterCleaningAreaSlugs = [
+  "hamilton",
+  "burlington",
+  "brantford",
+  "stoney-creek",
+  "grimsby",
+  "st-catharines",
+  "niagara-falls",
+] as const;
+
+export const gutterCleaningPricing = {
+  oneStorey: 99,
+  twoStorey: 199,
+};
 
