@@ -71,6 +71,16 @@ export default function Footer() {
                 {business.email}
               </a>
             </li>
+            <li>
+              <a
+                href={business.googleBusinessProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition hover:text-white"
+              >
+                Find Us on Google
+              </a>
+            </li>
           </ul>
           <Link
             href="/contact"

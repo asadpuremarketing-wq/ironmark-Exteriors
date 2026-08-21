@@ -72,6 +72,36 @@ export default function ContactPage() {
           />
         </div>
       </section>
+
+      <section className="pb-14 sm:pb-20">
+        <div className="container-max">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <h2 className="text-2xl font-extrabold text-navy-900">Find Us on Google</h2>
+            <a
+              href={business.googleBusinessProfileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+            >
+              View on Google Maps
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
+          <div className="overflow-hidden rounded-2xl border border-navy-900/10 shadow-sm">
+            <iframe
+              title={`${business.name} on Google Maps`}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(`${business.address}, ${business.city}`)}&output=embed`}
+              width="100%"
+              height="420"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+      </section>
     </>
   );
 }
