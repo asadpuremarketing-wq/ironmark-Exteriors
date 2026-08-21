@@ -203,3 +203,25 @@ export const gutterCleaningPricing = {
   twoStorey: 199,
 };
 
+export type Offer = {
+  slug: string;
+  title: string;
+  badge: string;
+  priceLabel: string;
+  description: string;
+  href: string;
+};
+
+// Shown in the homepage Offers section. Add new promotions here as they
+// come up, each gets its own card automatically.
+export const offers: Offer[] = [
+  {
+    slug: "gutter-cleaning",
+    title: "Gutter Cleaning",
+    badge: "Limited-Time Offer",
+    priceLabel: `Starting at $${gutterCleaningPricing.oneStorey}`,
+    description: `1 storey homes from $${gutterCleaningPricing.oneStorey}, 2 storey homes from $${gutterCleaningPricing.twoStorey}. Licensed & insured.`,
+    href: "/services/gutters",
+  },
+];
+

@@ -3,6 +3,7 @@ import HeroQuoteCard from "@/components/HeroQuoteCard";
 import StatsBar from "@/components/StatsBar";
 import GoogleReviews from "@/components/GoogleReviews";
 import ServicesCarousel from "@/components/ServicesCarousel";
+import OffersSection from "@/components/OffersSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import BeforeAfter from "@/components/BeforeAfter";
 import TruckTeam from "@/components/TruckTeam";
@@ -30,6 +31,7 @@ export default function Home() {
       <SectionFade from={REVIEWS_BG} to={NAVY_950} />
       <ServicesCarousel />
       <SectionFade from={NAVY_950} to={WHITE} />
+      <OffersSection />
       <WhyChooseUs />
       <SectionFade from={WHITE} to={NAVY_900} />
       <BeforeAfter />
