@@ -101,6 +101,14 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        {/* eslint-disable-next-line @next/next/no-img-element -- external tracking pixel, not an optimizable local asset */}
+        <img
+          src="https://tracker.metricool.com/c3po.jpg?hash=1e287b1b3508d79e328468af8d308e6"
+          alt=""
+          width={1}
+          height={1}
+          style={{ position: "absolute", width: 1, height: 1, overflow: "hidden" }}
+        />
       </body>
     </html>
   );
