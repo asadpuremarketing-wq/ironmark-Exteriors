@@ -55,8 +55,8 @@ export const services: Service[] = [
   },
   {
     slug: "gutters",
-    name: "Gutters",
-    shortDescription: "Seamless gutter systems that keep water moving away from your home.",
+    name: "Gutter Cleaning",
+    shortDescription: "Gutter cleaning starting at $99 for 1-storey homes, $199 for 2-storey homes.",
     description:
       "Properly functioning gutters are essential to protecting your foundation, siding, and landscaping. We install and repair seamless eavestrough systems, gutter guards, and downspouts built to handle heavy rain and snowmelt.",
     bullets: [

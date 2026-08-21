@@ -6,6 +6,7 @@ import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import GoogleReviews from "@/components/GoogleReviews";
 import { services, serviceAreas, serviceAreaNames, business } from "@/lib/data";
+import GutterCleaningOffer, { gutterCleaningMeta } from "@/components/GutterCleaningOffer";
 
 type Params = Promise<{ slug: string }>;
 
@@ -17,6 +18,17 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
+
+  if (slug === "gutters") {
+    const { title, description } = gutterCleaningMeta();
+    return {
+      title,
+      description,
+      alternates: { canonical: "/services/gutters" },
+      openGraph: { title, description, url: `${business.siteUrl}/services/gutters` },
+    };
+  }
+
   const title = `${service.name} in Hamilton, ON`;
   const description = `${service.shortDescription} Serving ${serviceAreaNames} and surrounding areas. Licensed & insured — get a free estimate today.`;
   return {
@@ -31,6 +43,10 @@ export default async function ServicePage({ params }: { params: Params }) {
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) notFound();
+
+  if (slug === "gutters") {
+    return <GutterCleaningOffer />;
+  }
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -83,18 +99,6 @@ export default async function ServicePage({ params }: { params: Params }) {
                 </li>
               ))}
             </ul>
-
-            {service.slug === "gutters" && (
-              <Link
-                href="/gutter-cleaning"
-                className="mt-8 inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
-              >
-                Gutter Cleaning Starting at $99 — See Pricing &amp; Book
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            )}
           </div>
           <SmartImage
             src={`/images/services/${service.slug}.jpg`}

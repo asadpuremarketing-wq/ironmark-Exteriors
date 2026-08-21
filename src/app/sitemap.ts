@@ -18,8 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const serviceRoutes: MetadataRoute.Sitemap = services.map((s) => ({
     url: `${base}/services/${s.slug}`,
     lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.9,
+    changeFrequency: s.slug === "gutters" ? "weekly" : "monthly",
+    priority: s.slug === "gutters" ? 1 : 0.9,
   }));
 
   const areaRoutes: MetadataRoute.Sitemap = serviceAreas.map((a) => ({
@@ -29,15 +29,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  const gutterCleaningRoutes: MetadataRoute.Sitemap = [
-    { url: `${base}/gutter-cleaning`, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    ...gutterCleaningAreaSlugs.map((slug) => ({
-      url: `${base}/gutter-cleaning/${slug}`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 1,
-    })),
-  ];
+  // Note: /gutter-cleaning (no city) 308-redirects to /services/gutters
+  // (see next.config.ts) and is intentionally not listed here — only the
+  // city-specific pages are separate indexable URLs.
+  const gutterCleaningRoutes: MetadataRoute.Sitemap = gutterCleaningAreaSlugs.map((slug) => ({
+    url: `${base}/gutter-cleaning/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 1,
+  }));
 
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((p) => ({
     url: `${base}/blog/${p.slug}`,
