@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { area: slug } = await params;
   const area = getArea(slug);
   if (!area) return {};
-  const title = `Gutter Cleaning ${area.name}, ON | Starting at $${gutterCleaningPricing.oneStorey} — Ironmark Exteriors`;
+  const title = `Gutter Cleaning ${area.name}, ON | Starting at $${gutterCleaningPricing.oneStorey} | Ironmark Exteriors`;
   const description = `Professional gutter cleaning in ${area.name}, ON starting at $${gutterCleaningPricing.oneStorey} for 1-storey homes and $${gutterCleaningPricing.twoStorey} for 2-storey homes. Licensed & insured. Book your free estimate today.`;
   return {
     title,
@@ -39,11 +39,11 @@ const faqs = (areaName: string) => [
   },
   {
     q: "How often should I get my gutters cleaned?",
-    a: "Most homes benefit from gutter cleaning twice a year — once in late spring and once in late fall after leaves have dropped. Homes surrounded by mature trees may need cleaning more often.",
+    a: "Most homes benefit from gutter cleaning twice a year, once in late spring and once in late fall after leaves have dropped. Homes surrounded by mature trees may need cleaning more often.",
   },
   {
     q: "What's included in your gutter cleaning service?",
-    a: "We remove all leaves, debris, and buildup from your gutters, clear and check downspouts for blockages, flush the system with water to confirm proper flow, and haul away all debris — no mess left behind.",
+    a: "We remove all leaves, debris, and buildup from your gutters, clear and check downspouts for blockages, flush the system with water to confirm proper flow, and haul away all debris, no mess left behind.",
   },
   {
     q: "Are you licensed and insured?",
@@ -74,7 +74,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
     offers: [
       {
         "@type": "Offer",
-        name: "Gutter Cleaning — 1 Storey House",
+        name: "Gutter Cleaning, 1 Storey House",
         price: gutterCleaningPricing.oneStorey,
         priceCurrency: "CAD",
         availability: "https://schema.org/InStock",
@@ -82,7 +82,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
       },
       {
         "@type": "Offer",
-        name: "Gutter Cleaning — 2 Storey House",
+        name: "Gutter Cleaning, 2 Storey House",
         price: gutterCleaningPricing.twoStorey,
         priceCurrency: "CAD",
         availability: "https://schema.org/InStock",
@@ -108,7 +108,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
 
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
-        title={`Gutter Cleaning in ${area.name}, ON — Starting at $${gutterCleaningPricing.oneStorey}`}
+        title={`Gutter Cleaning in ${area.name}, ON, Starting at $${gutterCleaningPricing.oneStorey}`}
         subtitle={`Fast, affordable gutter cleaning for homeowners in ${area.name}. $${gutterCleaningPricing.oneStorey} for 1-storey homes, $${gutterCleaningPricing.twoStorey} for 2-storey homes. Licensed & insured.`}
         showCta={false}
         formSlot={<GutterCleaningQuoteCard source={`gutter-cleaning-${area.slug}`} />}
@@ -175,12 +175,12 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
           <div>
             <h2 className="text-2xl font-extrabold text-navy-900">Why {area.name} Homeowners Choose Us</h2>
             <p className="mt-4 text-navy-900/75">
-              Clogged gutters send water straight down your foundation, siding, and landscaping — a small problem
+              Clogged gutters send water straight down your foundation, siding, and landscaping, a small problem
               that gets expensive fast. Ironmark Exteriors keeps homes across {area.name} protected with fast,
               affordable gutter cleaning backed by licensed, insured crews.
             </p>
             <p className="mt-4 text-navy-900/75">
-              Book online in minutes and we&apos;ll confirm a time that works for you — most jobs are completed the
+              Book online in minutes and we&apos;ll confirm a time that works for you, most jobs are completed the
               same week.
             </p>
           </div>

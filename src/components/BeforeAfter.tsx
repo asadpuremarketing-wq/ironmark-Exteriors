@@ -23,7 +23,7 @@ export default function BeforeAfter() {
             Before &amp; After
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-brand-silver/70">
-            A glimpse at recent work — more project photos added regularly.
+            A glimpse at recent work, more project photos added regularly.
           </p>
         </Reveal>
 
@@ -36,7 +36,7 @@ export default function BeforeAfter() {
                     <SmartImage
                       src={`/images/before-after/${p.slug}-before.jpg`}
                       alt={`${p.label} before`}
-                      fallbackLabel={`Before — ${p.label} Project`}
+                      fallbackLabel={`Before, ${p.label} Project`}
                       className="aspect-4/5"
                     />
                     <span className="glass-dark absolute left-3 top-3 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-brand-silver/80">
@@ -47,7 +47,7 @@ export default function BeforeAfter() {
                     <SmartImage
                       src={`/images/before-after/${p.slug}-after.jpg`}
                       alt={`${p.label} after`}
-                      fallbackLabel={`After — ${p.label} Project`}
+                      fallbackLabel={`After, ${p.label} Project`}
                       className="aspect-4/5"
                     />
                     <span className="absolute left-3 top-3 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg">

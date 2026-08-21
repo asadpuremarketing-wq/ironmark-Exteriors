@@ -4,7 +4,7 @@ import { business } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: `Privacy Policy for ${business.name} — how we collect, use, and protect your information.`,
+  description: `Privacy Policy for ${business.name}, how we collect, use, and protect your information.`,
   alternates: { canonical: "/privacy-policy" },
   robots: { index: false, follow: true },
 };
@@ -88,16 +88,16 @@ export default function PrivacyPolicyPage() {
               </p>
               <ul className="ml-5 flex list-disc flex-col gap-1.5 leading-relaxed">
                 <li>
-                  <span className="font-semibold text-navy-900">Google Local Services</span> — to
+                  <span className="font-semibold text-navy-900">Google Local Services</span>, to
                   connect service requests submitted through Google with our business
                 </li>
                 <li>
-                  <span className="font-semibold text-navy-900">Google Tag</span> — to measure
+                  <span className="font-semibold text-navy-900">Google Tag</span>, to measure
                   website traffic and advertising performance
                 </li>
                 <li>
-                  <span className="font-semibold text-navy-900">Meta Pixel &amp; Meta Ads</span> —
-                  to measure the performance of our Facebook and Instagram advertising and to show
+                  <span className="font-semibold text-navy-900">Meta Pixel &amp; Meta Ads</span>, to
+                  measure the performance of our Facebook and Instagram advertising and to show
                   relevant ads to people who have visited our site
                 </li>
               </ul>
@@ -118,7 +118,7 @@ export default function PrivacyPolicyPage() {
                 data we collect is used exclusively by {business.name} to contact you, provide our
                 services, and run our own marketing campaigns through the platforms listed above
                 (Google and Meta), which process data on our behalf under their own privacy terms
-                and act as our service providers — not as independent recipients of your data for
+                and act as our service providers, not as independent recipients of your data for
                 their own purposes.
               </p>
             </div>

@@ -70,7 +70,7 @@ export default function LeadForm({ variant = "full", source, className = "" }: P
           Request Received
         </h3>
         <p className="text-sm text-navy-900/70">
-          Thanks for reaching out — we&apos;ll contact you within 1 business hour
+          Thanks for reaching out, we&apos;ll contact you within 1 business hour
           to schedule your free estimate.
         </p>
       </div>
@@ -82,7 +82,7 @@ export default function LeadForm({ variant = "full", source, className = "" }: P
 
   return (
     <form onSubmit={handleSubmit} className={`flex flex-col gap-4 ${className}`} noValidate>
-      {/* Honeypot field — hidden from real users, bots tend to fill every input */}
+      {/* Honeypot field, hidden from real users, bots tend to fill every input */}
       <input
         type="text"
         name="company"

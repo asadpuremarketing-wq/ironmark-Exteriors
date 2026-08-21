@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   }
 
   const title = `${service.name} in Hamilton, ON`;
-  const description = `${service.shortDescription} Serving ${serviceAreaNames} and surrounding areas. Licensed & insured — get a free estimate today.`;
+  const description = `${service.shortDescription} Serving ${serviceAreaNames} and surrounding areas. Licensed & insured, get a free estimate today.`;
   return {
     title,
     description,

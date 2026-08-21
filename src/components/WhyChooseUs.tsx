@@ -15,7 +15,7 @@ const points = [
   },
   {
     title: "On-Time, Every Time",
-    text: "Clear timelines and dependable crews — we respect your schedule as much as our own.",
+    text: "Clear timelines and dependable crews, we respect your schedule as much as our own.",
     icon: "M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm.5 4v4.4l3.5 2-.7 1.2-4.3-2.5V6h1.5z",
     stat: "10+",
     statLabel: "Years",

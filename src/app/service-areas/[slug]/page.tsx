@@ -34,7 +34,7 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
   const areaSchema = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
-    name: `${business.name} — ${area.name}`,
+    name: `${business.name}, ${area.name}`,
     description: area.blurb,
     telephone: business.phone,
     url: `${business.siteUrl}/service-areas/${area.slug}`,
@@ -90,7 +90,7 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
                 href={`/gutter-cleaning/${area.slug}`}
                 className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
               >
-                Gutter Cleaning in {area.name} — Starting at ${gutterCleaningPricing.oneStorey}
+                Gutter Cleaning in {area.name}, Starting at ${gutterCleaningPricing.oneStorey}
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
                   <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

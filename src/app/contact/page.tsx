@@ -16,7 +16,7 @@ export default function ContactPage() {
       <Hero
         eyebrow="Get In Touch"
         title="Request a Free Estimate"
-        subtitle="Fill out the form below or reach out directly — we'll get back to you promptly to schedule your free, no-obligation estimate."
+        subtitle="Fill out the form below or reach out directly, we'll get back to you promptly to schedule your free, no-obligation estimate."
         showCta={false}
       />
 

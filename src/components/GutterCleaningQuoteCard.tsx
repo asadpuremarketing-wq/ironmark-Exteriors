@@ -11,7 +11,7 @@ export default function GutterCleaningQuoteCard({ source }: { source: string }) 
           Limited-Time Offer
         </div>
         <h2 className="font-heading text-xl font-bold text-navy-900">
-          Gutter Cleaning — Starting at ${gutterCleaningPricing.oneStorey}
+          Gutter Cleaning, Starting at ${gutterCleaningPricing.oneStorey}
         </h2>
         <div className="mt-3 grid grid-cols-2 gap-2">
           <div className="rounded-lg border border-navy-900/10 bg-[#f7f9fb] p-3 text-center">

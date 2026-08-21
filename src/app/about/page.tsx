@@ -6,7 +6,7 @@ import { serviceAreaNames } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: `Learn about Ironmark Exteriors — a Hamilton-based roofing, siding & exterior renovation company serving ${serviceAreaNames} with quality craftsmanship and honest service.`,
+  description: `Learn about Ironmark Exteriors, a Hamilton-based roofing, siding & exterior renovation company serving ${serviceAreaNames} with quality craftsmanship and honest service.`,
   alternates: { canonical: "/about" },
 };
 
@@ -17,7 +17,7 @@ const values = [
   },
   {
     title: "Honest Communication",
-    text: "Clear estimates, realistic timelines, and no surprises — we keep you informed from the first call to the final walkthrough.",
+    text: "Clear estimates, realistic timelines, and no surprises, we keep you informed from the first call to the final walkthrough.",
   },
   {
     title: "Local & Reliable",
@@ -53,7 +53,7 @@ export default function AboutPage() {
             </p>
             <p className="mt-4 text-navy-900/75">
               We proudly serve homeowners throughout Hamilton, Stoney Creek,
-              Burlington, Ancaster, Dundas, and the surrounding areas — bringing
+              Burlington, Ancaster, Dundas, and the surrounding areas, bringing
               a local, dependable presence to every job site.
             </p>
           </div>

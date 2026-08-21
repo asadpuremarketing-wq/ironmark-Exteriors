@@ -6,13 +6,13 @@ import CTA from "@/components/CTA";
 import { business, serviceAreas, gutterCleaningAreaSlugs, gutterCleaningPricing } from "@/lib/data";
 
 export function gutterCleaningMeta() {
-  const title = `Gutter Cleaning Services | Starting at $${gutterCleaningPricing.oneStorey} — Ironmark Exteriors`;
+  const title = `Gutter Cleaning Services | Starting at $${gutterCleaningPricing.oneStorey} | Ironmark Exteriors`;
   const description = `Professional gutter cleaning starting at $${gutterCleaningPricing.oneStorey} for 1-storey homes and $${gutterCleaningPricing.twoStorey} for 2-storey homes. Serving Hamilton, Burlington, Brantford, Stoney Creek, Grimsby, St. Catharines, and Niagara Falls. Licensed & insured.`;
   return { title, description };
 }
 
 /**
- * The main Gutter Cleaning offer page content — rendered at
+ * The main Gutter Cleaning offer page content, rendered at
  * /services/gutters (the URL the Services nav links to). Extracted as a
  * component so /gutter-cleaning/[area] city pages can share the same
  * pricing/schema constants without duplicating the whole page.
@@ -39,14 +39,14 @@ export default function GutterCleaningOffer() {
     offers: [
       {
         "@type": "Offer",
-        name: "Gutter Cleaning — 1 Storey House",
+        name: "Gutter Cleaning, 1 Storey House",
         price: gutterCleaningPricing.oneStorey,
         priceCurrency: "CAD",
         availability: "https://schema.org/InStock",
       },
       {
         "@type": "Offer",
-        name: "Gutter Cleaning — 2 Storey House",
+        name: "Gutter Cleaning, 2 Storey House",
         price: gutterCleaningPricing.twoStorey,
         priceCurrency: "CAD",
         availability: "https://schema.org/InStock",
@@ -60,7 +60,7 @@ export default function GutterCleaningOffer() {
 
       <Hero
         eyebrow="Hamilton, ON & Surrounding Areas"
-        title={`Gutter Cleaning Services — Starting at $${gutterCleaningPricing.oneStorey}`}
+        title={`Gutter Cleaning Services, Starting at $${gutterCleaningPricing.oneStorey}`}
         subtitle="Fast, affordable gutter cleaning for 1 and 2 storey homes. Licensed, insured, and trusted across Southern Ontario."
         showCta={false}
         formSlot={<GutterCleaningQuoteCard source="services-gutters" />}
@@ -117,7 +117,7 @@ export default function GutterCleaningOffer() {
             <h2 className="text-2xl font-extrabold text-navy-900">We Also Install &amp; Repair Gutters</h2>
             <p className="mt-4 text-navy-900/75">
               Beyond cleaning, Ironmark Exteriors installs seamless eavestrough systems, repairs damaged sections,
-              fits gutter guards, and extends downspouts — everything your gutter system needs to protect your
+              fits gutter guards, and extends downspouts, everything your gutter system needs to protect your
               foundation, siding, and landscaping year-round.
             </p>
             <p className="mt-4 text-navy-900/75">

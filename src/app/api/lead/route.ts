@@ -61,7 +61,7 @@ export async function POST(request: Request) {
 
   if (!transporter) {
     console.warn(
-      "[New Lead] GMAIL_USER / GMAIL_APP_PASSWORD are not set — email notifications were skipped."
+      "[New Lead] GMAIL_USER / GMAIL_APP_PASSWORD are not set, email notifications were skipped."
     );
     return NextResponse.json({ ok: true });
   }

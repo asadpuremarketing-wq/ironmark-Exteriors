@@ -59,7 +59,7 @@ function row(label: string, value: string) {
 }
 
 export function internalNotificationEmail(data: LeadEmailData) {
-  const subject = `New Lead: ${data.name}${data.service ? ` — ${data.service}` : ""}`;
+  const subject = `New Lead: ${data.name}${data.service ? `, ${data.service}` : ""}`;
   const html = wrapper(`
     <div style="display:inline-block;background-color:${BLUE}1a;color:${BLUE};font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:6px 12px;border-radius:999px;margin-bottom:16px;">
       New Website Lead
@@ -83,7 +83,7 @@ export function internalNotificationEmail(data: LeadEmailData) {
 }
 
 export function customerConfirmationEmail(data: LeadEmailData) {
-  const subject = `We received your request — ${business.name}`;
+  const subject = `We received your request | ${business.name}`;
   const html = wrapper(`
     <div style="width:48px;height:48px;background-color:${BLUE};border-radius:999px;text-align:center;line-height:48px;margin-bottom:20px;">
       <span style="color:#ffffff;font-size:22px;">&#10003;</span>
@@ -100,7 +100,7 @@ export function customerConfirmationEmail(data: LeadEmailData) {
       </p>
     </div>
     <p style="margin:0;font-size:13px;color:#7a8494;">
-      ${business.name} — Licensed &amp; insured exterior contractor serving Hamilton, Stoney Creek, Burlington, Ancaster, Dundas and surrounding areas.
+      ${business.name}, Licensed &amp; insured exterior contractor serving Hamilton, Stoney Creek, Burlington, Ancaster, Dundas and surrounding areas.
     </p>
   `);
   return { subject, html };

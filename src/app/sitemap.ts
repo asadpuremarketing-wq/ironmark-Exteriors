@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Note: /gutter-cleaning (no city) 308-redirects to /services/gutters
-  // (see next.config.ts) and is intentionally not listed here — only the
+  // (see next.config.ts) and is intentionally not listed here, only the
   // city-specific pages are separate indexable URLs.
   const gutterCleaningRoutes: MetadataRoute.Sitemap = gutterCleaningAreaSlugs.map((slug) => ({
     url: `${base}/gutter-cleaning/${slug}`,

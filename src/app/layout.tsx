@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Ironmark Exteriors",
   },
   description:
-    "Ironmark Exteriors provides roofing, siding, gutters, windows, painting, and pressure washing for homeowners in Hamilton, Stoney Creek, Burlington, Ancaster, Dundas and surrounding areas. Licensed & insured — free estimates.",
+    "Ironmark Exteriors provides roofing, siding, gutters, windows, painting, and pressure washing for homeowners in Hamilton, Stoney Creek, Burlington, Ancaster, Dundas and surrounding areas. Licensed & insured, free estimates.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
