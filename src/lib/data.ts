@@ -99,7 +99,7 @@ export const services: Service[] = [
   {
     slug: "pressure-washing",
     name: "Pressure Washing",
-    shortDescription: "Deep-clean exterior surfaces to restore your home's curb appeal.",
+    shortDescription: "Driveways, patios & walkways starting from $149.",
     description:
       "Dirt, grime, mold, and algae build up on siding, driveways, and walkways over time. Our pressure washing service safely restores exterior surfaces, prepping them for paint or simply refreshing your home's overall look.",
     bullets: [
@@ -117,6 +117,7 @@ export type ServiceArea = {
   name: string;
   province: string;
   blurb: string;
+  neighbourhoods: string[];
 };
 
 export const serviceAreas: ServiceArea[] = [
@@ -126,6 +127,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "As a Hamilton-based company, Ironmark Exteriors proudly serves homeowners throughout Hamilton with roofing, siding, gutters, windows, painting, and pressure washing services.",
+    neighbourhoods: ["Westdale", "Kirkendall", "Crown Point", "Waterdown"],
   },
   {
     slug: "stoney-creek",
@@ -133,6 +135,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "We provide reliable exterior renovation and repair services to homeowners in Stoney Creek, from roof replacements to full siding upgrades.",
+    neighbourhoods: ["Fifty Point", "Winona", "Community Beach"],
   },
   {
     slug: "burlington",
@@ -140,6 +143,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "Ironmark Exteriors brings quality craftsmanship to Burlington homes, helping protect and refresh exteriors with expert roofing, siding, and gutter work.",
+    neighbourhoods: ["Aldershot", "Millcroft", "Roseland"],
   },
   {
     slug: "ancaster",
@@ -147,6 +151,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "Homeowners in Ancaster trust Ironmark Exteriors for durable, well-installed roofing, siding, windows, and gutter systems built for the long term.",
+    neighbourhoods: ["Ancaster Village", "Meadowlands", "Parkview Heights"],
   },
   {
     slug: "dundas",
@@ -154,6 +159,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "From historic homes to new builds, Ironmark Exteriors delivers dependable exterior services to homeowners across Dundas and the surrounding area.",
+    neighbourhoods: ["Old Dundas", "Pleasant Valley", "Governor's Road area"],
   },
   {
     slug: "brantford",
@@ -161,6 +167,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "Ironmark Exteriors provides trusted roofing, siding, gutter, and exterior renovation services to homeowners throughout Brantford.",
+    neighbourhoods: ["Eagle Place", "West Brant", "Holmedale"],
   },
   {
     slug: "grimsby",
@@ -168,6 +175,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "Homeowners across Grimsby rely on Ironmark Exteriors for quality roofing, siding, gutter, and exterior maintenance services.",
+    neighbourhoods: ["Grimsby on the Lake", "Casablanca", "Downtown Grimsby"],
   },
   {
     slug: "st-catharines",
@@ -175,6 +183,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "Ironmark Exteriors serves St. Catharines homeowners with dependable roofing, siding, gutter, and exterior renovation work.",
+    neighbourhoods: ["Port Dalhousie", "Western Hill", "Old Towne"],
   },
   {
     slug: "niagara-falls",
@@ -182,6 +191,7 @@ export const serviceAreas: ServiceArea[] = [
     province: "ON",
     blurb:
       "From roofing to gutter maintenance, Ironmark Exteriors helps homeowners across Niagara Falls protect and maintain their homes' exteriors.",
+    neighbourhoods: ["Chippawa", "Fallsview", "Stamford"],
   },
 ];
 
@@ -214,6 +224,15 @@ export const windowCleaningPricing = {
   twoStorey: 249,
 };
 
+// Cities where the Pressure Washing promotion is specifically marketed and
+// given its own dedicated landing page for local SEO. Same coverage as
+// gutter and window cleaning.
+export const pressureWashingAreaSlugs = gutterCleaningAreaSlugs;
+
+export const pressureWashingPricing = {
+  startingFrom: 149,
+};
+
 export type Offer = {
   slug: string;
   title: string;
@@ -241,6 +260,14 @@ export const offers: Offer[] = [
     priceLabel: `Starting at $${windowCleaningPricing.oneStorey}`,
     description: `Interior & exterior. 1 storey homes from $${windowCleaningPricing.oneStorey}, 2 storey homes from $${windowCleaningPricing.twoStorey}.`,
     href: "/services/windows",
+  },
+  {
+    slug: "pressure-washing",
+    title: "Pressure Washing",
+    badge: "Limited-Time Offer",
+    priceLabel: `Starting from $${pressureWashingPricing.startingFrom}`,
+    description: "Driveways, patios, walkways & more. Pricing varies by surface size and condition.",
+    href: "/services/pressure-washing",
   },
 ];
 

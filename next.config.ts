@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       // on the right content instead of a 404.
       { source: "/gutter-cleaning", destination: "/services/gutters", permanent: true },
       { source: "/window-cleaning", destination: "/services/windows", permanent: true },
+      { source: "/pressure-washing", destination: "/services/pressure-washing", permanent: true },
     ];
   },
 };

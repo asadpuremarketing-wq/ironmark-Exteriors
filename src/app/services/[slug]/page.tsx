@@ -8,6 +8,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import { services, serviceAreas, serviceAreaNames, business } from "@/lib/data";
 import GutterCleaningOffer, { gutterCleaningMeta } from "@/components/GutterCleaningOffer";
 import WindowCleaningOffer, { windowCleaningMeta } from "@/components/WindowCleaningOffer";
+import PressureWashingOffer, { pressureWashingMeta } from "@/components/PressureWashingOffer";
 
 type Params = Promise<{ slug: string }>;
 
@@ -40,6 +41,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     };
   }
 
+  if (slug === "pressure-washing") {
+    const { title, description } = pressureWashingMeta();
+    return {
+      title,
+      description,
+      alternates: { canonical: "/services/pressure-washing" },
+      openGraph: { title, description, url: `${business.siteUrl}/services/pressure-washing` },
+    };
+  }
+
   const title = `${service.name} in Hamilton, ON`;
   const description = `${service.shortDescription} Serving ${serviceAreaNames} and surrounding areas. Licensed & insured, get a free estimate today.`;
   return {
@@ -61,6 +72,10 @@ export default async function ServicePage({ params }: { params: Params }) {
 
   if (slug === "windows") {
     return <WindowCleaningOffer />;
+  }
+
+  if (slug === "pressure-washing") {
+    return <PressureWashingOffer />;
   }
 
   const serviceSchema = {

@@ -6,6 +6,7 @@ import WindowCleaningQuoteCard from "@/components/WindowCleaningQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
 import { business, serviceAreas, windowCleaningAreaSlugs, windowCleaningPricing } from "@/lib/data";
+import { introParagraph, whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 
 type Params = Promise<{ area: string }>;
 
@@ -32,7 +33,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-const faqs = (areaName: string) => [
+const faqPool = (areaName: string) => [
   {
     q: `How much does window cleaning cost in ${areaName}?`,
     a: `Window cleaning in ${areaName} starts at $${windowCleaningPricing.oneStorey} for a 1-storey home and $${windowCleaningPricing.twoStorey} for a 2-storey home. Pricing may vary based on the number, size, and accessibility of windows.`,
@@ -49,6 +50,14 @@ const faqs = (areaName: string) => [
     q: "Are you licensed and insured?",
     a: "Yes. Ironmark Exteriors is fully licensed and insured, and every window cleaning job is completed by trained, experienced crews.",
   },
+  {
+    q: "How long does a typical window cleaning take?",
+    a: "Most 1-storey homes take about an hour to an hour and a half. 2-storey homes and properties with more windows take longer, we'll give you a time estimate when you book.",
+  },
+  {
+    q: "What time of year is best for window cleaning?",
+    a: "Spring and fall are the most popular, but window cleaning can be done any time weather permits. Many homeowners book twice a year to keep windows consistently streak-free.",
+  },
 ];
 
 export default async function WindowCleaningAreaPage({ params }: { params: Params }) {
@@ -56,7 +65,9 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
   const area = getArea(slug);
   if (!area) notFound();
 
-  const areaFaqs = faqs(area.name);
+  const index = windowCleaningAreaSlugs.indexOf(slug as (typeof windowCleaningAreaSlugs)[number]);
+  const areaFaqs = rotateFaqs(faqPool(area.name), index, 4);
+  const swapSections = index % 2 === 1;
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -101,6 +112,54 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
     })),
   };
 
+  const includedSection = (
+    <section key="included" className="section-y bg-[#f7f9fb]">
+      <div className="container-max grid gap-12 md:grid-cols-2">
+        <div>
+          <h2 className="text-2xl font-extrabold text-navy-900">What&apos;s Included</h2>
+          <ul className="mt-6 flex flex-col gap-3">
+            {[
+              "Interior & exterior glass cleaning",
+              "Window sill & track wipe-down",
+              "Screen cleaning (on request)",
+              "Streak-free finish, every time",
+              "Careful, insured crews around landscaping & property",
+            ].map((b) => (
+              <li key={b} className="flex items-start gap-3 text-sm text-navy-900/80">
+                <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" fill="none">
+                  <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M6.5 10.3l2.2 2.2 4.8-4.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 className="text-2xl font-extrabold text-navy-900">Why {area.name} Homeowners Choose Us</h2>
+          <p className="mt-4 text-navy-900/75">{whyChooseParagraph("window cleaning", area, index)}</p>
+          <p className="mt-4 text-navy-900/75">{bookingLine(index)}</p>
+        </div>
+      </div>
+    </section>
+  );
+
+  const faqSection = (
+    <section key="faq" className="section-y bg-white">
+      <div className="container-max max-w-3xl">
+        <h2 className="mb-8 text-center text-3xl font-extrabold text-navy-900">Frequently Asked Questions</h2>
+        <div className="flex flex-col gap-4">
+          {areaFaqs.map((f) => (
+            <div key={f.q} className="rounded-xl border border-navy-900/10 p-6">
+              <h3 className="text-base font-bold text-navy-900">{f.q}</h3>
+              <p className="mt-2 text-sm text-navy-900/70">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
@@ -113,6 +172,13 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
         showCta={false}
         formSlot={<WindowCleaningQuoteCard source={`window-cleaning-${area.slug}`} />}
       />
+
+      {/* Intro / local context, unique per city */}
+      <section className="bg-white pt-10">
+        <div className="container-max max-w-3xl text-center">
+          <p className="text-navy-900/70">{introParagraph("window cleaning", area, index)}</p>
+        </div>
+      </section>
 
       {/* Pricing */}
       <section className="section-y bg-white">
@@ -144,65 +210,14 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
             available by custom quote.
           </p>
           <p className="mt-4 text-center text-sm text-navy-900/50">
-            Serving homeowners throughout {area.name}, {area.province} and surrounding neighbourhoods.
+            Serving {neighbourhoodLine(area)} and the rest of {area.name}, {area.province}.
           </p>
         </div>
       </section>
 
-      {/* What's included */}
-      <section className="section-y bg-[#f7f9fb]">
-        <div className="container-max grid gap-12 md:grid-cols-2">
-          <div>
-            <h2 className="text-2xl font-extrabold text-navy-900">What&apos;s Included</h2>
-            <ul className="mt-6 flex flex-col gap-3">
-              {[
-                "Interior & exterior glass cleaning",
-                "Window sill & track wipe-down",
-                "Screen cleaning (on request)",
-                "Streak-free finish, every time",
-                "Careful, insured crews around landscaping & property",
-              ].map((b) => (
-                <li key={b} className="flex items-start gap-3 text-sm text-navy-900/80">
-                  <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" fill="none">
-                    <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
-                    <path d="M6.5 10.3l2.2 2.2 4.8-4.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-2xl font-extrabold text-navy-900">Why {area.name} Homeowners Choose Us</h2>
-            <p className="mt-4 text-navy-900/75">
-              Clean windows make the biggest visual difference to a home, inside and out. Ironmark Exteriors keeps
-              homes across {area.name} looking their best with careful, streak-free window cleaning backed by
-              licensed, insured crews.
-            </p>
-            <p className="mt-4 text-navy-900/75">
-              Book online in minutes and we&apos;ll confirm a time that works for you, most jobs are completed the
-              same week.
-            </p>
-          </div>
-        </div>
-      </section>
+      {swapSections ? [faqSection, includedSection] : [includedSection, faqSection]}
 
       <GoogleReviews />
-
-      {/* FAQ */}
-      <section className="section-y bg-white">
-        <div className="container-max max-w-3xl">
-          <h2 className="mb-8 text-center text-3xl font-extrabold text-navy-900">Frequently Asked Questions</h2>
-          <div className="flex flex-col gap-4">
-            {areaFaqs.map((f) => (
-              <div key={f.q} className="rounded-xl border border-navy-900/10 p-6">
-                <h3 className="text-base font-bold text-navy-900">{f.q}</h3>
-                <p className="mt-2 text-sm text-navy-900/70">{f.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Nearby areas */}
       <section className="section-y bg-navy-950">

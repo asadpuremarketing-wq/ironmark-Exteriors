@@ -12,7 +12,30 @@ import {
   gutterCleaningPricing,
   windowCleaningAreaSlugs,
   windowCleaningPricing,
+  pressureWashingAreaSlugs,
+  pressureWashingPricing,
 } from "@/lib/data";
+
+const areaOffers = [
+  {
+    label: "Gutter Cleaning",
+    pathPrefix: "gutter-cleaning",
+    slugs: gutterCleaningAreaSlugs,
+    priceLabel: `Starting at $${gutterCleaningPricing.oneStorey}`,
+  },
+  {
+    label: "Window Cleaning",
+    pathPrefix: "window-cleaning",
+    slugs: windowCleaningAreaSlugs,
+    priceLabel: `Starting at $${windowCleaningPricing.oneStorey}`,
+  },
+  {
+    label: "Pressure Washing",
+    pathPrefix: "pressure-washing",
+    slugs: pressureWashingAreaSlugs,
+    priceLabel: `Starting from $${pressureWashingPricing.startingFrom}`,
+  },
+] as const;
 
 type Params = Promise<{ slug: string }>;
 
@@ -92,31 +115,22 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
             ))}
           </div>
 
-          {(gutterCleaningAreaSlugs.includes(area.slug as (typeof gutterCleaningAreaSlugs)[number]) ||
-            windowCleaningAreaSlugs.includes(area.slug as (typeof windowCleaningAreaSlugs)[number])) && (
+          {areaOffers.some((o) => (o.slugs as readonly string[]).includes(area.slug)) && (
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              {gutterCleaningAreaSlugs.includes(area.slug as (typeof gutterCleaningAreaSlugs)[number]) && (
-                <Link
-                  href={`/gutter-cleaning/${area.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
-                >
-                  Gutter Cleaning in {area.name}, Starting at ${gutterCleaningPricing.oneStorey}
-                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              )}
-              {windowCleaningAreaSlugs.includes(area.slug as (typeof windowCleaningAreaSlugs)[number]) && (
-                <Link
-                  href={`/window-cleaning/${area.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
-                >
-                  Window Cleaning in {area.name}, Starting at ${windowCleaningPricing.oneStorey}
-                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              )}
+              {areaOffers
+                .filter((o) => (o.slugs as readonly string[]).includes(area.slug))
+                .map((o) => (
+                  <Link
+                    key={o.pathPrefix}
+                    href={`/${o.pathPrefix}/${area.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+                  >
+                    {o.label} in {area.name}, {o.priceLabel}
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                      <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+                ))}
             </div>
           )}
         </div>

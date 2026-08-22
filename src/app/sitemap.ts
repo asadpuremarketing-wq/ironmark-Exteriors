@@ -1,5 +1,12 @@
 import type { MetadataRoute } from "next";
-import { business, services, serviceAreas, gutterCleaningAreaSlugs, windowCleaningAreaSlugs } from "@/lib/data";
+import {
+  business,
+  services,
+  serviceAreas,
+  gutterCleaningAreaSlugs,
+  windowCleaningAreaSlugs,
+  pressureWashingAreaSlugs,
+} from "@/lib/data";
 import { blogPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -15,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  const offerServiceSlugs = ["gutters", "windows"];
+  const offerServiceSlugs = ["gutters", "windows", "pressure-washing"];
   const serviceRoutes: MetadataRoute.Sitemap = services.map((s) => ({
     url: `${base}/services/${s.slug}`,
     lastModified: now,
@@ -30,8 +37,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // Note: /gutter-cleaning and /window-cleaning (no city) 308-redirect to
-  // /services/gutters and /services/windows respectively (see
+  // Note: /gutter-cleaning, /window-cleaning, and /pressure-washing (no
+  // city) 308-redirect to their respective /services/* pages (see
   // next.config.ts) and are intentionally not listed here, only the
   // city-specific pages are separate indexable URLs.
   const gutterCleaningRoutes: MetadataRoute.Sitemap = gutterCleaningAreaSlugs.map((slug) => ({
@@ -43,6 +50,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const windowCleaningRoutes: MetadataRoute.Sitemap = windowCleaningAreaSlugs.map((slug) => ({
     url: `${base}/window-cleaning/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 1,
+  }));
+
+  const pressureWashingRoutes: MetadataRoute.Sitemap = pressureWashingAreaSlugs.map((slug) => ({
+    url: `${base}/pressure-washing/${slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
     priority: 1,
@@ -61,6 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...areaRoutes,
     ...gutterCleaningRoutes,
     ...windowCleaningRoutes,
+    ...pressureWashingRoutes,
     ...blogRoutes,
   ];
 }
