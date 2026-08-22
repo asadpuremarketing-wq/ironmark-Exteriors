@@ -70,8 +70,8 @@ export const services: Service[] = [
   },
   {
     slug: "windows",
-    name: "Windows",
-    shortDescription: "Energy-efficient window installation and replacement.",
+    name: "Window Cleaning",
+    shortDescription: "Interior & exterior window cleaning starting at $149.",
     description:
       "Upgrade your home's comfort and efficiency with new window installations from Ironmark Exteriors. We supply and install energy-efficient windows that reduce drafts, lower energy bills, and enhance your home's appearance.",
     bullets: [
@@ -204,6 +204,16 @@ export const gutterCleaningPricing = {
   twoStorey: 199,
 };
 
+// Cities where the Window Cleaning promotion is specifically marketed and
+// given its own dedicated landing page for local SEO. Same coverage as
+// gutter cleaning.
+export const windowCleaningAreaSlugs = gutterCleaningAreaSlugs;
+
+export const windowCleaningPricing = {
+  oneStorey: 149,
+  twoStorey: 249,
+};
+
 export type Offer = {
   slug: string;
   title: string;
@@ -223,6 +233,14 @@ export const offers: Offer[] = [
     priceLabel: `Starting at $${gutterCleaningPricing.oneStorey}`,
     description: `1 storey homes from $${gutterCleaningPricing.oneStorey}, 2 storey homes from $${gutterCleaningPricing.twoStorey}. Licensed & insured.`,
     href: "/services/gutters",
+  },
+  {
+    slug: "window-cleaning",
+    title: "Window Cleaning",
+    badge: "Limited-Time Offer",
+    priceLabel: `Starting at $${windowCleaningPricing.oneStorey}`,
+    description: `Interior & exterior. 1 storey homes from $${windowCleaningPricing.oneStorey}, 2 storey homes from $${windowCleaningPricing.twoStorey}.`,
+    href: "/services/windows",
   },
 ];
 

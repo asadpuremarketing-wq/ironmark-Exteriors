@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { business, services, serviceAreas, gutterCleaningAreaSlugs } from "@/lib/data";
+import { business, services, serviceAreas, gutterCleaningAreaSlugs, windowCleaningAreaSlugs } from "@/lib/data";
 import { blogPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -15,11 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
   ];
 
+  const offerServiceSlugs = ["gutters", "windows"];
   const serviceRoutes: MetadataRoute.Sitemap = services.map((s) => ({
     url: `${base}/services/${s.slug}`,
     lastModified: now,
-    changeFrequency: s.slug === "gutters" ? "weekly" : "monthly",
-    priority: s.slug === "gutters" ? 1 : 0.9,
+    changeFrequency: offerServiceSlugs.includes(s.slug) ? "weekly" : "monthly",
+    priority: offerServiceSlugs.includes(s.slug) ? 1 : 0.9,
   }));
 
   const areaRoutes: MetadataRoute.Sitemap = serviceAreas.map((a) => ({
@@ -29,11 +30,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // Note: /gutter-cleaning (no city) 308-redirects to /services/gutters
-  // (see next.config.ts) and is intentionally not listed here, only the
+  // Note: /gutter-cleaning and /window-cleaning (no city) 308-redirect to
+  // /services/gutters and /services/windows respectively (see
+  // next.config.ts) and are intentionally not listed here, only the
   // city-specific pages are separate indexable URLs.
   const gutterCleaningRoutes: MetadataRoute.Sitemap = gutterCleaningAreaSlugs.map((slug) => ({
     url: `${base}/gutter-cleaning/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 1,
+  }));
+
+  const windowCleaningRoutes: MetadataRoute.Sitemap = windowCleaningAreaSlugs.map((slug) => ({
+    url: `${base}/window-cleaning/${slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
     priority: 1,
@@ -46,5 +55,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...areaRoutes, ...gutterCleaningRoutes, ...blogRoutes];
+  return [
+    ...staticRoutes,
+    ...serviceRoutes,
+    ...areaRoutes,
+    ...gutterCleaningRoutes,
+    ...windowCleaningRoutes,
+    ...blogRoutes,
+  ];
 }

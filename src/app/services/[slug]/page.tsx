@@ -7,6 +7,7 @@ import SmartImage from "@/components/SmartImage";
 import GoogleReviews from "@/components/GoogleReviews";
 import { services, serviceAreas, serviceAreaNames, business } from "@/lib/data";
 import GutterCleaningOffer, { gutterCleaningMeta } from "@/components/GutterCleaningOffer";
+import WindowCleaningOffer, { windowCleaningMeta } from "@/components/WindowCleaningOffer";
 
 type Params = Promise<{ slug: string }>;
 
@@ -29,6 +30,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     };
   }
 
+  if (slug === "windows") {
+    const { title, description } = windowCleaningMeta();
+    return {
+      title,
+      description,
+      alternates: { canonical: "/services/windows" },
+      openGraph: { title, description, url: `${business.siteUrl}/services/windows` },
+    };
+  }
+
   const title = `${service.name} in Hamilton, ON`;
   const description = `${service.shortDescription} Serving ${serviceAreaNames} and surrounding areas. Licensed & insured, get a free estimate today.`;
   return {
@@ -46,6 +57,10 @@ export default async function ServicePage({ params }: { params: Params }) {
 
   if (slug === "gutters") {
     return <GutterCleaningOffer />;
+  }
+
+  if (slug === "windows") {
+    return <WindowCleaningOffer />;
   }
 
   const serviceSchema = {

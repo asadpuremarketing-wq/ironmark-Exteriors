@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       // existing links/bookmarks/search results for the old URL still land
       // on the right content instead of a 404.
       { source: "/gutter-cleaning", destination: "/services/gutters", permanent: true },
+      { source: "/window-cleaning", destination: "/services/windows", permanent: true },
     ];
   },
 };

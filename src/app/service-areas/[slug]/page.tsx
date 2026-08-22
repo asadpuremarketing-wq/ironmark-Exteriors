@@ -4,7 +4,15 @@ import { notFound } from "next/navigation";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import GoogleReviews from "@/components/GoogleReviews";
-import { serviceAreas, services, business, gutterCleaningAreaSlugs, gutterCleaningPricing } from "@/lib/data";
+import {
+  serviceAreas,
+  services,
+  business,
+  gutterCleaningAreaSlugs,
+  gutterCleaningPricing,
+  windowCleaningAreaSlugs,
+  windowCleaningPricing,
+} from "@/lib/data";
 
 type Params = Promise<{ slug: string }>;
 
@@ -84,17 +92,31 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
             ))}
           </div>
 
-          {gutterCleaningAreaSlugs.includes(area.slug as (typeof gutterCleaningAreaSlugs)[number]) && (
-            <div className="mt-10 flex justify-center">
-              <Link
-                href={`/gutter-cleaning/${area.slug}`}
-                className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
-              >
-                Gutter Cleaning in {area.name}, Starting at ${gutterCleaningPricing.oneStorey}
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
+          {(gutterCleaningAreaSlugs.includes(area.slug as (typeof gutterCleaningAreaSlugs)[number]) ||
+            windowCleaningAreaSlugs.includes(area.slug as (typeof windowCleaningAreaSlugs)[number])) && (
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
+              {gutterCleaningAreaSlugs.includes(area.slug as (typeof gutterCleaningAreaSlugs)[number]) && (
+                <Link
+                  href={`/gutter-cleaning/${area.slug}`}
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+                >
+                  Gutter Cleaning in {area.name}, Starting at ${gutterCleaningPricing.oneStorey}
+                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                    <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              )}
+              {windowCleaningAreaSlugs.includes(area.slug as (typeof windowCleaningAreaSlugs)[number]) && (
+                <Link
+                  href={`/window-cleaning/${area.slug}`}
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+                >
+                  Window Cleaning in {area.name}, Starting at ${windowCleaningPricing.oneStorey}
+                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                    <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              )}
             </div>
           )}
         </div>
