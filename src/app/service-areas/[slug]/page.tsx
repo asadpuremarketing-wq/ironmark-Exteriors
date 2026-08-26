@@ -4,38 +4,7 @@ import { notFound } from "next/navigation";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import GoogleReviews from "@/components/GoogleReviews";
-import {
-  serviceAreas,
-  services,
-  business,
-  gutterCleaningAreaSlugs,
-  gutterCleaningPricing,
-  windowCleaningAreaSlugs,
-  windowCleaningPricing,
-  pressureWashingAreaSlugs,
-  pressureWashingPricing,
-} from "@/lib/data";
-
-const areaOffers = [
-  {
-    label: "Gutter Cleaning",
-    pathPrefix: "gutter-cleaning",
-    slugs: gutterCleaningAreaSlugs,
-    priceLabel: `Starting at $${gutterCleaningPricing.oneStorey}`,
-  },
-  {
-    label: "Window Cleaning",
-    pathPrefix: "window-cleaning",
-    slugs: windowCleaningAreaSlugs,
-    priceLabel: `Starting at $${windowCleaningPricing.oneStorey}`,
-  },
-  {
-    label: "Pressure Washing",
-    pathPrefix: "pressure-washing",
-    slugs: pressureWashingAreaSlugs,
-    priceLabel: `Starting from $${pressureWashingPricing.startingFrom}`,
-  },
-] as const;
+import { serviceAreas, services, business, areaOffers } from "@/lib/data";
 
 type Params = Promise<{ slug: string }>;
 
@@ -115,10 +84,10 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
             ))}
           </div>
 
-          {areaOffers.some((o) => (o.slugs as readonly string[]).includes(area.slug)) && (
+          {areaOffers.some((o) => o.areaSlugs.includes(area.slug)) && (
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               {areaOffers
-                .filter((o) => (o.slugs as readonly string[]).includes(area.slug))
+                .filter((o) => o.areaSlugs.includes(area.slug))
                 .map((o) => (
                   <Link
                     key={o.pathPrefix}

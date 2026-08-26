@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CTA from "@/components/CTA";
 import { blogPosts, getBlogPost } from "@/lib/blog";
-import { business, services } from "@/lib/data";
+import { business, services, serviceAreas, areaOffers } from "@/lib/data";
 
 type Params = Promise<{ slug: string }>;
 
@@ -89,6 +89,9 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const relatedService = post.relatedService
     ? services.find((s) => s.slug === post.relatedService)
     : undefined;
+  const relatedOffer = post.relatedService
+    ? areaOffers.find((o) => o.slug === post.relatedService)
+    : undefined;
 
   const otherPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
@@ -153,6 +156,29 @@ export default async function BlogPostPage({ params }: { params: Params }) {
                   <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
+
+              {relatedOffer && (
+                <>
+                  <p className="mt-5 text-xs font-bold uppercase tracking-wide text-navy-900/40">
+                    {relatedOffer.label} By City
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {relatedOffer.areaSlugs.map((areaSlug) => {
+                      const a = serviceAreas.find((sa) => sa.slug === areaSlug);
+                      if (!a) return null;
+                      return (
+                        <Link
+                          key={areaSlug}
+                          href={`/${relatedOffer.pathPrefix}/${areaSlug}`}
+                          className="rounded-full border border-navy-900/10 bg-white px-3.5 py-1.5 text-xs font-semibold text-navy-900/70 transition hover:border-brand-blue hover:text-brand-blue"
+                        >
+                          {relatedOffer.label} in {a.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

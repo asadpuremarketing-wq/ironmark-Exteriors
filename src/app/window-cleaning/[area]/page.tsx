@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import WindowCleaningQuoteCard from "@/components/WindowCleaningQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
+import OtherOffersInCity from "@/components/OtherOffersInCity";
 import { business, serviceAreas, windowCleaningAreaSlugs, windowCleaningPricing } from "@/lib/data";
 import { introParagraph, whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 
@@ -218,6 +219,8 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
       {swapSections ? [faqSection, includedSection] : [includedSection, faqSection]}
 
       <GoogleReviews />
+
+      <OtherOffersInCity currentSlug="windows" area={area} />
 
       {/* Nearby areas */}
       <section className="section-y bg-navy-950">

@@ -271,3 +271,32 @@ export const offers: Offer[] = [
   },
 ];
 
+// Shared config for every place on the site that links out to the
+// per-city offer landing pages (blog posts, homepage, footer,
+// /service-areas/[city], and cross-links between the offer pages
+// themselves) so the anchor text and URL structure stay consistent
+// wherever a "[Service] in [City]" link is needed for SEO.
+export const areaOffers = [
+  {
+    slug: "gutters",
+    label: "Gutter Cleaning",
+    pathPrefix: "gutter-cleaning",
+    areaSlugs: gutterCleaningAreaSlugs as readonly string[],
+    priceLabel: `Starting at $${gutterCleaningPricing.oneStorey}`,
+  },
+  {
+    slug: "windows",
+    label: "Window Cleaning",
+    pathPrefix: "window-cleaning",
+    areaSlugs: windowCleaningAreaSlugs as readonly string[],
+    priceLabel: `Starting at $${windowCleaningPricing.oneStorey}`,
+  },
+  {
+    slug: "pressure-washing",
+    label: "Pressure Washing",
+    pathPrefix: "pressure-washing",
+    areaSlugs: pressureWashingAreaSlugs as readonly string[],
+    priceLabel: `Starting from $${pressureWashingPricing.startingFrom}`,
+  },
+] as const;
+

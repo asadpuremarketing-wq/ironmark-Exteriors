@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import GutterCleaningQuoteCard from "@/components/GutterCleaningQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
+import OtherOffersInCity from "@/components/OtherOffersInCity";
 import { business, serviceAreas, gutterCleaningAreaSlugs, gutterCleaningPricing } from "@/lib/data";
 import { introParagraph, whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 
@@ -218,6 +219,8 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
       {swapSections ? [faqSection, includedSection] : [includedSection, faqSection]}
 
       <GoogleReviews />
+
+      <OtherOffersInCity currentSlug="gutters" area={area} />
 
       {/* Nearby areas */}
       <section className="section-y bg-navy-950">

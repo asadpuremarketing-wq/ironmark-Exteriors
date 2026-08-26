@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import PressureWashingQuoteCard from "@/components/PressureWashingQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
+import OtherOffersInCity from "@/components/OtherOffersInCity";
 import { business, serviceAreas, pressureWashingAreaSlugs, pressureWashingPricing } from "@/lib/data";
 import { introParagraph, whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 
@@ -200,6 +201,8 @@ export default async function PressureWashingAreaPage({ params }: { params: Para
       {swapSections ? [faqSection, includedSection] : [includedSection, faqSection]}
 
       <GoogleReviews />
+
+      <OtherOffersInCity currentSlug="pressure-washing" area={area} />
 
       {/* Nearby areas */}
       <section className="section-y bg-navy-950">

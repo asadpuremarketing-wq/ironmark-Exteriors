@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { business, services, serviceAreas } from "@/lib/data";
+import { business, services, serviceAreas, areaOffers } from "@/lib/data";
 import Logo from "./Logo";
 
 export default function Footer() {
@@ -88,6 +88,31 @@ export default function Footer() {
           >
             Free Estimate
           </Link>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="container-max py-8">
+          <h3 className="mb-3 text-xs font-bold uppercase tracking-[0.15em] text-brand-blue-light">
+            Popular Offers
+          </h3>
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-brand-silver/50">
+            {areaOffers.flatMap((o) =>
+              o.areaSlugs.slice(0, 2).map((areaSlug) => {
+                const a = serviceAreas.find((sa) => sa.slug === areaSlug);
+                if (!a) return null;
+                return (
+                  <Link
+                    key={`${o.pathPrefix}-${areaSlug}`}
+                    href={`/${o.pathPrefix}/${areaSlug}`}
+                    className="transition hover:text-white"
+                  >
+                    {o.label} in {a.name}
+                  </Link>
+                );
+              })
+            )}
+          </div>
         </div>
       </div>
 
