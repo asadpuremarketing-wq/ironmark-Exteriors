@@ -57,7 +57,7 @@ export const services: Service[] = [
   {
     slug: "gutters",
     name: "Gutter Cleaning",
-    shortDescription: "Gutter cleaning starting at $99 for 1-storey homes, $199 for 2-storey homes.",
+    shortDescription: "Gutter cleaning starting at $149 for 1-storey homes, $199 for 2-storey homes.",
     description:
       "Properly functioning gutters are essential to protecting your foundation, siding, and landscaping. We install and repair seamless eavestrough systems, gutter guards, and downspouts built to handle heavy rain and snowmelt.",
     bullets: [
@@ -197,7 +197,7 @@ export const serviceAreas: ServiceArea[] = [
 
 export const serviceAreaNames = serviceAreas.map((a) => a.name).join(", ");
 
-// Cities where the $99/$199 Gutter Cleaning promotion is specifically
+// Cities where the $149/$199 Gutter Cleaning promotion is specifically
 // marketed and given its own dedicated landing page for local SEO.
 export const gutterCleaningAreaSlugs = [
   "hamilton",
@@ -210,7 +210,7 @@ export const gutterCleaningAreaSlugs = [
 ] as const;
 
 export const gutterCleaningPricing = {
-  oneStorey: 99,
+  oneStorey: 149,
   twoStorey: 199,
 };
 
