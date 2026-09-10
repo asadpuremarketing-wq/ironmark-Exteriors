@@ -114,7 +114,7 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}`}
-                    className="group rounded-2xl border border-navy-900/10 p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-xl hover:shadow-navy-900/10"
+                    className="group rounded-[28px] border border-navy-900/10 p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-xl hover:shadow-navy-900/10"
                   >
                     <h3 className="mb-2 text-lg font-bold text-navy-900">
                       {service.name} in {area.name}

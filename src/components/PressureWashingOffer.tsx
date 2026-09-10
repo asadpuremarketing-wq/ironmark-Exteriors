@@ -5,6 +5,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
 import { business, serviceAreas, pressureWashingAreaSlugs, pressureWashingPricing } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
+import PriceCard from "@/components/PriceCard";
 
 export function pressureWashingMeta() {
   const title = `Pressure Washing Services | Starting from $${pressureWashingPricing.startingFrom}`;
@@ -73,14 +74,14 @@ export default function PressureWashingOffer() {
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Simple, Upfront Pricing</p>
             <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Pressure Washing Pricing</h2>
           </div>
-          <div className="mx-auto max-w-md rounded-2xl border-2 border-brand-blue bg-brand-blue/5 p-8 text-center shadow-lg shadow-brand-blue/10">
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand-blue">Starting From</p>
-            <p className="mt-3 font-heading text-5xl font-extrabold text-navy-900">
-              ${pressureWashingPricing.startingFrom}
-            </p>
-            <p className="mt-4 text-sm text-navy-900/65">
-              Driveways, patios, walkways &amp; other exterior surfaces.
-            </p>
+          <div className="mx-auto max-w-md">
+            <PriceCard
+              label="All Exterior Surfaces"
+              price={pressureWashingPricing.startingFrom}
+              priceLabel="Starting From"
+              note="Driveways, patios, walkways & other exterior surfaces."
+              highlighted
+            />
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-navy-900/50">
             Pricing varies by surface size and condition. Contact Ironmark Exteriors for a free quote.
@@ -137,7 +138,7 @@ export default function PressureWashingOffer() {
               <Link
                 key={area.slug}
                 href={`/pressure-washing/${area.slug}`}
-                className="group rounded-2xl border border-navy-900/10 p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-xl hover:shadow-navy-900/10"
+                className="group rounded-[28px] border border-navy-900/10 p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-xl hover:shadow-navy-900/10"
               >
                 <h3 className="mb-2 text-lg font-bold text-navy-900">Pressure Washing in {area.name}</h3>
                 <p className="text-sm leading-relaxed text-navy-900/70">

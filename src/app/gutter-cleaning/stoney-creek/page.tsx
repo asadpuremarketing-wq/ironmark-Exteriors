@@ -151,13 +151,13 @@ export default function StoneyCreekGutterCleaningPage() {
             <div className="flex flex-col gap-10">
               {project.photoPairs.map((pair, i) => (
                 <div key={i} className="grid gap-4 sm:grid-cols-2 sm:items-center">
-                  <div className="relative overflow-hidden rounded-2xl border border-navy-900/10 shadow-sm">
+                  <div className="relative overflow-hidden rounded-[28px] border border-navy-900/10 shadow-sm">
                     <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-square sm:aspect-4/5" />
                     <span className="absolute left-3 top-3 rounded-full bg-navy-950/80 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
                       Before
                     </span>
                   </div>
-                  <div className="relative overflow-hidden rounded-2xl border border-navy-900/10 shadow-sm">
+                  <div className="relative overflow-hidden rounded-[28px] border border-navy-900/10 shadow-sm">
                     <SmartImage src={pair.after} alt={pair.afterAlt} fallbackLabel="After" className="aspect-square sm:aspect-4/5" />
                     <span className="absolute left-3 top-3 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
                       After
@@ -181,7 +181,7 @@ export default function StoneyCreekGutterCleaningPage() {
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {steps.map((step) => (
-              <div key={step.number} className="relative rounded-2xl border border-navy-900/10 bg-white p-7">
+              <div key={step.number} className="relative rounded-[28px] border border-navy-900/10 bg-white p-7 shadow-sm transition-shadow duration-300 hover:shadow-lg">
                 <span className="font-heading text-4xl font-extrabold text-brand-blue/20">{step.number}</span>
                 <h3 className="mt-3 text-lg font-bold text-navy-900">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{step.text}</p>
@@ -200,7 +200,7 @@ export default function StoneyCreekGutterCleaningPage() {
               Gutter Cleaning Prices in {area.name}
             </h2>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-navy-900/10">
+          <div className="overflow-hidden rounded-[28px] border border-navy-900/10">
             <div className="flex flex-col divide-y divide-navy-900/10 sm:flex-row sm:divide-x sm:divide-y-0">
               <div className="flex flex-1 items-center justify-between gap-4 p-6">
                 <div>

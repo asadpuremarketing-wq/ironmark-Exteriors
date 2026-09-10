@@ -7,6 +7,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
+import PriceCard from "@/components/PriceCard";
 import { business, serviceAreas, windowCleaningAreaSlugs, windowCleaningPricing } from "@/lib/data";
 import { whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
@@ -122,8 +123,8 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
 
   const includedSection = (
     <section key="included" className="section-y bg-[#f7f9fb]">
-      <div className="container-max grid gap-12 md:grid-cols-2">
-        <div>
+      <div className="container-max grid gap-6 md:grid-cols-2">
+        <div className="rounded-[28px] border border-navy-900/10 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-extrabold text-navy-900">What&apos;s Included</h2>
           <ul className="mt-6 flex flex-col gap-3">
             {[
@@ -143,7 +144,7 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
             ))}
           </ul>
         </div>
-        <div>
+        <div className="rounded-[28px] border border-navy-900/10 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-extrabold text-navy-900">Why {area.name} Homeowners Choose Us</h2>
           <p className="mt-4 text-navy-900/75">{whyChooseParagraph("window cleaning", area, index)}</p>
           <p className="mt-4 text-navy-900/75">{bookingLine(index)}</p>
@@ -187,20 +188,17 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
             </h2>
           </div>
           <div className="mx-auto grid max-w-2xl gap-6 sm:grid-cols-2">
-            <div className="rounded-2xl border border-navy-900/10 p-8 text-center shadow-sm">
-              <p className="text-sm font-semibold uppercase tracking-wide text-navy-900/50">1 Storey House</p>
-              <p className="mt-3 font-heading text-5xl font-extrabold text-navy-900">
-                ${windowCleaningPricing.oneStorey}
-              </p>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-navy-900/40">Starting At</p>
-            </div>
-            <div className="rounded-2xl border-2 border-brand-blue bg-brand-blue/5 p-8 text-center shadow-lg shadow-brand-blue/10">
-              <p className="text-sm font-semibold uppercase tracking-wide text-brand-blue">2 Storey House</p>
-              <p className="mt-3 font-heading text-5xl font-extrabold text-navy-900">
-                ${windowCleaningPricing.twoStorey}
-              </p>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-navy-900/40">Starting At</p>
-            </div>
+            <PriceCard
+              label="1 Storey House"
+              price={windowCleaningPricing.oneStorey}
+              note="Interior & exterior glass cleaning for single-storey homes."
+            />
+            <PriceCard
+              label="2 Storey House"
+              price={windowCleaningPricing.twoStorey}
+              note="Interior & exterior glass cleaning for two-storey homes."
+              highlighted
+            />
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-navy-900/50">
             Pricing may vary based on the number, size, and accessibility of windows. Commercial properties

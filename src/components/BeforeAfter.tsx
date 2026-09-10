@@ -36,9 +36,9 @@ export default function BeforeAfter() {
         <div className="mx-auto grid max-w-3xl gap-8 sm:grid-cols-2">
           {projects.map((p, i) => (
             <Reveal key={p.label} delay={i * 100}>
-              <div className="glass-dark group overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-2xl hover:shadow-black/40">
-                <div className="grid grid-cols-2 gap-px bg-white/5">
-                  <div className="relative">
+              <div className="glass-dark group overflow-hidden rounded-[32px] p-2.5 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-2xl hover:shadow-black/40">
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="relative overflow-hidden rounded-2xl">
                     <SmartImage
                       src={`/images/before-after/${p.slug}-before.jpg`}
                       alt={p.beforeAlt ?? `${p.label} before`}
@@ -49,7 +49,7 @@ export default function BeforeAfter() {
                       Before
                     </span>
                   </div>
-                  <div className="relative">
+                  <div className="relative overflow-hidden rounded-2xl">
                     <SmartImage
                       src={`/images/before-after/${p.slug}-after.jpg`}
                       alt={p.afterAlt ?? `${p.label} after`}
@@ -61,7 +61,7 @@ export default function BeforeAfter() {
                     </span>
                   </div>
                 </div>
-                <div className="bg-navy-950/60 px-5 py-3.5 text-center text-sm font-bold text-white backdrop-blur-sm">
+                <div className="px-5 pb-2 pt-3.5 text-center text-sm font-bold text-white">
                   {p.href ? (
                     <Link href={p.href} className="hover:text-brand-blue-light hover:underline">
                       {p.label}
