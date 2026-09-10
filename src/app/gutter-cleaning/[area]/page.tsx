@@ -14,7 +14,7 @@ import {
   gutterCleaningPricing,
   gutterCleaningProjects,
 } from "@/lib/data";
-import { introParagraph, whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
+import { whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 
 type Params = Promise<{ area: string }>;
 
@@ -183,13 +183,6 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
       />
 
       <GoogleReviews />
-
-      {/* Intro / local context, unique per city */}
-      <section className="bg-white pt-10">
-        <div className="container-max max-w-3xl text-center">
-          <p className="text-navy-900/70">{introParagraph("gutter cleaning", area, index)}</p>
-        </div>
-      </section>
 
       {/* Real completed project, only shown for cities with one on file */}
       {project && (

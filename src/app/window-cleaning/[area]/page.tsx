@@ -7,7 +7,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
 import { business, serviceAreas, windowCleaningAreaSlugs, windowCleaningPricing } from "@/lib/data";
-import { introParagraph, whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
+import { whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 
 type Params = Promise<{ area: string }>;
 
@@ -175,13 +175,6 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
       />
 
       <GoogleReviews />
-
-      {/* Intro / local context, unique per city */}
-      <section className="bg-white pt-10">
-        <div className="container-max max-w-3xl text-center">
-          <p className="text-navy-900/70">{introParagraph("window cleaning", area, index)}</p>
-        </div>
-      </section>
 
       {/* Pricing */}
       <section className="section-y bg-white">
