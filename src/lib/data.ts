@@ -265,6 +265,27 @@ export const gutterCleaningProjects: Record<string, GutterCleaningProject[]> = {
       ],
     },
   ],
+  "stoney-creek": [
+    {
+      title: "Gutter Cleaning Project in Stoney Creek",
+      description:
+        "This Stoney Creek home had gutters packed with leaves and built-up debris that were blocking normal water flow. We cleared every section by hand, flushed the downspouts, and confirmed the system was draining properly before wrapping up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/stoney-creek-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/stoney-creek-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Leaves and debris blocking the gutter before cleaning in Stoney Creek",
+          afterAlt: "Gutter cleared and flowing freely after cleaning in Stoney Creek",
+        },
+        {
+          before: "/images/before-after/stoney-creek-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/stoney-creek-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Overflowing gutter packed with debris before cleaning in Stoney Creek",
+          afterAlt: "Clean, debris-free gutter after cleaning in Stoney Creek",
+        },
+      ],
+    },
+  ],
 };
 
 // Cities where the Window Cleaning promotion is specifically marketed and

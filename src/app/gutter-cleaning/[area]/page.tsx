@@ -20,13 +20,18 @@ import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 type Params = Promise<{ area: string }>;
 
+// Stoney Creek has its own bespoke page at ./stoney-creek/page.tsx (a
+// static route, which Next.js prioritizes over this dynamic one) so it can
+// have a genuinely different structure instead of the shared template.
+const templatedAreaSlugs = gutterCleaningAreaSlugs.filter((s) => s !== "stoney-creek");
+
 function getArea(slug: string) {
-  if (!gutterCleaningAreaSlugs.includes(slug as (typeof gutterCleaningAreaSlugs)[number])) return undefined;
+  if (!templatedAreaSlugs.includes(slug as (typeof templatedAreaSlugs)[number])) return undefined;
   return serviceAreas.find((a) => a.slug === slug);
 }
 
 export function generateStaticParams() {
-  return gutterCleaningAreaSlugs.map((slug) => ({ area: slug }));
+  return templatedAreaSlugs.map((slug) => ({ area: slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
