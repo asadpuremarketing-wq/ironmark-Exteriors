@@ -6,7 +6,7 @@ import CTA from "@/components/CTA";
 import { business, serviceAreas, pressureWashingAreaSlugs, pressureWashingPricing } from "@/lib/data";
 
 export function pressureWashingMeta() {
-  const title = `Pressure Washing Services | Starting from $${pressureWashingPricing.startingFrom} | Ironmark Exteriors`;
+  const title = `Pressure Washing Services | Starting from $${pressureWashingPricing.startingFrom}`;
   const description = `Professional pressure washing for driveways, patios, walkways and other exterior surfaces starting from $${pressureWashingPricing.startingFrom}. Serving Hamilton, Burlington, Brantford, Stoney Creek, Grimsby, St. Catharines, and Niagara Falls. Free quotes.`;
   return { title, description };
 }

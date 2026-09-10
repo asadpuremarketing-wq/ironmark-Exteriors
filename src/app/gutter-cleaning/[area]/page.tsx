@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { area: slug } = await params;
   const area = getArea(slug);
   if (!area) return {};
-  const title = `Gutter Cleaning ${area.name}, ON | Starting at $${gutterCleaningPricing.oneStorey} | Ironmark Exteriors`;
+  const title = `Gutter Cleaning ${area.name}, ON | Starting at $${gutterCleaningPricing.oneStorey}`;
   const description = `Professional gutter cleaning in ${area.name}, ON starting at $${gutterCleaningPricing.oneStorey} for 1-storey homes and $${gutterCleaningPricing.twoStorey} for 2-storey homes. Licensed & insured. Book your free estimate today.`;
   return {
     title,

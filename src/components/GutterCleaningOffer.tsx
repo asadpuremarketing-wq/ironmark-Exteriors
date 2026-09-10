@@ -6,7 +6,7 @@ import CTA from "@/components/CTA";
 import { business, serviceAreas, gutterCleaningAreaSlugs, gutterCleaningPricing } from "@/lib/data";
 
 export function gutterCleaningMeta() {
-  const title = `Gutter Cleaning Services | Starting at $${gutterCleaningPricing.oneStorey} | Ironmark Exteriors`;
+  const title = `Gutter Cleaning Services | Starting at $${gutterCleaningPricing.oneStorey}`;
   const description = `Professional gutter cleaning starting at $${gutterCleaningPricing.oneStorey} for 1-storey homes and $${gutterCleaningPricing.twoStorey} for 2-storey homes. Serving Hamilton, Burlington, Brantford, Stoney Creek, Grimsby, St. Catharines, and Niagara Falls. Licensed & insured.`;
   return { title, description };
 }

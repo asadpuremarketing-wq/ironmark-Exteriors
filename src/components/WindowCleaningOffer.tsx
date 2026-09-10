@@ -6,7 +6,7 @@ import CTA from "@/components/CTA";
 import { business, serviceAreas, windowCleaningAreaSlugs, windowCleaningPricing } from "@/lib/data";
 
 export function windowCleaningMeta() {
-  const title = `Window Cleaning Services | Starting at $${windowCleaningPricing.oneStorey} | Ironmark Exteriors`;
+  const title = `Window Cleaning Services | Starting at $${windowCleaningPricing.oneStorey}`;
   const description = `Interior & exterior window cleaning for residential properties starting at $${windowCleaningPricing.oneStorey} for 1-storey homes and $${windowCleaningPricing.twoStorey} for 2-storey homes. Serving Hamilton, Burlington, Brantford, Stoney Creek, Grimsby, St. Catharines, and Niagara Falls. Commercial properties available by custom quote.`;
   return { title, description };
 }

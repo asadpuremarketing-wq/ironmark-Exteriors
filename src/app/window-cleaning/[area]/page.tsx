@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { area: slug } = await params;
   const area = getArea(slug);
   if (!area) return {};
-  const title = `Window Cleaning ${area.name}, ON | Starting at $${windowCleaningPricing.oneStorey} | Ironmark Exteriors`;
+  const title = `Window Cleaning ${area.name}, ON | Starting at $${windowCleaningPricing.oneStorey}`;
   const description = `Interior & exterior window cleaning in ${area.name}, ON starting at $${windowCleaningPricing.oneStorey} for 1-storey homes and $${windowCleaningPricing.twoStorey} for 2-storey homes. Licensed & insured. Book your free estimate today.`;
   return {
     title,

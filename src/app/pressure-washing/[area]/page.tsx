@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { area: slug } = await params;
   const area = getArea(slug);
   if (!area) return {};
-  const title = `Pressure Washing ${area.name}, ON | Starting from $${pressureWashingPricing.startingFrom} | Ironmark Exteriors`;
+  const title = `Pressure Washing ${area.name}, ON | Starting from $${pressureWashingPricing.startingFrom}`;
   const description = `Professional pressure washing in ${area.name}, ON for driveways, patios, and walkways starting from $${pressureWashingPricing.startingFrom}. Free quotes, licensed & insured.`;
   return {
     title,
