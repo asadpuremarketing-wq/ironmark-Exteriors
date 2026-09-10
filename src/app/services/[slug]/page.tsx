@@ -6,6 +6,7 @@ import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import GoogleReviews from "@/components/GoogleReviews";
 import { services, serviceAreas, serviceAreaNames, business } from "@/lib/data";
+import { breadcrumbSchema } from "@/lib/breadcrumb";
 import GutterCleaningOffer, { gutterCleaningMeta } from "@/components/GutterCleaningOffer";
 import WindowCleaningOffer, { windowCleaningMeta } from "@/components/WindowCleaningOffer";
 import PressureWashingOffer, { pressureWashingMeta } from "@/components/PressureWashingOffer";
@@ -93,8 +94,16 @@ export default async function ServicePage({ params }: { params: Params }) {
     areaServed: serviceAreas.map((a) => `${a.name}, ${a.province}`),
   };
 
+  const breadcrumbSchemaData = breadcrumbSchema([
+    { name: service.name, path: `/services/${service.slug}` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}

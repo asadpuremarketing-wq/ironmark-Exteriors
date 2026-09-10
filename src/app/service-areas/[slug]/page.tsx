@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import GoogleReviews from "@/components/GoogleReviews";
 import { serviceAreas, services, business, areaOffers } from "@/lib/data";
+import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 type Params = Promise<{ slug: string }>;
 
@@ -45,11 +46,20 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
     })),
   };
 
+  const breadcrumbSchemaData = breadcrumbSchema([
+    { name: "Service Areas", path: "/service-areas" },
+    { name: area.name, path: `/service-areas/${area.slug}` },
+  ]);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(areaSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
       />
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}

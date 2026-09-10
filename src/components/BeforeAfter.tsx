@@ -8,6 +8,8 @@ const projects = [
     slug: "hamilton-gutter-cleaning-1",
     label: "Gutter Cleaning in Hamilton",
     href: "/gutter-cleaning/hamilton",
+    beforeAlt: "Pine needles and debris clogging the roof edge and gutters before cleaning in Ancaster, Hamilton",
+    afterAlt: "Clean, debris-free gutter and roofline after gutter cleaning in Ancaster, Hamilton",
   },
 ];
 
@@ -39,7 +41,7 @@ export default function BeforeAfter() {
                   <div className="relative">
                     <SmartImage
                       src={`/images/before-after/${p.slug}-before.jpg`}
-                      alt={`${p.label} before`}
+                      alt={p.beforeAlt ?? `${p.label} before`}
                       fallbackLabel={`Before, ${p.label} Project`}
                       className="aspect-4/5"
                     />
@@ -50,7 +52,7 @@ export default function BeforeAfter() {
                   <div className="relative">
                     <SmartImage
                       src={`/images/before-after/${p.slug}-after.jpg`}
-                      alt={`${p.label} after`}
+                      alt={p.afterAlt ?? `${p.label} after`}
                       fallbackLabel={`After, ${p.label} Project`}
                       className="aspect-4/5"
                     />

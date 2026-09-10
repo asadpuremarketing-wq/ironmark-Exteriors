@@ -4,6 +4,7 @@ import WindowCleaningQuoteCard from "@/components/WindowCleaningQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
 import { business, serviceAreas, windowCleaningAreaSlugs, windowCleaningPricing } from "@/lib/data";
+import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 export function windowCleaningMeta() {
   const title = `Window Cleaning Services | Starting at $${windowCleaningPricing.oneStorey}`;
@@ -54,8 +55,11 @@ export default function WindowCleaningOffer() {
     ],
   };
 
+  const breadcrumbSchemaData = breadcrumbSchema([{ name: "Window Cleaning", path: "/services/windows" }]);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       <Hero

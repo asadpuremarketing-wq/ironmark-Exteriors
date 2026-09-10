@@ -16,6 +16,7 @@ import {
   gutterCleaningProjects,
 } from "@/lib/data";
 import { whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
+import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 type Params = Promise<{ area: string }>;
 
@@ -122,6 +123,11 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
     })),
   };
 
+  const breadcrumbSchemaData = breadcrumbSchema([
+    { name: "Gutter Cleaning", path: "/services/gutters" },
+    { name: `Gutter Cleaning in ${area.name}`, path: `/gutter-cleaning/${area.slug}` },
+  ]);
+
   const includedSection = (
     <section key="included" className="section-y bg-[#f7f9fb]">
       <div className="container-max grid gap-12 md:grid-cols-2">
@@ -167,6 +173,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }} />
 
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
@@ -197,7 +204,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
                     <div className="relative">
                       <SmartImage
                         src={pair.before}
-                        alt={`${project.title}, before`}
+                        alt={pair.beforeAlt}
                         fallbackLabel="Before"
                         className="aspect-4/5"
                       />
@@ -208,7 +215,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
                     <div className="relative">
                       <SmartImage
                         src={pair.after}
-                        alt={`${project.title}, after`}
+                        alt={pair.afterAlt}
                         fallbackLabel="After"
                         className="aspect-4/5"
                       />

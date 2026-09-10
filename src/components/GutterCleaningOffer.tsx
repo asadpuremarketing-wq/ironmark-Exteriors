@@ -4,6 +4,7 @@ import GutterCleaningQuoteCard from "@/components/GutterCleaningQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
 import { business, serviceAreas, gutterCleaningAreaSlugs, gutterCleaningPricing } from "@/lib/data";
+import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 export function gutterCleaningMeta() {
   const title = `Gutter Cleaning Services | Starting at $${gutterCleaningPricing.oneStorey}`;
@@ -54,8 +55,11 @@ export default function GutterCleaningOffer() {
     ],
   };
 
+  const breadcrumbSchemaData = breadcrumbSchema([{ name: "Gutter Cleaning", path: "/services/gutters" }]);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       <Hero

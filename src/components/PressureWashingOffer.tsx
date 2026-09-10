@@ -4,6 +4,7 @@ import PressureWashingQuoteCard from "@/components/PressureWashingQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
 import { business, serviceAreas, pressureWashingAreaSlugs, pressureWashingPricing } from "@/lib/data";
+import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 export function pressureWashingMeta() {
   const title = `Pressure Washing Services | Starting from $${pressureWashingPricing.startingFrom}`;
@@ -48,8 +49,11 @@ export default function PressureWashingOffer() {
     ],
   };
 
+  const breadcrumbSchemaData = breadcrumbSchema([{ name: "Pressure Washing", path: "/services/pressure-washing" }]);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
       <Hero

@@ -9,6 +9,7 @@ import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
 import { business, serviceAreas, pressureWashingAreaSlugs, pressureWashingPricing } from "@/lib/data";
 import { whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
+import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 type Params = Promise<{ area: string }>;
 
@@ -109,6 +110,11 @@ export default async function PressureWashingAreaPage({ params }: { params: Para
     })),
   };
 
+  const breadcrumbSchemaData = breadcrumbSchema([
+    { name: "Pressure Washing", path: "/services/pressure-washing" },
+    { name: `Pressure Washing in ${area.name}`, path: `/pressure-washing/${area.slug}` },
+  ]);
+
   const includedSection = (
     <section key="included" className="section-y bg-[#f7f9fb]">
       <div className="container-max grid gap-12 md:grid-cols-2">
@@ -154,6 +160,7 @@ export default async function PressureWashingAreaPage({ params }: { params: Para
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }} />
 
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}

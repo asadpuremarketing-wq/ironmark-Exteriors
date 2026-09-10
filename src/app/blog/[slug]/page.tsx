@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import CTA from "@/components/CTA";
 import { blogPosts, getBlogPost } from "@/lib/blog";
 import { business, services, serviceAreas, areaOffers } from "@/lib/data";
+import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 type Params = Promise<{ slug: string }>;
 
@@ -106,8 +107,17 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     mainEntityOfPage: `${business.siteUrl}/blog/${post.slug}`,
   };
 
+  const breadcrumbSchemaData = breadcrumbSchema([
+    { name: "Blog", path: "/blog" },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

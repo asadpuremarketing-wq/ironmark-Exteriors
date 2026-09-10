@@ -217,7 +217,7 @@ export const gutterCleaningPricing = {
 export type GutterCleaningProject = {
   title: string;
   description: string;
-  photoPairs: { before: string; after: string }[];
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
 };
 
 // Real completed-job photos, keyed by the gutter-cleaning city page slug
@@ -225,17 +225,21 @@ export type GutterCleaningProject = {
 // study on that city's page, omit a city to leave it without one.
 export const gutterCleaningProjects: Record<string, GutterCleaningProject> = {
   hamilton: {
-    title: "Gutter Cleaning Project Near Hamilton",
+    title: "Gutter Cleaning Project in Ancaster, Hamilton",
     description:
       "This home in Ancaster, part of the Greater Hamilton area we serve, had heavy pine needle and debris buildup throughout the gutters. We removed the debris, checked the downspouts, and confirmed proper drainage before completing the job.",
     photoPairs: [
       {
         before: "/images/before-after/hamilton-gutter-cleaning-1-before.jpg",
         after: "/images/before-after/hamilton-gutter-cleaning-1-after.jpg",
+        beforeAlt: "Pine needles and debris clogging the roof edge and gutters before cleaning in Ancaster, Hamilton",
+        afterAlt: "Clean, debris-free gutter and roofline after gutter cleaning in Ancaster, Hamilton",
       },
       {
         before: "/images/before-after/hamilton-gutter-cleaning-2-before.jpg",
         after: "/images/before-after/hamilton-gutter-cleaning-2-after.jpg",
+        beforeAlt: "Gutter packed with pine needles and leaf debris before cleaning in Ancaster, Hamilton",
+        afterAlt: "Gutter cleared of debris with proper drainage confirmed after cleaning in Ancaster, Hamilton",
       },
     ],
   },
