@@ -6,6 +6,9 @@ import CTA from "@/components/CTA";
 import GoogleReviews from "@/components/GoogleReviews";
 import { serviceAreas, services, business, areaOffers } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
+import { areaIntroParagraph, areaLocalNote, areaFaqs } from "@/lib/serviceAreaContent";
+import { neighbourhoodLine } from "@/lib/offerContent";
+import FaqAccordion from "@/components/FaqAccordion";
 
 type Params = Promise<{ slug: string }>;
 
@@ -32,6 +35,10 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
   const area = serviceAreas.find((a) => a.slug === slug);
   if (!area) notFound();
 
+  const index = serviceAreas.findIndex((a) => a.slug === area.slug);
+  const swapSections = index % 2 === 1;
+  const faqs = areaFaqs(area, index);
+
   const areaSchema = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
@@ -43,6 +50,16 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
     makesOffer: services.map((s) => ({
       "@type": "Offer",
       itemOffered: { "@type": "Service", name: s.name },
+    })),
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   };
 
@@ -61,6 +78,10 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
         title={`Exterior Services in ${area.name}, ON`}
@@ -69,51 +90,89 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
 
       <GoogleReviews />
 
-      <section className="section-y bg-white">
-        <div className="container-max">
-          <div className="mb-12 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
-              What We Offer
-            </p>
-            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
-              Services Available in {area.name}
-            </h2>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <Link
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                className="group rounded-2xl border border-navy-900/10 p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-xl hover:shadow-navy-900/10"
-              >
-                <h3 className="mb-2 text-lg font-bold text-navy-900">
-                  {service.name} in {area.name}
-                </h3>
-                <p className="text-sm leading-relaxed text-navy-900/70">
-                  {service.shortDescription}
-                </p>
-              </Link>
-            ))}
-          </div>
+      {/* Intro / local context, unique per city */}
+      <section className="bg-white pt-10">
+        <div className="container-max max-w-3xl text-center">
+          <p className="text-navy-900/70">{areaIntroParagraph(area, index)}</p>
+        </div>
+      </section>
 
-          {areaOffers.some((o) => o.areaSlugs.includes(area.slug)) && (
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
-              {areaOffers
-                .filter((o) => o.areaSlugs.includes(area.slug))
-                .map((o) => (
+      {(() => {
+        const offersSection = (
+          <section key="offers" className="section-y bg-white">
+            <div className="container-max">
+              <div className="mb-12 text-center">
+                <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
+                  What We Offer
+                </p>
+                <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+                  Services Available in {area.name}
+                </h2>
+              </div>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {services.map((service) => (
                   <Link
-                    key={o.pathPrefix}
-                    href={`/${o.pathPrefix}/${area.slug}`}
-                    className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+                    key={service.slug}
+                    href={`/services/${service.slug}`}
+                    className="group rounded-2xl border border-navy-900/10 p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-xl hover:shadow-navy-900/10"
                   >
-                    {o.label} in {area.name}, {o.priceLabel}
-                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-                      <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <h3 className="mb-2 text-lg font-bold text-navy-900">
+                      {service.name} in {area.name}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-navy-900/70">
+                      {service.shortDescription}
+                    </p>
                   </Link>
                 ))}
+              </div>
+
+              {areaOffers.some((o) => o.areaSlugs.includes(area.slug)) && (
+                <div className="mt-10 flex flex-wrap justify-center gap-3">
+                  {areaOffers
+                    .filter((o) => o.areaSlugs.includes(area.slug))
+                    .map((o) => (
+                      <Link
+                        key={o.pathPrefix}
+                        href={`/${o.pathPrefix}/${area.slug}`}
+                        className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue bg-brand-blue/5 px-6 py-3 text-sm font-bold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+                      >
+                        {o.label} in {area.name}, {o.priceLabel}
+                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                          <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </Link>
+                    ))}
+                </div>
+              )}
             </div>
-          )}
+          </section>
+        );
+
+        const localNoteSection = (
+          <section key="local-note" className="section-y bg-[#f7f9fb]">
+            <div className="container-max grid gap-10 md:grid-cols-2 md:items-center">
+              <div>
+                <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
+                  Local to {area.name}
+                </p>
+                <h2 className="text-2xl font-extrabold text-navy-900 sm:text-3xl">
+                  Built for Homes Around {neighbourhoodLine(area)}
+                </h2>
+              </div>
+              <p className="text-navy-900/75">{areaLocalNote(area, index)}</p>
+            </div>
+          </section>
+        );
+
+        return swapSections ? [localNoteSection, offersSection] : [offersSection, localNoteSection];
+      })()}
+
+      <section className="section-y bg-white">
+        <div className="container-max max-w-3xl">
+          <h2 className="mb-8 text-center text-3xl font-extrabold text-navy-900">
+            {area.name} Frequently Asked Questions
+          </h2>
+          <FaqAccordion faqs={faqs} />
         </div>
       </section>
 
