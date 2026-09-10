@@ -66,6 +66,8 @@ export default function WindowCleaningOffer() {
         formSlot={<WindowCleaningQuoteCard source="services-windows" />}
       />
 
+      <GoogleReviews />
+
       {/* Pricing */}
       <section className="section-y bg-white">
         <div className="container-max">
@@ -158,7 +160,6 @@ export default function WindowCleaningOffer() {
         </div>
       </section>
 
-      <GoogleReviews />
       <CTA />
     </>
   );

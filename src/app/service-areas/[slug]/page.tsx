@@ -57,6 +57,8 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
         subtitle={area.blurb}
       />
 
+      <GoogleReviews />
+
       <section className="section-y bg-white">
         <div className="container-max">
           <div className="mb-12 text-center">
@@ -104,8 +106,6 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
           )}
         </div>
       </section>
-
-      <GoogleReviews />
 
       <section className="section-y bg-navy-950">
         <div className="container-max">

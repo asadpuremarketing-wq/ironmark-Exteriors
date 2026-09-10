@@ -60,6 +60,8 @@ export default function PressureWashingOffer() {
         formSlot={<PressureWashingQuoteCard source="services-pressure-washing" />}
       />
 
+      <GoogleReviews />
+
       {/* Pricing */}
       <section className="section-y bg-white">
         <div className="container-max">
@@ -143,7 +145,6 @@ export default function PressureWashingOffer() {
         </div>
       </section>
 
-      <GoogleReviews />
       <CTA />
     </>
   );

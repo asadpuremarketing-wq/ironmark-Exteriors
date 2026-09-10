@@ -66,6 +66,8 @@ export default function GutterCleaningOffer() {
         formSlot={<GutterCleaningQuoteCard source="services-gutters" />}
       />
 
+      <GoogleReviews />
+
       {/* Pricing */}
       <section className="section-y bg-white">
         <div className="container-max">
@@ -152,7 +154,6 @@ export default function GutterCleaningOffer() {
         </div>
       </section>
 
-      <GoogleReviews />
       <CTA />
     </>
   );

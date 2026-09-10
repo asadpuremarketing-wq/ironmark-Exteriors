@@ -169,6 +169,8 @@ export default async function PressureWashingAreaPage({ params }: { params: Para
         formSlot={<PressureWashingQuoteCard source={`pressure-washing-${area.slug}`} />}
       />
 
+      <GoogleReviews />
+
       {/* Intro / local context, unique per city */}
       <section className="bg-white pt-10">
         <div className="container-max max-w-3xl text-center">
@@ -199,8 +201,6 @@ export default async function PressureWashingAreaPage({ params }: { params: Para
       </section>
 
       {swapSections ? [faqSection, includedSection] : [includedSection, faqSection]}
-
-      <GoogleReviews />
 
       <OtherOffersInCity currentSlug="pressure-washing" area={area} />
 

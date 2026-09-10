@@ -182,6 +182,8 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
         formSlot={<GutterCleaningQuoteCard source={`gutter-cleaning-${area.slug}`} />}
       />
 
+      <GoogleReviews />
+
       {/* Intro / local context, unique per city */}
       <section className="bg-white pt-10">
         <div className="container-max max-w-3xl text-center">
@@ -271,8 +273,6 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
       </section>
 
       {swapSections ? [faqSection, includedSection] : [includedSection, faqSection]}
-
-      <GoogleReviews />
 
       <OtherOffersInCity currentSlug="gutters" area={area} />
 

@@ -105,6 +105,8 @@ export default async function ServicePage({ params }: { params: Params }) {
         subtitle={service.shortDescription}
       />
 
+      <GoogleReviews />
+
       <section className="section-y bg-white">
         <div className="container-max grid items-start gap-12 md:grid-cols-2">
           <div>
@@ -172,8 +174,6 @@ export default async function ServicePage({ params }: { params: Params }) {
           </div>
         </div>
       </section>
-
-      <GoogleReviews />
 
       <section className="relative overflow-hidden bg-navy-950 py-14 sm:py-20">
         <div

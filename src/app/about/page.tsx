@@ -36,6 +36,8 @@ export default function AboutPage() {
         showCta={false}
       />
 
+      <GoogleReviews />
+
       <section className="section-y bg-white">
         <div className="container-max grid items-center gap-12 md:grid-cols-2">
           <div>
@@ -92,8 +94,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      <GoogleReviews />
 
       <section className="pb-14 sm:pb-20">
         <div className="container-max">
