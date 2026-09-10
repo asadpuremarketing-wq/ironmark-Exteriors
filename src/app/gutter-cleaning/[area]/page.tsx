@@ -78,7 +78,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
   const index = gutterCleaningAreaSlugs.indexOf(slug as (typeof gutterCleaningAreaSlugs)[number]);
   const areaFaqs = rotateFaqs(faqPool(area.name), index, 4);
   const swapSections = index % 2 === 1;
-  const project = gutterCleaningProjects[area.slug];
+  const projects = gutterCleaningProjects[area.slug];
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -185,9 +185,12 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
 
       <GoogleReviews />
 
-      {/* Real completed project, only shown for cities with one on file */}
-      {project && (
-        <section className="section-y bg-[#f7f9fb]">
+      {/* Real completed projects, only shown for cities with one or more on file */}
+      {projects?.map((project, projectIndex) => (
+        <section
+          key={project.title}
+          className={`section-y ${projectIndex % 2 === 0 ? "bg-[#f7f9fb]" : "bg-white"}`}
+        >
           <div className="container-max">
             <div className="mb-10 text-center">
               <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Real Results</p>
@@ -229,7 +232,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
             </div>
           </div>
         </section>
-      )}
+      ))}
 
       {/* Pricing */}
       <section className="section-y bg-white">

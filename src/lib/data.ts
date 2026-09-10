@@ -221,28 +221,50 @@ export type GutterCleaningProject = {
 };
 
 // Real completed-job photos, keyed by the gutter-cleaning city page slug
-// they should appear on. Add an entry here to show a "Real Project" case
-// study on that city's page, omit a city to leave it without one.
-export const gutterCleaningProjects: Record<string, GutterCleaningProject> = {
-  hamilton: {
-    title: "Gutter Cleaning Project in Ancaster, Hamilton",
-    description:
-      "This home in Ancaster, part of the Greater Hamilton area we serve, had heavy pine needle and debris buildup throughout the gutters. We removed the debris, checked the downspouts, and confirmed proper drainage before completing the job.",
-    photoPairs: [
-      {
-        before: "/images/before-after/hamilton-gutter-cleaning-1-before.jpg",
-        after: "/images/before-after/hamilton-gutter-cleaning-1-after.jpg",
-        beforeAlt: "Pine needles and debris clogging the roof edge and gutters before cleaning in Ancaster, Hamilton",
-        afterAlt: "Clean, debris-free gutter and roofline after gutter cleaning in Ancaster, Hamilton",
-      },
-      {
-        before: "/images/before-after/hamilton-gutter-cleaning-2-before.jpg",
-        after: "/images/before-after/hamilton-gutter-cleaning-2-after.jpg",
-        beforeAlt: "Gutter packed with pine needles and leaf debris before cleaning in Ancaster, Hamilton",
-        afterAlt: "Gutter cleared of debris with proper drainage confirmed after cleaning in Ancaster, Hamilton",
-      },
-    ],
-  },
+// they should appear on. Add entries here to show "Real Project" case
+// studies on that city's page (a city can have more than one job), omit a
+// city to leave it without any.
+export const gutterCleaningProjects: Record<string, GutterCleaningProject[]> = {
+  hamilton: [
+    {
+      title: "Gutter Cleaning Project in Ancaster, Hamilton",
+      description:
+        "This home in Ancaster, part of the Greater Hamilton area we serve, had heavy pine needle and debris buildup throughout the gutters. We removed the debris, checked the downspouts, and confirmed proper drainage before completing the job.",
+      photoPairs: [
+        {
+          before: "/images/before-after/hamilton-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/hamilton-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Pine needles and debris clogging the roof edge and gutters before cleaning in Ancaster, Hamilton",
+          afterAlt: "Clean, debris-free gutter and roofline after gutter cleaning in Ancaster, Hamilton",
+        },
+        {
+          before: "/images/before-after/hamilton-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/hamilton-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Gutter packed with pine needles and leaf debris before cleaning in Ancaster, Hamilton",
+          afterAlt: "Gutter cleared of debris with proper drainage confirmed after cleaning in Ancaster, Hamilton",
+        },
+      ],
+    },
+    {
+      title: "Gutter Cleaning Project in Hamilton",
+      description:
+        "This Hamilton home had heavy leaf and debris buildup packed into the gutters along the roofline. We cleared the gutters completely, cleaned up the surrounding area, and confirmed the system was draining properly before finishing the job.",
+      photoPairs: [
+        {
+          before: "/images/before-after/hamilton-gutter-cleaning-job2-1-before.jpg",
+          after: "/images/before-after/hamilton-gutter-cleaning-job2-1-after.jpg",
+          beforeAlt: "Leaves and debris packed into the gutter before cleaning in Hamilton",
+          afterAlt: "Gutter cleared of leaves and debris after cleaning in Hamilton",
+        },
+        {
+          before: "/images/before-after/hamilton-gutter-cleaning-job2-2-before.jpg",
+          after: "/images/before-after/hamilton-gutter-cleaning-job2-2-after.jpg",
+          beforeAlt: "Debris-clogged gutter and downspout area before cleaning in Hamilton",
+          afterAlt: "Clean gutter and clear downspout after cleaning in Hamilton",
+        },
+      ],
+    },
+  ],
 };
 
 // Cities where the Window Cleaning promotion is specifically marketed and
