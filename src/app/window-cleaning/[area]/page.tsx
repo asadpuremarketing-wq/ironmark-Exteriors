@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Hero from "@/components/Hero";
 import WindowCleaningQuoteCard from "@/components/WindowCleaningQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
+import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
 import { business, serviceAreas, windowCleaningAreaSlugs, windowCleaningPricing } from "@/lib/data";
@@ -149,14 +150,7 @@ export default async function WindowCleaningAreaPage({ params }: { params: Param
     <section key="faq" className="section-y bg-white">
       <div className="container-max max-w-3xl">
         <h2 className="mb-8 text-center text-3xl font-extrabold text-navy-900">Frequently Asked Questions</h2>
-        <div className="flex flex-col gap-4">
-          {areaFaqs.map((f) => (
-            <div key={f.q} className="rounded-xl border border-navy-900/10 p-6">
-              <h3 className="text-base font-bold text-navy-900">{f.q}</h3>
-              <p className="mt-2 text-sm text-navy-900/70">{f.a}</p>
-            </div>
-          ))}
-        </div>
+        <FaqAccordion faqs={areaFaqs} />
       </div>
     </section>
   );
