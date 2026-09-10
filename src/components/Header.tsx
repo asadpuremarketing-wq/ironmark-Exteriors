@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { business, services } from "@/lib/data";
+import { business, services, serviceAreas, areaOffers } from "@/lib/data";
 import Logo from "./Logo";
 
 const navLinks = [
@@ -10,10 +10,21 @@ const navLinks = [
   { href: "/about", label: "About" },
 ];
 
+function areasForService(slug: string) {
+  const offer = areaOffers.find((o) => o.slug === slug);
+  if (!offer) return null;
+  return offer.areaSlugs
+    .map((s) => serviceAreas.find((a) => a.slug === s))
+    .filter((a): a is (typeof serviceAreas)[number] => Boolean(a))
+    .map((a) => ({ area: a, href: `/${offer.pathPrefix}/${a.slug}` }));
+}
+
 export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [areasSubOpen, setAreasSubOpen] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileAreasSubOpen, setMobileAreasSubOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -74,18 +85,60 @@ export default function Header() {
                 }`}
               >
                 <div className="shimmer-border overflow-hidden rounded-xl border border-white/10 bg-navy-900 shadow-2xl shadow-black/50">
-                  {services.map((service) => (
-                    <Link
-                      key={service.slug}
-                      href={`/services/${service.slug}`}
-                      className="flex items-center justify-between border-b border-white/5 px-5 py-3.5 text-sm font-medium text-brand-silver last:border-b-0 hover:bg-navy-800/70 hover:text-white"
-                    >
-                      {service.name}
-                      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-brand-blue-light" fill="none">
-                        <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </Link>
-                  ))}
+                  {services.map((service) => {
+                    const areas = areasForService(service.slug);
+                    if (!areas) {
+                      return (
+                        <Link
+                          key={service.slug}
+                          href={`/services/${service.slug}`}
+                          className="flex items-center justify-between border-b border-white/5 px-5 py-3.5 text-sm font-medium text-brand-silver last:border-b-0 hover:bg-navy-800/70 hover:text-white"
+                        >
+                          {service.name}
+                          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-brand-blue-light" fill="none">
+                            <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </Link>
+                      );
+                    }
+                    return (
+                      <div
+                        key={service.slug}
+                        className="relative border-b border-white/5 last:border-b-0"
+                        onMouseEnter={() => setAreasSubOpen(service.slug)}
+                        onMouseLeave={() => setAreasSubOpen((cur) => (cur === service.slug ? null : cur))}
+                      >
+                        <Link
+                          href={`/services/${service.slug}`}
+                          className="flex items-center justify-between px-5 py-3.5 text-sm font-medium text-brand-silver hover:bg-navy-800/70 hover:text-white"
+                        >
+                          {service.name}
+                          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-brand-blue-light" fill="none">
+                            <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </Link>
+                        <div
+                          className={`absolute left-full top-0 w-64 pl-3 transition-all duration-200 ${
+                            areasSubOpen === service.slug
+                              ? "pointer-events-auto translate-x-0 opacity-100"
+                              : "pointer-events-none -translate-x-1 opacity-0"
+                          }`}
+                        >
+                          <div className="shimmer-border overflow-hidden rounded-xl border border-white/10 bg-navy-900 shadow-2xl shadow-black/50">
+                            {areas.map(({ area, href }) => (
+                              <Link
+                                key={area.slug}
+                                href={href}
+                                className="block border-b border-white/5 px-5 py-3 text-sm text-brand-silver last:border-b-0 hover:bg-navy-800/70 hover:text-white"
+                              >
+                                {service.name} in {area.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -175,16 +228,63 @@ export default function Header() {
             </button>
             {mobileServicesOpen && (
               <div className="ml-3 flex flex-col border-l border-white/10 pl-3">
-                {services.map((service) => (
-                  <Link
-                    key={service.slug}
-                    href={`/services/${service.slug}`}
-                    className="rounded px-2 py-2.5 text-sm text-brand-silver hover:bg-navy-800 hover:text-white"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {service.name}
-                  </Link>
-                ))}
+                {services.map((service) => {
+                  const areas = areasForService(service.slug);
+                  if (!areas) {
+                    return (
+                      <Link
+                        key={service.slug}
+                        href={`/services/${service.slug}`}
+                        className="rounded px-2 py-2.5 text-sm text-brand-silver hover:bg-navy-800 hover:text-white"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {service.name}
+                      </Link>
+                    );
+                  }
+                  const subOpen = mobileAreasSubOpen === service.slug;
+                  return (
+                    <div key={service.slug} className="flex flex-col">
+                      <div className="flex items-center justify-between rounded pr-2 hover:bg-navy-800">
+                        <Link
+                          href={`/services/${service.slug}`}
+                          className="flex-1 px-2 py-2.5 text-sm text-brand-silver hover:text-white"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {service.name}
+                        </Link>
+                        <button
+                          type="button"
+                          className="p-2 text-brand-silver hover:text-white"
+                          aria-label={`Toggle ${service.name} service areas`}
+                          onClick={() => setMobileAreasSubOpen((cur) => (cur === service.slug ? null : service.slug))}
+                        >
+                          <svg
+                            className={`h-3 w-3 transition-transform ${subOpen ? "rotate-180" : ""}`}
+                            viewBox="0 0 12 8"
+                            fill="none"
+                          >
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </button>
+                      </div>
+                      {subOpen && (
+                        <div className="ml-3 flex flex-col border-l border-white/10 pl-3">
+                          {areas.map(({ area, href }) => (
+                            <Link
+                              key={area.slug}
+                              href={href}
+                              className="rounded px-2 py-2 text-xs text-brand-silver hover:bg-navy-800 hover:text-white"
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              {service.name} in {area.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
 
