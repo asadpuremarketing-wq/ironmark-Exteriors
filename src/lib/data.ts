@@ -14,7 +14,7 @@ export const business = {
   },
   website: "ironmarkexteriors.ca",
   siteUrl: "https://ironmarkexteriors.ca",
-  googleBusinessProfileUrl: "https://maps.app.goo.gl/gETYPuHSJHCMxFMy6",
+  googleBusinessProfileUrl: "https://maps.app.goo.gl/5zeAYCLrEDsXZFW98",
 };
 
 export type Service = {
@@ -212,6 +212,33 @@ export const gutterCleaningAreaSlugs = [
 export const gutterCleaningPricing = {
   oneStorey: 149,
   twoStorey: 199,
+};
+
+export type GutterCleaningProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string }[];
+};
+
+// Real completed-job photos, keyed by the gutter-cleaning city page slug
+// they should appear on. Add an entry here to show a "Real Project" case
+// study on that city's page, omit a city to leave it without one.
+export const gutterCleaningProjects: Record<string, GutterCleaningProject> = {
+  hamilton: {
+    title: "Gutter Cleaning Project Near Hamilton",
+    description:
+      "This home in Ancaster, part of the Greater Hamilton area we serve, had heavy pine needle and debris buildup throughout the gutters. We removed the debris, checked the downspouts, and confirmed proper drainage before completing the job.",
+    photoPairs: [
+      {
+        before: "/images/before-after/hamilton-gutter-cleaning-1-before.jpg",
+        after: "/images/before-after/hamilton-gutter-cleaning-1-after.jpg",
+      },
+      {
+        before: "/images/before-after/hamilton-gutter-cleaning-2-before.jpg",
+        after: "/images/before-after/hamilton-gutter-cleaning-2-after.jpg",
+      },
+    ],
+  },
 };
 
 // Cities where the Window Cleaning promotion is specifically marketed and

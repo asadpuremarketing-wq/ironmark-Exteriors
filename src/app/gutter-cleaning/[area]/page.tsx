@@ -6,7 +6,14 @@ import GutterCleaningQuoteCard from "@/components/GutterCleaningQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
-import { business, serviceAreas, gutterCleaningAreaSlugs, gutterCleaningPricing } from "@/lib/data";
+import SmartImage from "@/components/SmartImage";
+import {
+  business,
+  serviceAreas,
+  gutterCleaningAreaSlugs,
+  gutterCleaningPricing,
+  gutterCleaningProjects,
+} from "@/lib/data";
 import { introParagraph, whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 
 type Params = Promise<{ area: string }>;
@@ -69,6 +76,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
   const index = gutterCleaningAreaSlugs.indexOf(slug as (typeof gutterCleaningAreaSlugs)[number]);
   const areaFaqs = rotateFaqs(faqPool(area.name), index, 4);
   const swapSections = index % 2 === 1;
+  const project = gutterCleaningProjects[area.slug];
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -180,6 +188,52 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
           <p className="text-navy-900/70">{introParagraph("gutter cleaning", area, index)}</p>
         </div>
       </section>
+
+      {/* Real completed project, only shown for cities with one on file */}
+      {project && (
+        <section className="section-y bg-[#f7f9fb]">
+          <div className="container-max">
+            <div className="mb-10 text-center">
+              <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Real Results</p>
+              <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">{project.title}</h2>
+              <p className="mx-auto mt-4 max-w-2xl text-navy-900/70">{project.description}</p>
+            </div>
+            <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+              {project.photoPairs.map((pair, i) => (
+                <div
+                  key={i}
+                  className="overflow-hidden rounded-2xl border border-navy-900/10 shadow-sm"
+                >
+                  <div className="grid grid-cols-2 gap-1">
+                    <div className="relative">
+                      <SmartImage
+                        src={pair.before}
+                        alt={`${project.title}, before`}
+                        fallbackLabel="Before"
+                        className="aspect-4/5"
+                      />
+                      <span className="absolute left-2 top-2 rounded-full bg-navy-950/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                        Before
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <SmartImage
+                        src={pair.after}
+                        alt={`${project.title}, after`}
+                        fallbackLabel="After"
+                        className="aspect-4/5"
+                      />
+                      <span className="absolute left-2 top-2 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg">
+                        After
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Pricing */}
       <section className="section-y bg-white">

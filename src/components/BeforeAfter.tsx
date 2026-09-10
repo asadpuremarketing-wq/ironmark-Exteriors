@@ -4,7 +4,11 @@ import Reveal from "./Reveal";
 
 const projects = [
   { slug: "project-1", label: "Project 1" },
-  { slug: "project-2", label: "Project 2" },
+  {
+    slug: "hamilton-gutter-cleaning-1",
+    label: "Gutter Cleaning in Hamilton",
+    href: "/gutter-cleaning/hamilton",
+  },
 ];
 
 export default function BeforeAfter() {
@@ -56,7 +60,13 @@ export default function BeforeAfter() {
                   </div>
                 </div>
                 <div className="bg-navy-950/60 px-5 py-3.5 text-center text-sm font-bold text-white backdrop-blur-sm">
-                  {p.label}
+                  {p.href ? (
+                    <Link href={p.href} className="hover:text-brand-blue-light hover:underline">
+                      {p.label}
+                    </Link>
+                  ) : (
+                    p.label
+                  )}
                 </div>
               </div>
             </Reveal>

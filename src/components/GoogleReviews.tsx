@@ -1,20 +1,21 @@
 import Reveal from "./Reveal";
+import { business } from "@/lib/data";
 
 const reviews = [
   {
-    name: "Sarah M.",
-    location: "Hamilton, ON",
-    text: "Ironmark replaced our roof and gutters in a day and a half. Clean, professional, and the crew left the property spotless. Highly recommend.",
+    name: "Krishn Sharma",
+    location: "Local Guide",
+    text: "Asad did great job replacing and cleaning the downspout. Will highly recommend.",
   },
   {
-    name: "Mike D.",
+    name: "Sameea Amin",
     location: "Stoney Creek, ON",
-    text: "Great communication from quote to completion. The new siding completely transformed the look of our house. Fair pricing too.",
+    text: "Ironmark Exteriors did a great job, they cleaned our gutters in Stoney Creek, provided before and after photos of the job, I am very happy with their service and also the service was very affordable.",
   },
   {
-    name: "Priya K.",
-    location: "Burlington, ON",
-    text: "Fast, reliable, and the crew genuinely cared about doing the job right. Our new windows have made a noticeable difference in comfort.",
+    name: "Kalsoom K",
+    location: "Local Guide",
+    text: "Ironmark Exteriors installed a brand new downspout at our place, it's working perfectly. Their prices are very reasonable. I will definitely hire them again. Thank you for your service.",
   },
 ];
 
@@ -89,6 +90,20 @@ export default function GoogleReviews() {
         <p className="mt-3 text-center text-xs text-navy-900/40 sm:hidden">
           Swipe to see more reviews →
         </p>
+
+        <div className="mt-8 text-center">
+          <a
+            href={business.googleBusinessProfileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-bold text-brand-blue hover:underline"
+          >
+            Read all our reviews on Google
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+              <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   );
