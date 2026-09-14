@@ -18,6 +18,7 @@ import {
 } from "@/lib/data";
 import { whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
+import { gutterCleaningCityContent } from "@/lib/gutterCleaningCityContent";
 
 type Params = Promise<{ area: string }>;
 
@@ -74,6 +75,64 @@ const faqPool = (areaName: string) => [
     q: "Can you install gutter guards to reduce how often I need cleaning?",
     a: "Yes. We supply and install gutter guards that cut down significantly on debris buildup, especially useful for homes with heavy tree cover. Ask about guards when you book your cleaning.",
   },
+  {
+    q: "How long does gutter cleaning take?",
+    a: "Most 1-storey homes take under an hour. 2-storey homes or properties with a lot of linear footage of gutter can take a bit longer, we'll give you a time estimate when you book.",
+  },
+  {
+    q: "Do I need to be home?",
+    a: "No, as long as we have access to the property. Many homeowners have us come by during the day while they're at work and pay afterward.",
+  },
+  {
+    q: "Do you clean gutter guards?",
+    a: "Yes. If you already have gutter guards installed, we clear debris off the top and check that they're seated properly. If a guard is damaged or letting debris through, we'll flag it.",
+  },
+  {
+    q: "What happens if a downspout is blocked?",
+    a: "We clear it as part of the standard cleaning. If a downspout is cracked, disconnected, or too small to keep up with heavy rain, we'll point it out and quote a repair or extension separately.",
+  },
+];
+
+const processSteps = [
+  {
+    number: "01",
+    title: "Inspection",
+    text: "We walk the roofline and check every section of gutter and downspout for buildup, damage, or loose brackets before we start.",
+  },
+  {
+    number: "02",
+    title: "Debris Removal",
+    text: "Leaves, pine needles, shingle grit, and any other buildup are removed by hand from every section of gutter.",
+  },
+  {
+    number: "03",
+    title: "Downspout Clearing",
+    text: "Each downspout is checked and cleared of blockages so water has a clear path off the roof and away from the foundation.",
+  },
+  {
+    number: "04",
+    title: "Water-Flow Testing",
+    text: "We run water through the system to confirm it drains properly end to end, not just that the gutter looks clear.",
+  },
+  {
+    number: "05",
+    title: "Final Inspection",
+    text: "A last pass to check for anything missed, along with any damage worth flagging, like a separated seam or a sagging section.",
+  },
+  {
+    number: "06",
+    title: "Cleanup",
+    text: "All debris is bagged and hauled away. We don't leave leaves or gutter waste on your lawn, driveway, or landscaping.",
+  },
+];
+
+const signsPool = [
+  "Water spilling over the sides of the gutter during or after rain",
+  "Visible sagging or gutters pulling away from the fascia",
+  "Plants, weeds, or moss growing inside the gutter",
+  "Water stains or streaking on the siding below the gutter line",
+  "Standing water or a sluggish drain after you run a hose through it",
+  "Birds, squirrels, or other pests nesting in the gutter",
 ];
 
 export default async function GutterCleaningAreaPage({ params }: { params: Params }) {
@@ -82,9 +141,11 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
   if (!area) notFound();
 
   const index = gutterCleaningAreaSlugs.indexOf(slug as (typeof gutterCleaningAreaSlugs)[number]);
-  const areaFaqs = rotateFaqs(faqPool(area.name), index, 4);
+  const areaFaqs = rotateFaqs(faqPool(area.name), index, 7);
+  const areaSigns = rotateFaqs(signsPool, index, signsPool.length);
   const swapSections = index % 2 === 1;
   const projects = gutterCleaningProjects[area.slug];
+  const cityContent = gutterCleaningCityContent[area.slug];
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -191,6 +252,33 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
 
       <GoogleReviews />
 
+      {/* Our process */}
+      <section className="section-y bg-white">
+        <div className="container-max">
+          <div className="mb-10 text-center">
+            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How We Work</p>
+            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+              Our Gutter Cleaning Process in {area.name}
+            </h2>
+            {cityContent && (
+              <p className="mx-auto mt-4 max-w-2xl text-navy-900/70">{cityContent.processIntro}</p>
+            )}
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {processSteps.map((step) => (
+              <div
+                key={step.number}
+                className="rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-7 transition-shadow duration-300 hover:shadow-lg"
+              >
+                <span className="font-heading text-4xl font-extrabold text-brand-blue/20">{step.number}</span>
+                <h3 className="mt-3 text-lg font-bold text-navy-900">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Real completed projects, only shown for cities with one or more on file */}
       {projects?.map((project, projectIndex) => (
         <section
@@ -240,6 +328,51 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
         </section>
       ))}
 
+      {/* Signs your gutters need cleaning */}
+      <section className="section-y bg-white">
+        <div className="container-max">
+          <div className="mb-10 text-center">
+            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Know the Warning Signs</p>
+            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Signs Your Gutters Need Cleaning</h2>
+          </div>
+          <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
+            {areaSigns.map((sign) => (
+              <div key={sign} className="flex items-start gap-3 rounded-2xl border border-navy-900/10 p-5">
+                <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" fill="none">
+                  <path
+                    d="M10 6v5M10 14h.01M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <p className="text-sm text-navy-900/80">{sign}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Seasonal gutter care, unique per city */}
+      {cityContent && (
+        <section className="section-y bg-[#f7f9fb]">
+          <div className="container-max max-w-3xl">
+            <div className="mb-8 text-center">
+              <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Local Conditions</p>
+              <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+                Seasonal Gutter Care in {area.name}
+              </h2>
+            </div>
+            <div className="flex flex-col gap-5 text-navy-900/75">
+              {cityContent.seasonal.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Pricing */}
       <section className="section-y bg-white">
         <div className="container-max">
@@ -269,6 +402,41 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
       </section>
 
       {swapSections ? [faqSection, includedSection] : [includedSection, faqSection]}
+
+      {/* Related gutter services */}
+      <section className="section-y bg-[#f7f9fb]">
+        <div className="container-max">
+          <h2 className="mb-6 text-center text-2xl font-extrabold text-navy-900">
+            Related Gutter Services in {area.name}
+          </h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/services/gutters#repair"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+            >
+              Gutter Repair
+            </Link>
+            <Link
+              href="/services/gutters#installation"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+            >
+              Gutter Installation
+            </Link>
+            <Link
+              href="/services/gutters#guards"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+            >
+              Gutter Guards
+            </Link>
+            <Link
+              href="/services/gutters#downspouts"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+            >
+              Downspout Services
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <OtherOffersInCity currentSlug="gutters" area={area} />
 
