@@ -133,6 +133,49 @@ export default function GutterCleaningOffer() {
         </div>
       </section>
 
+      {/* Other gutter services, linked to from city pages with anchor text like "gutter repair" or "gutter guards" */}
+      <section id="other-gutter-services" className="section-y bg-white">
+        <div className="container-max">
+          <div className="mb-10 text-center">
+            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Beyond Cleaning</p>
+            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Other Gutter Services We Provide</h2>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div id="repair" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
+              <h3 className="mb-2 text-lg font-bold text-navy-900">Gutter Repair</h3>
+              <p className="text-sm leading-relaxed text-navy-900/70">
+                Loose brackets, separated seams, and sagging sections repaired so your gutters hang and drain the
+                way they should.
+              </p>
+            </div>
+            <div id="installation" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
+              <h3 className="mb-2 text-lg font-bold text-navy-900">Gutter Installation</h3>
+              <p className="text-sm leading-relaxed text-navy-900/70">
+                New seamless eavestrough installed to fit your home, replacing worn or undersized gutters that
+                can&apos;t keep up with heavy rain.
+              </p>
+            </div>
+            <div id="guards" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
+              <h3 className="mb-2 text-lg font-bold text-navy-900">Gutter Guards</h3>
+              <p className="text-sm leading-relaxed text-navy-900/70">
+                Guards fitted over existing gutters to cut down on how often they fill with leaves and debris,
+                especially useful under mature trees.
+              </p>
+            </div>
+            <div id="downspouts" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
+              <h3 className="mb-2 text-lg font-bold text-navy-900">Downspout Services</h3>
+              <p className="text-sm leading-relaxed text-navy-900/70">
+                Blocked, disconnected, or undersized downspouts repaired or extended so water is carried away from
+                your foundation.
+              </p>
+            </div>
+          </div>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-navy-900/50">
+            Ask about any of these when you book a cleaning, or contact us for a quote on its own.
+          </p>
+        </div>
+      </section>
+
       {/* Service areas */}
       <section className="section-y bg-white">
         <div className="container-max">
