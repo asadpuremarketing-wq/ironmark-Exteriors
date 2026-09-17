@@ -82,6 +82,54 @@ export function internalNotificationEmail(data: LeadEmailData) {
   return { subject, html };
 }
 
+function checklistItem(text: string) {
+  return `<tr><td style="padding:6px 0;font-size:14px;line-height:1.5;color:#0a1424;">&#9744;&nbsp;&nbsp;${text}</td></tr>`;
+}
+
+export function checklistConfirmationEmail() {
+  const subject = `Your Free Seasonal Exterior Maintenance Checklist | ${business.name}`;
+  const html = wrapper(`
+    <h1 style="margin:0 0 12px;font-size:20px;color:${NAVY};">Here's your checklist</h1>
+    <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#3a4453;">
+      A quick walkthrough twice a year catches most exterior problems while they're still cheap to fix.
+    </p>
+    <h2 style="margin:20px 0 8px;font-size:14px;color:${BLUE};text-transform:uppercase;letter-spacing:0.06em;">Roof</h2>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${checklistItem("Look for missing, curling, or cracked shingles")}
+      ${checklistItem("Check for granules collecting in gutters or at downspouts")}
+      ${checklistItem("Scan the attic for daylight coming through the roof deck")}
+      ${checklistItem("Check flashing around chimneys, vents, and skylights")}
+    </table>
+    <h2 style="margin:20px 0 8px;font-size:14px;color:${BLUE};text-transform:uppercase;letter-spacing:0.06em;">Gutters &amp; Downspouts</h2>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${checklistItem("Clear leaves and debris, especially after fall leaf-drop")}
+      ${checklistItem("Confirm downspouts drain freely and point away from the foundation")}
+      ${checklistItem("Check for sagging sections or gutters pulling away from the fascia")}
+    </table>
+    <h2 style="margin:20px 0 8px;font-size:14px;color:${BLUE};text-transform:uppercase;letter-spacing:0.06em;">Siding &amp; Exterior</h2>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${checklistItem("Look for cracked, warped, or loose siding panels")}
+      ${checklistItem("Check caulking around windows and doors for gaps")}
+      ${checklistItem("Note any dark streaking or moss that could trap moisture")}
+    </table>
+    <h2 style="margin:20px 0 8px;font-size:14px;color:${BLUE};text-transform:uppercase;letter-spacing:0.06em;">Windows</h2>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${checklistItem("Check for drafts or condensation between panes")}
+      ${checklistItem("Clean tracks and confirm screens aren't torn")}
+    </table>
+    <p style="margin:24px 0 0;font-size:13px;line-height:1.6;color:#7a8494;">
+      If anything on this list looks off, we offer free inspections and estimates, just reply to this email or call
+      us directly.
+    </p>
+    <div style="margin:16px 0 0;padding:16px 20px;background-color:#f7f9fb;border-radius:10px;">
+      <p style="margin:6px 0 0;font-size:16px;font-weight:700;color:${NAVY};">
+        <a href="tel:${business.phoneHref.replace("tel:", "")}" style="color:${NAVY};text-decoration:none;">${business.phone}</a>
+      </p>
+    </div>
+  `);
+  return { subject, html };
+}
+
 export function customerConfirmationEmail(data: LeadEmailData) {
   const subject = `We received your request | ${business.name}`;
   const html = wrapper(`

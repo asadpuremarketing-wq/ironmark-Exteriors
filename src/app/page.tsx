@@ -6,6 +6,7 @@ import ServicesCarousel from "@/components/ServicesCarousel";
 import OffersSection from "@/components/OffersSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import BeforeAfter from "@/components/BeforeAfter";
+import ChecklistOptIn from "@/components/ChecklistOptIn";
 import TruckTeam from "@/components/TruckTeam";
 import CTA from "@/components/CTA";
 import SectionFade from "@/components/SectionFade";
@@ -37,6 +38,7 @@ export default function Home() {
       <BeforeAfter />
       <SectionFade from={NAVY_900} to={WHITE} />
       <TruckTeam />
+      <ChecklistOptIn source="home-checklist" />
       <CTA />
     </>
   );

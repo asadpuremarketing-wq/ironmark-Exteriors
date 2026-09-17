@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { internalNotificationEmail, customerConfirmationEmail } from "@/lib/emailTemplates";
+import {
+  internalNotificationEmail,
+  customerConfirmationEmail,
+  checklistConfirmationEmail,
+} from "@/lib/emailTemplates";
 
 export type LeadPayload = {
   name: string;
@@ -39,17 +43,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  if (
-    !body.name?.trim() ||
-    !body.phone?.trim() ||
-    !body.email?.trim() ||
-    !body.service?.trim()
-  ) {
+  if (!body.email?.trim() || !body.service?.trim()) {
     return NextResponse.json(
-      { error: "Name, phone, email, and service are required." },
+      { error: "Email and service are required." },
       { status: 400 }
     );
   }
+
+  // Low-friction opt-ins (e.g. the seasonal checklist signup) only collect
+  // an email address, name/phone are optional for those.
+  body.name = body.name?.trim() || "Not provided";
+  body.phone = body.phone?.trim() || "Not provided";
 
   console.log("[New Lead]", {
     ...body,
@@ -78,7 +82,10 @@ export async function POST(request: Request) {
   const fromAddress = `"Ironmark Exteriors" <${process.env.GMAIL_USER}>`;
 
   const internal = internalNotificationEmail(leadData);
-  const confirmation = customerConfirmationEmail(leadData);
+  const confirmation =
+    leadData.service === "Seasonal Maintenance Checklist"
+      ? checklistConfirmationEmail()
+      : customerConfirmationEmail(leadData);
 
   const results = await Promise.allSettled([
     transporter.sendMail({
