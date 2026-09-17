@@ -22,6 +22,32 @@ export default function Footer() {
               {business.phone}
             </a>
           </div>
+          <div className="mt-5 flex items-center gap-3">
+            <a
+              href={business.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${business.name} on Instagram`}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-brand-silver transition hover:bg-brand-blue/20 hover:text-white"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+              </svg>
+            </a>
+            <a
+              href={business.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${business.name} on Facebook`}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-brand-silver transition hover:bg-brand-blue/20 hover:text-white"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+                <path d="M14 9h2.5V6h-2.5c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h2.5l.5-3H13v-2c0-.55.45-1 1-1z" />
+              </svg>
+            </a>
+          </div>
         </div>
 
         <div>

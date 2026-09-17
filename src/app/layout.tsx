@@ -64,7 +64,7 @@ const localBusinessSchema = {
     "@type": "PostalAddress",
     ...business.postalAddress,
   },
-  sameAs: [business.googleBusinessProfileUrl],
+  sameAs: [business.googleBusinessProfileUrl, business.instagramUrl, business.facebookUrl],
   areaServed: serviceAreas.map((a) => ({
     "@type": "City",
     name: `${a.name}, ${a.province}`,

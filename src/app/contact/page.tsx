@@ -62,6 +62,37 @@ export default function ContactPage() {
                   surrounding areas
                 </div>
               </li>
+              <li>
+                <div className="text-xs font-bold uppercase tracking-wide text-brand-blue">
+                  Follow Us
+                </div>
+                <div className="mt-2 flex items-center gap-3">
+                  <a
+                    href={business.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${business.name} on Instagram`}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-navy-900/10 text-navy-900/70 transition hover:border-brand-blue hover:text-brand-blue"
+                  >
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+                      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+                    </svg>
+                  </a>
+                  <a
+                    href={business.facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${business.name} on Facebook`}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-navy-900/10 text-navy-900/70 transition hover:border-brand-blue hover:text-brand-blue"
+                  >
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+                      <path d="M14 9h2.5V6h-2.5c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h2.5l.5-3H13v-2c0-.55.45-1 1-1z" />
+                    </svg>
+                  </a>
+                </div>
+              </li>
             </ul>
           </div>
 

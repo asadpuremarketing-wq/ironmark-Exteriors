@@ -15,6 +15,8 @@ export const business = {
   website: "ironmarkexteriors.ca",
   siteUrl: "https://ironmarkexteriors.ca",
   googleBusinessProfileUrl: "https://maps.app.goo.gl/5zeAYCLrEDsXZFW98",
+  instagramUrl: "https://www.instagram.com/ironmarkexteriors/?hl=en",
+  facebookUrl: "https://www.facebook.com/Ironmarkexteriors",
 };
 
 export type Service = {
