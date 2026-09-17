@@ -6,6 +6,7 @@ import {
   gutterCleaningAreaSlugs,
   windowCleaningAreaSlugs,
   pressureWashingAreaSlugs,
+  serviceCityPages,
 } from "@/lib/data";
 import { blogPosts } from "@/lib/blog";
 
@@ -62,6 +63,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 1,
   }));
 
+  const serviceCityRoutes: MetadataRoute.Sitemap = serviceCityPages.flatMap((scp) =>
+    scp.areaSlugs.map((slug) => ({
+      url: `${base}/${scp.pathPrefix}/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    }))
+  );
+
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((p) => ({
     url: `${base}/blog/${p.slug}`,
     lastModified: new Date(p.publishedDate),
@@ -76,6 +86,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...gutterCleaningRoutes,
     ...windowCleaningRoutes,
     ...pressureWashingRoutes,
+    ...serviceCityRoutes,
     ...blogRoutes,
   ];
 }

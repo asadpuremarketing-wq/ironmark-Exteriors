@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
-import { business, serviceAreas, services } from "@/lib/data";
+import { business, serviceAreas, services, googleReviews } from "@/lib/data";
 
 const manrope = Manrope({
   variable: "--font-heading",
@@ -78,6 +78,19 @@ const localBusinessSchema = {
     },
   })),
   priceRange: "$$",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: (
+      googleReviews.reduce((sum, r) => sum + r.rating, 0) / googleReviews.length
+    ).toFixed(1),
+    reviewCount: googleReviews.length,
+  },
+  review: googleReviews.map((r) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: r.name },
+    reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+    reviewBody: r.text,
+  })),
 };
 
 export default function RootLayout({

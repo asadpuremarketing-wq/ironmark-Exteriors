@@ -1,32 +1,5 @@
 import Reveal from "./Reveal";
-import { business } from "@/lib/data";
-
-const reviews = [
-  {
-    name: "Krishn Sharma",
-    meta: "Local Guide · 21 reviews · 2 photos",
-    timeAgo: "2 weeks ago",
-    isNew: true,
-    avatarColor: "#1a73e8",
-    text: "Asad did great job replacing and cleaning the downspout. Will highly recommend.",
-  },
-  {
-    name: "Sameea Amin",
-    meta: "12 reviews · 2 photos",
-    timeAgo: "a week ago",
-    isNew: true,
-    avatarColor: "#d93025",
-    text: "Ironmark Exteriors did a great job, they cleaned our gutters in Stoney Creek, provided before and after photos of the job, I am very happy with their service and also the service was very affordable.",
-  },
-  {
-    name: "Kalsoom K",
-    meta: "Local Guide · 12 reviews · 3 photos",
-    timeAgo: "6 days ago",
-    isNew: true,
-    avatarColor: "#188038",
-    text: "Ironmark Exteriors installed a brand new downspout at our place, it's working perfectly. Their prices are very reasonable. I will definitely hire them again. Thank you for your service.",
-  },
-];
+import { business, googleReviews } from "@/lib/data";
 
 function GoogleLogo({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -79,7 +52,7 @@ export default function GoogleReviews() {
         </Reveal>
 
         <div className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          {reviews.map((r, i) => (
+          {googleReviews.map((r, i) => (
             <Reveal key={r.name} delay={i * 90} className="w-[82vw] max-w-sm shrink-0 snap-start sm:w-auto sm:max-w-none sm:shrink">
               <div className="relative h-full rounded-2xl border border-navy-900/10 bg-white p-6 font-sans shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-navy-900/10">
                 <div className="flex items-start justify-between gap-3">

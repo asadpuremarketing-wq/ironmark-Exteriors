@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import GoogleReviews from "@/components/GoogleReviews";
-import { services, serviceAreas, serviceAreaNames, business } from "@/lib/data";
+import { services, serviceAreas, serviceAreaNames, business, serviceCityPages } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 import GutterCleaningOffer, { gutterCleaningMeta } from "@/components/GutterCleaningOffer";
 import WindowCleaningOffer, { windowCleaningMeta } from "@/components/WindowCleaningOffer";
@@ -78,6 +78,8 @@ export default async function ServicePage({ params }: { params: Params }) {
   if (slug === "pressure-washing") {
     return <PressureWashingOffer />;
   }
+
+  const cityPages = serviceCityPages.find((scp) => scp.slug === slug);
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -210,7 +212,7 @@ export default async function ServicePage({ params }: { params: Params }) {
             {serviceAreas.map((area) => (
               <Link
                 key={area.slug}
-                href={`/service-areas/${area.slug}`}
+                href={cityPages ? `/${cityPages.pathPrefix}/${area.slug}` : `/service-areas/${area.slug}`}
                 className="group flex items-center gap-2 rounded-full border border-white/10 bg-navy-900 px-5 py-2.5 text-sm font-semibold text-brand-silver transition duration-300 hover:-translate-y-0.5 hover:border-brand-blue/50 hover:bg-navy-800 hover:text-white hover:shadow-lg hover:shadow-brand-blue/10"
               >
                 <svg viewBox="0 0 20 20" className="h-4 w-4 text-brand-blue-light" fill="currentColor">

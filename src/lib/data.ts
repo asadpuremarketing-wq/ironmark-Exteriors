@@ -19,6 +19,49 @@ export const business = {
   facebookUrl: "https://www.facebook.com/Ironmarkexteriors",
 };
 
+export type GoogleReview = {
+  name: string;
+  meta: string;
+  timeAgo: string;
+  isNew: boolean;
+  avatarColor: string;
+  rating: number;
+  text: string;
+};
+
+// Real Google reviews, shown on GoogleReviews.tsx and reused for the
+// sitewide Review / AggregateRating structured data. Update this list as
+// new real reviews come in, never fabricate entries here.
+export const googleReviews: GoogleReview[] = [
+  {
+    name: "Krishn Sharma",
+    meta: "Local Guide · 21 reviews · 2 photos",
+    timeAgo: "2 weeks ago",
+    isNew: true,
+    avatarColor: "#1a73e8",
+    rating: 5,
+    text: "Asad did great job replacing and cleaning the downspout. Will highly recommend.",
+  },
+  {
+    name: "Sameea Amin",
+    meta: "12 reviews · 2 photos",
+    timeAgo: "a week ago",
+    isNew: true,
+    avatarColor: "#d93025",
+    rating: 5,
+    text: "Ironmark Exteriors did a great job, they cleaned our gutters in Stoney Creek, provided before and after photos of the job, I am very happy with their service and also the service was very affordable.",
+  },
+  {
+    name: "Kalsoom K",
+    meta: "Local Guide · 12 reviews · 3 photos",
+    timeAgo: "6 days ago",
+    isNew: true,
+    avatarColor: "#188038",
+    rating: 5,
+    text: "Ironmark Exteriors installed a brand new downspout at our place, it's working perfectly. Their prices are very reasonable. I will definitely hire them again. Thank you for your service.",
+  },
+];
+
 export type Service = {
   slug: string;
   name: string;
@@ -373,6 +416,25 @@ export const areaOffers = [
     pathPrefix: "pressure-washing",
     areaSlugs: pressureWashingAreaSlugs as readonly string[],
     priceLabel: `Starting from $${pressureWashingPricing.startingFrom}`,
+  },
+] as const;
+
+// City landing pages for services that are quoted rather than fixed-price
+// (no priceLabel), so they're kept separate from areaOffers but use the
+// same "/[pathPrefix]/[citySlug]" URL pattern for consistency. Covers all
+// service areas rather than just the 7 promo cities.
+export const serviceCityPages = [
+  {
+    slug: "roofing",
+    label: "Roofing",
+    pathPrefix: "roofing",
+    areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
+  },
+  {
+    slug: "painting",
+    label: "Painting",
+    pathPrefix: "painting",
+    areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
 ] as const;
 

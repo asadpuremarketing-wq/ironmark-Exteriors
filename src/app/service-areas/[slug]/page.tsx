@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import GoogleReviews from "@/components/GoogleReviews";
-import { serviceAreas, services, business, areaOffers } from "@/lib/data";
+import { serviceAreas, services, business, areaOffers, serviceCityPages } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 import { areaIntroParagraph, areaLocalNote, areaFaqs } from "@/lib/serviceAreaContent";
 import { neighbourhoodLine } from "@/lib/offerContent";
@@ -110,10 +110,12 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
                 </h2>
               </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {services.map((service) => (
+                {services.map((service) => {
+                  const cityPages = serviceCityPages.find((scp) => scp.slug === service.slug);
+                  return (
                   <Link
                     key={service.slug}
-                    href={`/services/${service.slug}`}
+                    href={cityPages ? `/${cityPages.pathPrefix}/${area.slug}` : `/services/${service.slug}`}
                     className="group rounded-[28px] border border-navy-900/10 p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-xl hover:shadow-navy-900/10"
                   >
                     <h3 className="mb-2 text-lg font-bold text-navy-900">
@@ -123,7 +125,8 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
                       {service.shortDescription}
                     </p>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
 
               {areaOffers.some((o) => o.areaSlugs.includes(area.slug)) && (

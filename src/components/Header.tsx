@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { business, services, serviceAreas, areaOffers } from "@/lib/data";
+import { business, services, serviceAreas, areaOffers, serviceCityPages } from "@/lib/data";
 import Logo from "./Logo";
 
 const navLinks = [
@@ -11,7 +11,7 @@ const navLinks = [
 ];
 
 function areasForService(slug: string) {
-  const offer = areaOffers.find((o) => o.slug === slug);
+  const offer = areaOffers.find((o) => o.slug === slug) ?? serviceCityPages.find((o) => o.slug === slug);
   if (!offer) return null;
   return offer.areaSlugs
     .map((s) => serviceAreas.find((a) => a.slug === s))
