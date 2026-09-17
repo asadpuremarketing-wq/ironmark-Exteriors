@@ -84,7 +84,7 @@ export default function Header() {
                     : "pointer-events-none -translate-y-1 opacity-0"
                 }`}
               >
-                <div className="shimmer-border overflow-hidden rounded-xl border border-white/10 bg-navy-900 shadow-2xl shadow-black/50">
+                <div className="shimmer-border rounded-xl border border-white/10 bg-navy-900 shadow-2xl shadow-black/50">
                   {services.map((service) => {
                     const areas = areasForService(service.slug);
                     if (!areas) {
@@ -92,7 +92,7 @@ export default function Header() {
                         <Link
                           key={service.slug}
                           href={`/services/${service.slug}`}
-                          className="flex items-center justify-between border-b border-white/5 px-5 py-3.5 text-sm font-medium text-brand-silver last:border-b-0 hover:bg-navy-800/70 hover:text-white"
+                          className="flex items-center justify-between border-b border-white/5 px-5 py-3.5 text-sm font-medium text-brand-silver first:rounded-t-xl last:rounded-b-xl last:border-b-0 hover:bg-navy-800/70 hover:text-white"
                         >
                           {service.name}
                           <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-brand-blue-light" fill="none">
@@ -104,13 +104,13 @@ export default function Header() {
                     return (
                       <div
                         key={service.slug}
-                        className="relative border-b border-white/5 last:border-b-0"
+                        className="relative border-b border-white/5 first:rounded-t-xl last:rounded-b-xl last:border-b-0"
                         onMouseEnter={() => setAreasSubOpen(service.slug)}
                         onMouseLeave={() => setAreasSubOpen((cur) => (cur === service.slug ? null : cur))}
                       >
                         <Link
                           href={`/services/${service.slug}`}
-                          className="flex items-center justify-between px-5 py-3.5 text-sm font-medium text-brand-silver hover:bg-navy-800/70 hover:text-white"
+                          className="flex items-center justify-between px-5 py-3.5 text-sm font-medium text-brand-silver first:rounded-t-xl last:rounded-b-xl hover:bg-navy-800/70 hover:text-white"
                         >
                           {service.name}
                           <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-brand-blue-light" fill="none">
