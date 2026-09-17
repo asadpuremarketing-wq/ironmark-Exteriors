@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CTA from "@/components/CTA";
 import { blogPosts, getBlogPost } from "@/lib/blog";
-import { business, services, serviceAreas, areaOffers } from "@/lib/data";
+import { business, services, serviceAreas, areaOffers, serviceCityPages } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 type Params = Promise<{ slug: string }>;
@@ -91,7 +91,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     ? services.find((s) => s.slug === post.relatedService)
     : undefined;
   const relatedOffer = post.relatedService
-    ? areaOffers.find((o) => o.slug === post.relatedService)
+    ? (areaOffers.find((o) => o.slug === post.relatedService) ??
+      serviceCityPages.find((o) => o.slug === post.relatedService))
     : undefined;
 
   const otherPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);

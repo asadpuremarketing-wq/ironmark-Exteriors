@@ -175,6 +175,32 @@ export const blogPosts: BlogPost[] = [
       "Ironmark Exteriors provides pressure washing for siding, driveways, walkways, decks, and fences across Hamilton, Stoney Creek, Burlington, Ancaster, and Dundas.",
     ],
   },
+  {
+    slug: "roof-repair-cost-hamilton",
+    title: "What Affects Roof Repair Cost in Hamilton, ON",
+    excerpt:
+      "Roof repair pricing varies a lot depending on the type and size of the damage. Here's what actually drives the cost, and how to get an accurate quote.",
+    publishedDate: "2026-09-15",
+    readTime: "5 min read",
+    category: "Roofing",
+    relatedService: "roofing",
+    content: [
+      "\"How much does roof repair cost?\" is one of the most common questions we get from homeowners in Hamilton, and it's a hard one to answer with a single number, because the price depends heavily on what's actually wrong. Here's a breakdown of the factors that drive cost up or down.",
+      "## Size and location of the damage",
+      "A small area of missing or damaged shingles near the ridge is a very different job than a leak that's spread across a valley or around a chimney. Repairs in hard-to-reach spots, like steep pitches or areas requiring extra scaffolding, also cost more due to the added labour and safety setup.",
+      "## What's actually damaged",
+      "Not all roof problems are the same. A few missing shingles is a straightforward fix. Damaged flashing around a chimney, vent, or skylight involves more careful work to reseal properly. If water has gotten into the roof deck itself, the repair may involve replacing sections of wood underneath the shingles, which adds materials and labour.",
+      "## Age and condition of the surrounding roof",
+      "If the roof around the damaged area is old and brittle, matching shingles safely without cracking more of them takes more time and care than working on a newer roof. In some cases, a roof that's near the end of its life makes more financial sense to replace than to keep patching, our inspection will tell you honestly which situation you're in.",
+      "## Access and safety requirements",
+      "Steep roofs, high roofs, and homes with limited ladder access all add time and equipment needs to a job, which affects the final price.",
+      "## Why a phone estimate rarely works",
+      "Because so much depends on what the damage actually looks like up close, we don't quote roof repairs over the phone. A short in-person inspection lets us give you an accurate, itemized quote instead of a rough guess that could be off in either direction.",
+      "## Getting an accurate quote",
+      "The best way to know your actual roof repair cost in Hamilton is a free inspection. We'll look at the damage, explain what's causing it, and give you a clear price before any work starts, no surprise charges once the crew is on the roof.",
+      "Ironmark Exteriors offers free roof inspections and repair estimates for homeowners across Hamilton, Stoney Creek, Burlington, and the surrounding areas.",
+    ],
+  },
 ];
 
 export function getBlogPost(slug: string) {
