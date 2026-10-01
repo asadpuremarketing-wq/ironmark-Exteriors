@@ -12,6 +12,24 @@ export type GutterCleaningCityContent = {
 };
 
 export const gutterCleaningCityContent: Record<string, GutterCleaningCityContent> = {
+  ancaster: {
+    processIntro:
+      "Ancaster's larger, tree-lined properties mean more linear footage of gutter and heavier seasonal debris loads than smaller lots elsewhere in our service area, so we work the full run methodically, not just the sections that look full from the ground.",
+    seasonal: [
+      "Homes around Ancaster Village and Meadowlands sit on larger, mature lots with heavy tree canopy, which means more leaves, seed pods, and small branches ending up in gutters than on newer, less wooded properties.",
+      "A fall cleaning after leaf drop is essential here given the tree cover, but a spring visit matters just as much, winter debris mixed with meltwater sits heavier and longer in gutters shaded by mature trees.",
+      "Properties near Parkview Heights with longer rooflines also benefit from a mid-season check, since a single clogged section on a long run can back water up much further than it would on a shorter gutter.",
+    ],
+  },
+  dundas: {
+    processIntro:
+      "Dundas' valley setting and concentration of older, tree-shaded homes means gutters here stay damp longer after a clean than they would in a more open, sunnier area, so we make sure every section drains fully before calling the job done.",
+    seasonal: [
+      "The valley setting around Old Dundas and Pleasant Valley traps more humidity and shade than surrounding areas, which means leaves and debris in gutters take longer to dry out and can hold moisture against the fascia for longer stretches.",
+      "Mature tree cover throughout the area makes fall cleaning especially important here, but the valley's slower drying conditions also mean a spring cleaning after winter buildup shouldn't be skipped.",
+      "Older homes along the Governor's Road area often have narrower, original eavestrough that fills up faster than modern gutters, so we check these systems closely for both debris and general condition during every visit.",
+    ],
+  },
   burlington: {
     processIntro:
       "Burlington homes near the Lake Ontario shoreline deal with more wind-blown debris and humidity than inland areas, so we follow the same six steps on every job to make sure nothing gets missed.",

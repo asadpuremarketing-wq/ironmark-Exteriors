@@ -319,6 +319,8 @@ export const gutterCleaningAreaSlugs = [
   "burlington",
   "brantford",
   "stoney-creek",
+  "ancaster",
+  "dundas",
   "grimsby",
   "st-catharines",
   "niagara-falls",
