@@ -7,6 +7,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
+import CardCarousel from "@/components/CardCarousel";
 import { business, serviceAreas, gutterRepairProjects } from "@/lib/data";
 import { neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
@@ -124,14 +125,14 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Fix</p>
           <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Common Gutter Problems</h2>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <CardCarousel>
           {problems.map((p) => (
-            <div key={p.title} className="rounded-[28px] border border-navy-900/10 p-6 transition-shadow duration-300 hover:shadow-lg">
+            <div key={p.title} className="h-full rounded-[28px] border border-navy-900/10 p-6 transition-shadow duration-300 hover:shadow-lg">
               <h3 className="mb-2 text-base font-bold text-navy-900">{p.title}</h3>
               <p className="text-sm leading-relaxed text-navy-900/65">{p.text}</p>
             </div>
           ))}
-        </div>
+        </CardCarousel>
       </div>
     </section>
   );
@@ -191,15 +192,15 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How We Work</p>
           <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Gutter Repair Process</h2>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <CardCarousel>
           {gutterRepairProcessSteps.map((step) => (
-            <div key={step.number} className="rounded-[28px] border border-navy-900/10 bg-white p-7 transition-shadow duration-300 hover:shadow-lg">
+            <div key={step.number} className="h-full rounded-[28px] border border-navy-900/10 bg-white p-7 transition-shadow duration-300 hover:shadow-lg">
               <span className="font-heading text-4xl font-extrabold text-brand-blue/20">{step.number}</span>
               <h3 className="mt-3 text-lg font-bold text-navy-900">{step.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{step.text}</p>
             </div>
           ))}
-        </div>
+        </CardCarousel>
       </div>
     </section>
   );
