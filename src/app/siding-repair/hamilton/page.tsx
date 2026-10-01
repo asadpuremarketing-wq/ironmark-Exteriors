@@ -383,49 +383,43 @@ export default function HamiltonSidingRepairPage() {
             <div className="flex flex-col gap-10">
               {projects.map((project) => (
                 <div key={project.title} className="rounded-[28px] border border-navy-900/10 bg-white p-6 sm:p-8">
-                  <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-                    <div>
-                      <h3 className="text-xl font-bold text-navy-900">{project.title}</h3>
-                      {project.location && (
-                        <p className="mt-1 text-xs font-bold uppercase tracking-wide text-brand-blue">
-                          {project.location}
-                        </p>
-                      )}
-                      <p className="mt-3 text-sm leading-relaxed text-navy-900/70">{project.description}</p>
-                      {project.problem && (
-                        <p className="mt-4 text-sm text-navy-900/70">
-                          <span className="font-bold text-navy-900">Problem: </span>
-                          {project.problem}
-                        </p>
-                      )}
-                      {project.solution && (
-                        <p className="mt-2 text-sm text-navy-900/70">
-                          <span className="font-bold text-navy-900">Solution: </span>
-                          {project.solution}
-                        </p>
-                      )}
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      {project.photoPairs.map((pair, i) => (
-                        <div key={i} className="rounded-[20px] border border-navy-900/10 bg-[#f7f9fb] p-2 shadow-sm">
-                          <div className="grid grid-cols-2 gap-2">
-                            <div className="relative overflow-hidden rounded-xl">
-                              <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-4/5" />
-                              <span className="absolute left-1.5 top-1.5 rounded-full bg-navy-950/80 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
-                                Before
-                              </span>
-                            </div>
-                            <div className="relative overflow-hidden rounded-xl">
-                              <SmartImage src={pair.after} alt={pair.afterAlt} fallbackLabel="After" className="aspect-4/5" />
-                              <span className="absolute left-1.5 top-1.5 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white shadow-lg">
-                                After
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                  <h3 className="text-xl font-bold text-navy-900">{project.title}</h3>
+                  {project.location && (
+                    <p className="mt-1 text-xs font-bold uppercase tracking-wide text-brand-blue">
+                      {project.location}
+                    </p>
+                  )}
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-navy-900/70">{project.description}</p>
+                  <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-8">
+                    {project.problem && (
+                      <p className="text-sm text-navy-900/70">
+                        <span className="font-bold text-navy-900">Problem: </span>
+                        {project.problem}
+                      </p>
+                    )}
+                    {project.solution && (
+                      <p className="text-sm text-navy-900/70">
+                        <span className="font-bold text-navy-900">Solution: </span>
+                        {project.solution}
+                      </p>
+                    )}
                   </div>
+                  {project.photoPairs.map((pair, i) => (
+                    <div key={i} className="mt-6 grid gap-4 sm:grid-cols-2">
+                      <div className="relative overflow-hidden rounded-[20px]">
+                        <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-4/3" />
+                        <span className="absolute left-3 top-3 rounded-full bg-navy-950/80 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                          Before
+                        </span>
+                      </div>
+                      <div className="relative overflow-hidden rounded-[20px]">
+                        <SmartImage src={pair.after} alt={pair.afterAlt} fallbackLabel="After" className="aspect-4/3" />
+                        <span className="absolute left-3 top-3 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
+                          After
+                        </span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
