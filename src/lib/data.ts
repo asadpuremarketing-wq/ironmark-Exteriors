@@ -72,20 +72,6 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: "roofing",
-    name: "Roofing",
-    shortDescription: "Durable roof installations and repairs built to withstand the elements.",
-    description:
-      "From full roof replacements to targeted repairs, Ironmark Exteriors installs and maintains roofing systems that protect your home year-round. We work with premium shingles and flashing materials, backed by workmanship you can rely on.",
-    bullets: [
-      "Full roof replacements & new installations",
-      "Leak detection and repair",
-      "Shingle, flashing & ventilation upgrades",
-      "Storm and wind damage repair",
-      "Free roof inspections & estimates",
-    ],
-  },
-  {
     slug: "siding",
     name: "Siding Repair",
     shortDescription: "Modern, weather-resistant siding that boosts curb appeal and protection.",
@@ -198,20 +184,6 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "painting",
-    name: "Painting",
-    shortDescription: "Professional exterior painting for a lasting, refreshed finish.",
-    description:
-      "A fresh coat of exterior paint protects your siding, trim, and fascia while giving your home an instant refresh. Our crews prep, prime, and paint with premium exterior-grade coatings built to last through the seasons.",
-    bullets: [
-      "Exterior house painting",
-      "Trim, fascia & soffit painting",
-      "Surface prep & priming",
-      "Color consultation",
-      "Deck & fence staining",
-    ],
-  },
-  {
     slug: "pressure-washing",
     name: "Pressure Washing",
     shortDescription: "Driveways, patios & walkways starting from $149.",
@@ -223,6 +195,34 @@ export const services: Service[] = [
       "Deck & fence washing",
       "Gutter exterior cleaning",
       "Pre-paint surface preparation",
+    ],
+  },
+  {
+    slug: "roofing",
+    name: "Roofing",
+    shortDescription: "Durable roof installations and repairs built to withstand the elements.",
+    description:
+      "From full roof replacements to targeted repairs, Ironmark Exteriors installs and maintains roofing systems that protect your home year-round. We work with premium shingles and flashing materials, backed by workmanship you can rely on.",
+    bullets: [
+      "Full roof replacements & new installations",
+      "Leak detection and repair",
+      "Shingle, flashing & ventilation upgrades",
+      "Storm and wind damage repair",
+      "Free roof inspections & estimates",
+    ],
+  },
+  {
+    slug: "painting",
+    name: "Painting",
+    shortDescription: "Professional exterior painting for a lasting, refreshed finish.",
+    description:
+      "A fresh coat of exterior paint protects your siding, trim, and fascia while giving your home an instant refresh. Our crews prep, prime, and paint with premium exterior-grade coatings built to last through the seasons.",
+    bullets: [
+      "Exterior house painting",
+      "Trim, fascia & soffit painting",
+      "Surface prep & priming",
+      "Color consultation",
+      "Deck & fence staining",
     ],
   },
 ];
