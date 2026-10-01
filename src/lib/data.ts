@@ -114,6 +114,20 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "gutter-repair",
+    name: "Gutter Repair",
+    shortDescription: "Fixing sagging, leaking, and damaged gutters before they damage your home.",
+    description:
+      "From separated seams to gutters pulling away from the fascia, Ironmark Exteriors diagnoses and repairs the gutter problems that put your foundation, siding, and landscaping at risk. We fix what's broken instead of pushing a full replacement you don't need.",
+    bullets: [
+      "Sagging & pulling-away gutter repair",
+      "Leaking seam & joint resealing",
+      "Fascia bracket replacement",
+      "Downspout repair & realignment",
+      "Free repair-or-replace assessments",
+    ],
+  },
+  {
     slug: "windows",
     name: "Window Cleaning",
     shortDescription: "Interior & exterior window cleaning starting at $149.",
@@ -436,5 +450,22 @@ export const serviceCityPages = [
     pathPrefix: "painting",
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
+  {
+    slug: "gutter-repair",
+    label: "Gutter Repair",
+    pathPrefix: "gutter-repair",
+    areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
+  },
 ] as const;
+
+export type GutterRepairProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+};
+
+// Real completed gutter-repair job photos, keyed by city slug. Empty until
+// real project photos and details are provided; add entries here the same
+// way gutterCleaningProjects works once that content is ready.
+export const gutterRepairProjects: Record<string, GutterRepairProject[]> = {};
 

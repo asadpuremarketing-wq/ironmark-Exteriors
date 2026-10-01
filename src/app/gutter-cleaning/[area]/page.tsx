@@ -411,7 +411,7 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
           </h2>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/services/gutters#repair"
+              href={`/gutter-repair/${area.slug}`}
               className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
             >
               Gutter Repair

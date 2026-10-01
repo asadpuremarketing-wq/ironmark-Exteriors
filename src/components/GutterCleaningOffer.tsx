@@ -141,13 +141,22 @@ export default function GutterCleaningOffer() {
             <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Other Gutter Services We Provide</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div id="repair" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
-              <h3 className="mb-2 text-lg font-bold text-navy-900">Gutter Repair</h3>
+            <Link
+              id="repair"
+              href="/services/gutter-repair"
+              className="group scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6 transition hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-lg"
+            >
+              <h3 className="mb-2 flex items-center justify-between text-lg font-bold text-navy-900">
+                Gutter Repair
+                <svg viewBox="0 0 24 24" className="h-4 w-4 text-brand-blue-light transition group-hover:translate-x-1" fill="none">
+                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </h3>
               <p className="text-sm leading-relaxed text-navy-900/70">
                 Loose brackets, separated seams, and sagging sections repaired so your gutters hang and drain the
                 way they should.
               </p>
-            </div>
+            </Link>
             <div id="installation" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
               <h3 className="mb-2 text-lg font-bold text-navy-900">Gutter Installation</h3>
               <p className="text-sm leading-relaxed text-navy-900/70">
