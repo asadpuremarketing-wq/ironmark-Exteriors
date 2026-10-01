@@ -156,6 +156,20 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "gutter-guards",
+    name: "Gutter Guards",
+    shortDescription: "Leaf and debris guards that cut down how often gutters need cleaning.",
+    description:
+      "Ironmark Exteriors supplies and installs gutter guards that keep leaves, pine needles, and debris out of your gutters while letting water flow through, especially useful for homes with heavy tree cover.",
+    bullets: [
+      "Micro-mesh & screen gutter guard installation",
+      "Guards fitted to new or existing gutters",
+      "Reduced gutter cleaning frequency",
+      "Ice dam risk reduction in winter",
+      "Free on-site assessments & quotes",
+    ],
+  },
+  {
     slug: "windows",
     name: "Window Cleaning",
     shortDescription: "Interior & exterior window cleaning starting at $149.",
@@ -496,6 +510,18 @@ export const serviceCityPages = [
     pathPrefix: "downspout-repair",
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
+  {
+    slug: "gutter-guards",
+    label: "Gutter Guards",
+    pathPrefix: "gutter-guards",
+    areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
+  },
+  {
+    slug: "siding",
+    label: "Siding",
+    pathPrefix: "siding",
+    areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
+  },
 ] as const;
 
 export type GutterRepairProject = {
@@ -528,4 +554,24 @@ export type DownspoutRepairProject = {
 // Real completed downspout job photos, keyed by city slug. Empty until real
 // project photos and details are provided.
 export const downspoutRepairProjects: Record<string, DownspoutRepairProject[]> = {};
+
+export type GutterGuardsProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+};
+
+// Real completed gutter-guard installation photos, keyed by city slug.
+// Empty until real project photos and details are provided.
+export const gutterGuardsProjects: Record<string, GutterGuardsProject[]> = {};
+
+export type SidingProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+};
+
+// Real completed siding job photos, keyed by city slug. Empty until real
+// project photos and details are provided.
+export const sidingProjects: Record<string, SidingProject[]> = {};
 
