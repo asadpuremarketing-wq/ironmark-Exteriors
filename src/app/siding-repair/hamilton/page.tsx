@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/Hero";
+import ServiceQuoteCard from "@/components/ServiceQuoteCard";
 import GoogleReviews from "@/components/GoogleReviews";
 import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
@@ -73,7 +74,7 @@ const sidingTypes = [
 ];
 
 const processSteps = [
-  { number: "01", title: "Send Photos / Inspection", text: "Start with photos, or book an on-site look." },
+  { number: "01", title: "Inspection", text: "We take a close look at the damaged area and the wall around it." },
   { number: "02", title: "Diagnose Damage", text: "We identify what's actually wrong and why." },
   { number: "03", title: "Repair the Affected Area", text: "Matching material, not a bigger job than needed." },
   { number: "04", title: "Final Check", text: "We confirm the repair holds before we leave." },
@@ -147,12 +148,6 @@ const breadcrumbItems = [
 
 const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
-const photoQuoteSubject = encodeURIComponent("Siding Repair Quote Request - Photos Attached");
-const photoQuoteBody = encodeURIComponent(
-  "Hi Ironmark Exteriors,\n\nI'd like a quote for siding repair. I've attached photos of the damaged area(s).\n\nAddress:\nBest time to reach me:\n"
-);
-const photoQuoteHref = `mailto:${business.email}?subject=${photoQuoteSubject}&body=${photoQuoteBody}`;
-
 const quickNav = [
   { href: "#what-we-repair", label: "What We Repair" },
   { href: "#cost", label: "Cost" },
@@ -168,13 +163,13 @@ export default function HamiltonSidingRepairPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }} />
 
-      {/* 1. Hero, clean, two buttons, no embedded form */}
+      {/* 1. Hero with the standard lead-capture form, same as other service pages */}
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
         title="Siding Repair in Hamilton, ON"
-        subtitle="Cracked, loose, or storm-damaged siding, repaired fast by our local crew."
-        ctaLabel="Send Photos for a Free Quote"
-        ctaHref={photoQuoteHref}
+        subtitle="Cracked, loose, or storm-damaged siding, repaired fast by our local crew. Free on-site estimates."
+        showCta={false}
+        formSlot={<ServiceQuoteCard title="Get Your Free Siding Repair Quote" source="siding-repair-hamilton" />}
       />
 
       {/* Breadcrumb + sticky quick nav */}
@@ -240,12 +235,12 @@ export default function HamiltonSidingRepairPage() {
                 </span>
               ))}
             </div>
-            <a
-              href={photoQuoteHref}
+            <Link
+              href="/contact"
               className="btn-shine mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-dark bg-[length:150%_100%] bg-left px-8 py-4 text-sm font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-right"
             >
-              Send Us Photos for a Quote
-            </a>
+              Get a Free Quote
+            </Link>
           </div>
         </div>
       </section>
@@ -432,30 +427,6 @@ export default function HamiltonSidingRepairPage() {
         <div className="container-max max-w-3xl">
           <h2 className="mb-8 text-center text-3xl font-extrabold text-navy-900">Frequently Asked Questions</h2>
           <FaqAccordion faqs={faqs} />
-        </div>
-      </section>
-
-      {/* 10. Final CTA, simple */}
-      <section className="section-y bg-navy-950">
-        <div className="container-max max-w-2xl text-center">
-          <h2 className="font-heading text-2xl font-extrabold text-white sm:text-3xl">
-            Need Siding Repaired?
-          </h2>
-          <p className="mt-3 text-brand-silver/80">Send photos and receive a free quote.</p>
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <a
-              href={photoQuoteHref}
-              className="btn-shine inline-flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-dark bg-[length:150%_100%] bg-left px-8 py-4 text-center text-sm font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-right"
-            >
-              Send Photos
-            </a>
-            <a
-              href={business.phoneHref}
-              className="glass-dark inline-flex items-center justify-center rounded-full px-8 py-4 text-center text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/10"
-            >
-              Call Now
-            </a>
-          </div>
         </div>
       </section>
 
