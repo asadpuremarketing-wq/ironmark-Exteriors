@@ -6,6 +6,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
+import CardCarousel from "@/components/CardCarousel";
 import { business, serviceAreas, sidingRepairProjects } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 
@@ -205,9 +206,9 @@ export default function HamiltonSidingRepairPage() {
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Repair</p>
             <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Siding Problems We Fix in Hamilton</h2>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <CardCarousel>
             {whatWeRepair.map((p) => (
-              <div key={p.title} className="rounded-[24px] border border-navy-900/10 p-6 transition-shadow duration-300 hover:shadow-lg">
+              <div key={p.title} className="h-full rounded-[24px] border border-navy-900/10 p-6 transition-shadow duration-300 hover:shadow-lg">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
                   <Icon path={p.icon} />
                 </span>
@@ -215,7 +216,7 @@ export default function HamiltonSidingRepairPage() {
                 <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{p.text}</p>
               </div>
             ))}
-          </div>
+          </CardCarousel>
         </div>
       </section>
 
@@ -286,9 +287,9 @@ export default function HamiltonSidingRepairPage() {
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Work With</p>
             <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Types of Siding We Repair</h2>
           </div>
-          <div className="grid gap-6 sm:grid-cols-3">
+          <CardCarousel>
             {sidingTypes.map((t) => (
-              <div key={t.title} className="rounded-[24px] border border-navy-900/10 bg-white p-6 text-center">
+              <div key={t.title} className="h-full rounded-[24px] border border-navy-900/10 bg-white p-6 text-center">
                 <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
                   <Icon path={t.icon} />
                 </span>
@@ -296,7 +297,7 @@ export default function HamiltonSidingRepairPage() {
                 <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{t.text}</p>
               </div>
             ))}
-          </div>
+          </CardCarousel>
         </div>
       </section>
 
@@ -340,15 +341,15 @@ export default function HamiltonSidingRepairPage() {
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How It Works</p>
             <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">How Siding Repair Works</h2>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <CardCarousel cardWidthClassName="w-[220px] sm:w-[240px]">
             {processSteps.map((step) => (
-              <div key={step.number} className="rounded-[24px] border border-navy-900/10 bg-white p-6 text-center">
+              <div key={step.number} className="h-full rounded-[24px] border border-navy-900/10 bg-white p-6 text-center">
                 <span className="font-heading text-3xl font-extrabold text-brand-blue/25">{step.number}</span>
                 <h3 className="mt-2 text-sm font-bold text-navy-900">{step.title}</h3>
                 <p className="mt-1 text-xs leading-relaxed text-navy-900/60">{step.text}</p>
               </div>
             ))}
-          </div>
+          </CardCarousel>
         </div>
       </section>
 
