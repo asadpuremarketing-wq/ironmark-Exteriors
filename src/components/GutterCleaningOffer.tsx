@@ -157,13 +157,22 @@ export default function GutterCleaningOffer() {
                 way they should.
               </p>
             </Link>
-            <div id="installation" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
-              <h3 className="mb-2 text-lg font-bold text-navy-900">Gutter Installation</h3>
+            <Link
+              id="installation"
+              href="/services/gutter-installation"
+              className="group scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6 transition hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-lg"
+            >
+              <h3 className="mb-2 flex items-center justify-between text-lg font-bold text-navy-900">
+                Gutter Installation
+                <svg viewBox="0 0 24 24" className="h-4 w-4 text-brand-blue-light transition group-hover:translate-x-1" fill="none">
+                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </h3>
               <p className="text-sm leading-relaxed text-navy-900/70">
                 New seamless eavestrough installed to fit your home, replacing worn or undersized gutters that
                 can&apos;t keep up with heavy rain.
               </p>
-            </div>
+            </Link>
             <div id="guards" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
               <h3 className="mb-2 text-lg font-bold text-navy-900">Gutter Guards</h3>
               <p className="text-sm leading-relaxed text-navy-900/70">

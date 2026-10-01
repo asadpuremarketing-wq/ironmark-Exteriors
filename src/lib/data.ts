@@ -128,6 +128,20 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "gutter-installation",
+    name: "Gutter Installation",
+    shortDescription: "Seamless eavestrough, custom-fit and installed for your home.",
+    description:
+      "Ironmark Exteriors fabricates and installs seamless aluminum eavestrough custom-fit to your home, replacing old, undersized, or failing gutters with a system built to handle real Ontario rainfall and snowmelt.",
+    bullets: [
+      "Seamless aluminum eavestrough installation",
+      "Full gutter system replacement",
+      "Properly sized downspouts & extensions",
+      "Gutter guard installation available",
+      "Free on-site measurements & quotes",
+    ],
+  },
+  {
     slug: "windows",
     name: "Window Cleaning",
     shortDescription: "Interior & exterior window cleaning starting at $149.",
@@ -456,6 +470,12 @@ export const serviceCityPages = [
     pathPrefix: "gutter-repair",
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
+  {
+    slug: "gutter-installation",
+    label: "Gutter Installation",
+    pathPrefix: "gutter-installation",
+    areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
+  },
 ] as const;
 
 export type GutterRepairProject = {
@@ -468,4 +488,14 @@ export type GutterRepairProject = {
 // real project photos and details are provided; add entries here the same
 // way gutterCleaningProjects works once that content is ready.
 export const gutterRepairProjects: Record<string, GutterRepairProject[]> = {};
+
+export type GutterInstallationProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+};
+
+// Real completed gutter-installation job photos, keyed by city slug. Empty
+// until real project photos and details are provided.
+export const gutterInstallationProjects: Record<string, GutterInstallationProject[]> = {};
 

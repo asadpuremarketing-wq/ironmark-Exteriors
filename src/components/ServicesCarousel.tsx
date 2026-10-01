@@ -10,6 +10,7 @@ const icons: Record<string, string> = {
   siding: "M3 4h18v4H3V4zm0 6h18v4H3v-4zm0 6h18v4H3v-4z",
   gutters: "M4 5h16v3H4V5zm2 3v2a6 6 0 0 0 12 0V8H6z",
   "gutter-repair": "M14.7 6.3a1 1 0 0 1 1.4 0l1.6 1.6a1 1 0 0 1 0 1.4l-8 8-3 1 1-3 8-8zM4 21h16",
+  "gutter-installation": "M4 5h16v3H4V5zm2 3v9h2V8H6zm10 0v9h2V8h-2zm-7 11h6v2h-6v-2z",
   windows: "M4 3h16v18H4V3zm8 0v18M4 12h16",
   painting: "M7 3h10l-1 6H8L7 3zM9 9h6l1 12H8L9 9z",
   "pressure-washing": "M5 12l4-9 4 9-2 9H7l-2-9zm10-6l3 6-1 4h-4",
