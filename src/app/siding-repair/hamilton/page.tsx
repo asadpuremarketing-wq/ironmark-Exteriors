@@ -48,13 +48,17 @@ const ICONS = {
   water: "M12 3s6 7.2 6 11.2a6 6 0 1 1-12 0C6 10.2 12 3 12 3Z",
 };
 
+// TODO: placeholder photos for visualization only, swap for real job
+// photos once available (same pattern as the siding-repair project photos).
+const placeholderPhoto = (seed: string) => `https://picsum.photos/seed/${seed}/600/450`;
+
 const whatWeRepair = [
-  { title: "Cracked Panels", icon: ICONS.crack, text: "A single cracked panel, usually from cold-weather brittleness or impact, replaced and colour-matched." },
-  { title: "Loose Siding", icon: ICONS.loose, text: "Panels that have pulled away from the fastening strip, re-secured before wind or moisture make it worse." },
-  { title: "Wind Damage", icon: ICONS.wind, text: "Sections lifted, bent, or torn loose by wind off Lake Ontario, repaired and re-fastened properly." },
-  { title: "Missing Panels", icon: ICONS.missing, text: "Gaps left by a blown-off or removed panel, filled with a matching replacement." },
-  { title: "Warped Siding", icon: ICONS.warp, text: "Panels installed too tight that have buckled with temperature swings, replaced with proper expansion room." },
-  { title: "Small Section Replacement", icon: ICONS.section, text: "A contained area of damage replaced without re-siding the whole wall." },
+  { title: "Cracked Panels", icon: ICONS.crack, image: placeholderPhoto("cracked-panels"), text: "A single cracked panel, usually from cold-weather brittleness or impact, replaced and colour-matched." },
+  { title: "Loose Siding", icon: ICONS.loose, image: placeholderPhoto("loose-siding"), text: "Panels that have pulled away from the fastening strip, re-secured before wind or moisture make it worse." },
+  { title: "Wind Damage", icon: ICONS.wind, image: placeholderPhoto("wind-damage"), text: "Sections lifted, bent, or torn loose by wind off Lake Ontario, repaired and re-fastened properly." },
+  { title: "Missing Panels", icon: ICONS.missing, image: placeholderPhoto("missing-panels"), text: "Gaps left by a blown-off or removed panel, filled with a matching replacement." },
+  { title: "Warped Siding", icon: ICONS.warp, image: placeholderPhoto("warped-siding"), text: "Panels installed too tight that have buckled with temperature swings, replaced with proper expansion room." },
+  { title: "Small Section Replacement", icon: ICONS.section, image: placeholderPhoto("small-section"), text: "A contained area of damage replaced without re-siding the whole wall." },
 ];
 
 const repairWhen = ["Isolated panels", "Wind damage", "Cracks or small holes", "Small, contained areas"];
@@ -69,9 +73,9 @@ const costFactorChips = [
 ];
 
 const sidingTypes = [
-  { title: "Vinyl Siding", icon: ICONS.panel, text: "The most common siding on Hamilton homes, repaired by panel replacement and colour matching." },
-  { title: "Insulated Vinyl", icon: ICONS.snow, text: "Foam-backed vinyl, repaired carefully so the insulation layer isn't disturbed." },
-  { title: "Composite & Engineered", icon: ICONS.layers, text: "Rigid, wood-look siding used on newer builds, repaired at damaged edges and fastener points." },
+  { title: "Vinyl Siding", icon: ICONS.panel, image: placeholderPhoto("vinyl-siding"), text: "The most common siding on Hamilton homes, repaired by panel replacement and colour matching." },
+  { title: "Insulated Vinyl", icon: ICONS.snow, image: placeholderPhoto("insulated-vinyl"), text: "Foam-backed vinyl, repaired carefully so the insulation layer isn't disturbed." },
+  { title: "Composite & Engineered", icon: ICONS.layers, image: placeholderPhoto("composite-siding"), text: "Rigid, wood-look siding used on newer builds, repaired at damaged edges and fastener points." },
 ];
 
 const processSteps = [
@@ -206,14 +210,20 @@ export default function HamiltonSidingRepairPage() {
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Repair</p>
             <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Siding Problems We Fix in Hamilton</h2>
           </div>
-          <CardCarousel>
+          <CardCarousel cardWidthClassName="w-[260px] sm:w-[280px]">
             {whatWeRepair.map((p) => (
-              <div key={p.title} className="h-full rounded-[24px] border border-navy-900/10 p-6 transition-shadow duration-300 hover:shadow-lg">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
-                  <Icon path={p.icon} />
-                </span>
-                <h3 className="mt-4 text-base font-bold text-navy-900">{p.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{p.text}</p>
+              <div key={p.title} className="h-full overflow-hidden rounded-[24px] border border-navy-900/10 transition-shadow duration-300 hover:shadow-lg">
+                <div className="relative aspect-[4/3] overflow-hidden bg-navy-900/5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  <span className="absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-xl bg-white/90 text-brand-blue shadow-sm backdrop-blur-sm">
+                    <Icon path={p.icon} className="h-4 w-4" />
+                  </span>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-base font-bold text-navy-900">{p.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{p.text}</p>
+                </div>
               </div>
             ))}
           </CardCarousel>
@@ -287,14 +297,20 @@ export default function HamiltonSidingRepairPage() {
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Work With</p>
             <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Types of Siding We Repair</h2>
           </div>
-          <CardCarousel>
+          <CardCarousel cardWidthClassName="w-[280px] sm:w-[320px]">
             {sidingTypes.map((t) => (
-              <div key={t.title} className="h-full rounded-[24px] border border-navy-900/10 bg-white p-6 text-center">
-                <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
-                  <Icon path={t.icon} />
-                </span>
-                <h3 className="mt-4 text-base font-bold text-navy-900">{t.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{t.text}</p>
+              <div key={t.title} className="h-full overflow-hidden rounded-[24px] border border-navy-900/10 bg-white text-center">
+                <div className="relative aspect-[4/3] overflow-hidden bg-navy-900/5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={t.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  <span className="absolute left-1/2 top-full flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl bg-white text-brand-blue shadow-md">
+                    <Icon path={t.icon} />
+                  </span>
+                </div>
+                <div className="px-6 pb-6 pt-8">
+                  <h3 className="text-base font-bold text-navy-900">{t.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{t.text}</p>
+                </div>
               </div>
             ))}
           </CardCarousel>
