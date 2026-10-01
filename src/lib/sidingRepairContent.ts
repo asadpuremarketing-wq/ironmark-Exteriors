@@ -177,8 +177,8 @@ const faqPool = (areaName: string) => [
     a: "Yes, especially if your current siding is older and uninsulated. Insulated vinyl or proper house wrap installed during a re-side can make a noticeable difference in comfort and energy bills.",
   },
   {
-    q: "Are you licensed and insured?",
-    a: "Yes. Ironmark Exteriors is fully licensed and insured, and every siding project is completed by trained, experienced crews.",
+    q: "Can I just send photos of the damage to get a quote?",
+    a: "Yes, this is often the fastest way to get a starting estimate. Clear photos of the damaged area, plus a wide shot showing where it is on the house, let us give you a realistic initial range before confirming anything in person.",
   },
   {
     q: "Do you offer a free estimate?",

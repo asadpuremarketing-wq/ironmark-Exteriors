@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const area = getArea(slug);
   if (!area) return {};
   const title = `Siding Repair in ${area.name}, ON`;
-  const description = `Siding repair, replacement, and installation in ${area.name}, ON, vinyl and fiber cement siding installed by licensed, insured crews. Free on-site estimates.`;
+  const description = `Siding repair for cracked, warped, loose, and storm-damaged vinyl, insulated, and composite siding in ${area.name}, ON. Free on-site estimates, send photos to get started.`;
   return {
     title,
     description,
@@ -260,7 +260,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
       <div className="container-max">
         <div className="mb-10 text-center">
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Know the Warning Signs</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Signs You Need New Siding</h2>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Can Your Siding Be Repaired?</h2>
         </div>
         <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
           {signs.map((sign) => (
@@ -281,7 +281,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
       <div className="container-max relative">
         <div className="mb-10 text-center">
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue-light">Know the Warning Signs</p>
-          <h2 className="font-heading text-3xl font-extrabold text-white sm:text-4xl">Signs You Need New Siding</h2>
+          <h2 className="font-heading text-3xl font-extrabold text-white sm:text-4xl">Can Your Siding Be Repaired?</h2>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {signs.map((sign) => (
@@ -298,7 +298,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
     <section key="signs" className="section-y bg-[#f7f9fb]">
       <div className="container-max max-w-3xl text-center">
         <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Know the Warning Signs</p>
-        <h2 className="mb-8 text-3xl font-extrabold text-navy-900 sm:text-4xl">Signs You Need New Siding</h2>
+        <h2 className="mb-8 text-3xl font-extrabold text-navy-900 sm:text-4xl">Can Your Siding Be Repaired?</h2>
         <div className="flex flex-wrap justify-center gap-3">
           {signs.map((sign) => (
             <span key={sign} className="rounded-full border border-navy-900/10 bg-white px-5 py-2.5 text-sm text-navy-900/80 shadow-sm">
@@ -426,7 +426,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
         title={`Siding Repair in ${area.name}, ON`}
-        subtitle={`Vinyl and fiber cement siding, repaired or installed by licensed, insured crews. Free on-site estimates for homeowners in ${area.name}.`}
+        subtitle={`Cracked, warped, loose, or storm-damaged siding repaired, not replaced unless it actually needs it. Free on-site estimates for homeowners in ${area.name}.`}
         showCta={false}
         formSlot={<ServiceQuoteCard title="Get Your Free Siding Repair Estimate" source={`siding-repair-${area.slug}`} />}
       />

@@ -24,7 +24,7 @@ function Stars({ className = "" }: { className?: string }) {
   );
 }
 
-export default function GoogleReviews() {
+export default function GoogleReviews({ heading = "Trusted by Homeowners Across Hamilton" }: { heading?: string }) {
   return (
     <section className="relative section-y overflow-hidden bg-[#f7f9fb]">
       <div
@@ -41,7 +41,7 @@ export default function GoogleReviews() {
             <span className="text-sm font-bold text-navy-900">Google Reviews</span>
           </div>
           <h2 className="font-heading text-3xl font-extrabold text-navy-900 sm:text-4xl">
-            Trusted by Homeowners Across Hamilton
+            {heading}
           </h2>
           <div className="mt-4 flex items-center gap-2">
             <Stars />
