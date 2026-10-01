@@ -19,9 +19,11 @@ function areasForService(slug: string) {
     .map((a) => ({ area: a, href: `/${offer.pathPrefix}/${a.slug}` }));
 }
 
+const firstServiceWithAreas = services.find((s) => areasForService(s.slug))?.slug ?? null;
+
 export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [areasSubOpen, setAreasSubOpen] = useState<string | null>(null);
+  const [activeService, setActiveService] = useState<string | null>(firstServiceWithAreas);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileAreasSubOpen, setMobileAreasSubOpen] = useState<string | null>(null);
@@ -78,21 +80,38 @@ export default function Header() {
                 </svg>
               </button>
               <div
-                className={`absolute left-1/2 top-full w-72 -translate-x-1/2 pt-3 transition-all duration-200 ${
+                className={`absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200 ${
                   servicesOpen
                     ? "pointer-events-auto translate-y-0 opacity-100"
                     : "pointer-events-none -translate-y-1 opacity-0"
                 }`}
               >
-                <div className="shimmer-border rounded-xl border border-white/10 bg-navy-900 shadow-2xl shadow-black/50">
-                  {services.map((service) => {
-                    const areas = areasForService(service.slug);
-                    if (!areas) {
+                <div className="shimmer-border flex max-h-[70vh] overflow-hidden rounded-xl border border-white/10 bg-navy-900 shadow-2xl shadow-black/50">
+                  <div className="w-64 overflow-y-auto border-r border-white/10 py-2">
+                    {services.map((service) => {
+                      const areas = areasForService(service.slug);
+                      if (!areas) {
+                        return (
+                          <Link
+                            key={service.slug}
+                            href={`/services/${service.slug}`}
+                            onMouseEnter={() => setActiveService(null)}
+                            className="flex items-center justify-between px-5 py-3 text-sm font-medium text-brand-silver hover:bg-navy-800/70 hover:text-white"
+                          >
+                            {service.name}
+                          </Link>
+                        );
+                      }
                       return (
                         <Link
                           key={service.slug}
                           href={`/services/${service.slug}`}
-                          className="flex items-center justify-between border-b border-white/5 px-5 py-3.5 text-sm font-medium text-brand-silver first:rounded-t-xl last:rounded-b-xl last:border-b-0 hover:bg-navy-800/70 hover:text-white"
+                          onMouseEnter={() => setActiveService(service.slug)}
+                          className={`flex items-center justify-between px-5 py-3 text-sm font-medium transition ${
+                            activeService === service.slug
+                              ? "bg-navy-800/70 text-white"
+                              : "text-brand-silver hover:bg-navy-800/70 hover:text-white"
+                          }`}
                         >
                           {service.name}
                           <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-brand-blue-light" fill="none">
@@ -100,45 +119,27 @@ export default function Header() {
                           </svg>
                         </Link>
                       );
-                    }
-                    return (
-                      <div
-                        key={service.slug}
-                        className="relative border-b border-white/5 first:rounded-t-xl last:rounded-b-xl last:border-b-0"
-                        onMouseEnter={() => setAreasSubOpen(service.slug)}
-                        onMouseLeave={() => setAreasSubOpen((cur) => (cur === service.slug ? null : cur))}
-                      >
-                        <Link
-                          href={`/services/${service.slug}`}
-                          className="flex items-center justify-between px-5 py-3.5 text-sm font-medium text-brand-silver first:rounded-t-xl last:rounded-b-xl hover:bg-navy-800/70 hover:text-white"
-                        >
-                          {service.name}
-                          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-brand-blue-light" fill="none">
-                            <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </Link>
-                        <div
-                          className={`absolute left-full top-0 w-64 pl-3 transition-all duration-200 ${
-                            areasSubOpen === service.slug
-                              ? "pointer-events-auto translate-x-0 opacity-100"
-                              : "pointer-events-none -translate-x-1 opacity-0"
-                          }`}
-                        >
-                          <div className="shimmer-border overflow-hidden rounded-xl border border-white/10 bg-navy-900 shadow-2xl shadow-black/50">
-                            {areas.map(({ area, href }) => (
-                              <Link
-                                key={area.slug}
-                                href={href}
-                                className="block border-b border-white/5 px-5 py-3 text-sm text-brand-silver last:border-b-0 hover:bg-navy-800/70 hover:text-white"
-                              >
-                                {service.name} in {area.name}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                    })}
+                  </div>
+
+                  {activeService && (
+                    <div className="w-64 overflow-y-auto py-2">
+                      {(() => {
+                        const service = services.find((s) => s.slug === activeService);
+                        const areas = service ? areasForService(service.slug) : null;
+                        if (!service || !areas) return null;
+                        return areas.map(({ area, href }) => (
+                          <Link
+                            key={area.slug}
+                            href={href}
+                            className="block px-5 py-2.5 text-sm text-brand-silver hover:bg-navy-800/70 hover:text-white"
+                          >
+                            {service.name} in {area.name}
+                          </Link>
+                        ));
+                      })()}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
