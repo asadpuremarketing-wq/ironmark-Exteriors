@@ -3,7 +3,7 @@ export const business = {
   tagline: "Exterior Solutions You Can Trust",
   phone: "+1 647-951-2786",
   phoneHref: "tel:+16479512786",
-  email: "Info@ironmarkexteriors.ca",
+  email: "ironmarkexteriors@gmail.com",
   address: "144 Pottruff Road N",
   city: "Hamilton, ON",
   postalAddress: {
