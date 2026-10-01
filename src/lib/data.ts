@@ -142,6 +142,20 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "downspout-repair",
+    name: "Downspout Repair",
+    shortDescription: "Blocked, disconnected, or undersized downspouts fixed or replaced.",
+    description:
+      "Ironmark Exteriors repairs, reattaches, extends, and installs downspouts so water is actually carried away from your foundation instead of pooling right beside it. We fix what's broken and install what's missing.",
+    bullets: [
+      "Downspout repair & reattachment",
+      "New downspout installation",
+      "Downspout extensions",
+      "Blockage clearing & realignment",
+      "Free on-site assessments & quotes",
+    ],
+  },
+  {
     slug: "windows",
     name: "Window Cleaning",
     shortDescription: "Interior & exterior window cleaning starting at $149.",
@@ -476,6 +490,12 @@ export const serviceCityPages = [
     pathPrefix: "gutter-installation",
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
+  {
+    slug: "downspout-repair",
+    label: "Downspout Repair",
+    pathPrefix: "downspout-repair",
+    areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
+  },
 ] as const;
 
 export type GutterRepairProject = {
@@ -498,4 +518,14 @@ export type GutterInstallationProject = {
 // Real completed gutter-installation job photos, keyed by city slug. Empty
 // until real project photos and details are provided.
 export const gutterInstallationProjects: Record<string, GutterInstallationProject[]> = {};
+
+export type DownspoutRepairProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+};
+
+// Real completed downspout job photos, keyed by city slug. Empty until real
+// project photos and details are provided.
+export const downspoutRepairProjects: Record<string, DownspoutRepairProject[]> = {};
 

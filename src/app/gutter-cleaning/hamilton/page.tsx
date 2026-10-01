@@ -442,7 +442,7 @@ export default function HamiltonGutterCleaningPage() {
               Gutter Guards
             </Link>
             <Link
-              href="/services/gutters#downspouts"
+              href={`/downspout-repair/${area.slug}`}
               className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
             >
               Downspout Services

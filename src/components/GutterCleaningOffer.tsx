@@ -180,13 +180,22 @@ export default function GutterCleaningOffer() {
                 especially useful under mature trees.
               </p>
             </div>
-            <div id="downspouts" className="scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6">
-              <h3 className="mb-2 text-lg font-bold text-navy-900">Downspout Services</h3>
+            <Link
+              id="downspouts"
+              href="/services/downspout-repair"
+              className="group scroll-mt-24 rounded-[28px] border border-navy-900/10 p-6 transition hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-lg"
+            >
+              <h3 className="mb-2 flex items-center justify-between text-lg font-bold text-navy-900">
+                Downspout Services
+                <svg viewBox="0 0 24 24" className="h-4 w-4 text-brand-blue-light transition group-hover:translate-x-1" fill="none">
+                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </h3>
               <p className="text-sm leading-relaxed text-navy-900/70">
                 Blocked, disconnected, or undersized downspouts repaired or extended so water is carried away from
                 your foundation.
               </p>
-            </div>
+            </Link>
           </div>
           <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-navy-900/50">
             Ask about any of these when you book a cleaning, or contact us for a quote on its own.
