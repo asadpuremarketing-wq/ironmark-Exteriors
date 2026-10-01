@@ -591,6 +591,11 @@ export type SidingRepairProject = {
   title: string;
   description: string;
   photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+  // Optional detail fields for the "Recent Siding Repairs" case-study format
+  // (problem/solution/neighbourhood), used on the bespoke city pages.
+  location?: string;
+  problem?: string;
+  solution?: string;
 };
 
 // Real completed siding repair job photos, keyed by city slug. Empty until

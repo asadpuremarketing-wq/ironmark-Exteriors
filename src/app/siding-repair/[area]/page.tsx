@@ -25,13 +25,23 @@ type Params = Promise<{ area: string }>;
 
 const areaSlugs = serviceAreas.map((a) => a.slug);
 
+// Hamilton has its own bespoke page (a static route, which Next.js
+// prioritizes over this dynamic one) with deeper, genuinely unique content,
+// so it's excluded here to avoid generating a duplicate/conflicting route.
+const templatedAreaSlugs = areaSlugs.filter((s) => s !== "hamilton");
+
+function getArea(slug: string) {
+  if (!templatedAreaSlugs.includes(slug)) return undefined;
+  return serviceAreas.find((a) => a.slug === slug);
+}
+
 export function generateStaticParams() {
-  return areaSlugs.map((slug) => ({ area: slug }));
+  return templatedAreaSlugs.map((slug) => ({ area: slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { area: slug } = await params;
-  const area = serviceAreas.find((a) => a.slug === slug);
+  const area = getArea(slug);
   if (!area) return {};
   const title = `Siding Repair in ${area.name}, ON`;
   const description = `Siding repair, replacement, and installation in ${area.name}, ON, vinyl and fiber cement siding installed by licensed, insured crews. Free on-site estimates.`;
@@ -45,7 +55,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function SidingAreaPage({ params }: { params: Params }) {
   const { area: slug } = await params;
-  const area = serviceAreas.find((a) => a.slug === slug);
+  const area = getArea(slug);
   if (!area) notFound();
 
   const index = areaSlugs.indexOf(slug);
