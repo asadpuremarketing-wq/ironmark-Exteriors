@@ -87,7 +87,7 @@ export const services: Service[] = [
   },
   {
     slug: "siding",
-    name: "Siding",
+    name: "Siding Repair",
     shortDescription: "Modern, weather-resistant siding that boosts curb appeal and protection.",
     description:
       "Ironmark Exteriors installs high-quality vinyl and composite siding designed to hold up against Southern Ontario weather while giving your home a fresh, modern look. We handle everything from full re-siding projects to repairs and panel replacement.",
@@ -166,20 +166,6 @@ export const services: Service[] = [
       "Guards fitted to new or existing gutters",
       "Reduced gutter cleaning frequency",
       "Ice dam risk reduction in winter",
-      "Free on-site assessments & quotes",
-    ],
-  },
-  {
-    slug: "siding-repair",
-    name: "Siding Repair",
-    shortDescription: "Warped, cracked, or storm-damaged siding repaired or replaced.",
-    description:
-      "Ironmark Exteriors repairs warped, cracked, and storm-damaged siding, matching existing panels where possible or replacing full sections, so your home's exterior keeps out moisture the way it should.",
-    bullets: [
-      "Cracked & impact-damaged panel repair",
-      "Warped or buckled siding replacement",
-      "Moisture damage assessment & repair",
-      "Colour & profile matching",
       "Free on-site assessments & quotes",
     ],
   },
@@ -531,7 +517,7 @@ export const serviceCityPages = [
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
   {
-    slug: "siding-repair",
+    slug: "siding",
     label: "Siding Repair",
     pathPrefix: "siding-repair",
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],

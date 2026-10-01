@@ -84,7 +84,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
   };
 
   const breadcrumbSchemaData = breadcrumbSchema([
-    { name: "Siding Repair", path: "/services/siding-repair" },
+    { name: "Siding Repair", path: "/services/siding" },
     { name: `Siding Repair in ${area.name}`, path: `/siding-repair/${area.slug}` },
   ]);
 
