@@ -6,8 +6,8 @@ import GoogleReviews from "@/components/GoogleReviews";
 import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
+import CardCarousel from "@/components/CardCarousel";
 import { business, serviceAreas, sidingRepairProjects } from "@/lib/data";
-import { neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 
 const area = serviceAreas.find((a) => a.slug === "hamilton")!;
@@ -24,45 +24,74 @@ export const metadata: Metadata = {
   openGraph: { title, description, url: `${business.siteUrl}/siding-repair/hamilton` },
 };
 
+function Icon({ path, className = "h-5 w-5" }: { path: string; className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none">
+      <path d={path} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const ICONS = {
+  crack: "M3 13l4-1 2-6 3 11 2-7 3 2 4-1",
+  warp: "M3 14c2-4 4 4 6 0s4-4 6 0 4 4 6 0",
+  water: "M12 3s6 7.2 6 11.2a6 6 0 1 1-12 0C6 10.2 12 3 12 3Z",
+  wind: "M3 8h12.5a2.3 2.3 0 1 0-2.1-3.2M3 12.5h15.5a2.3 2.3 0 1 1-2.1 3.2M3 17h9",
+  sun: "M12 4v2M12 18v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4 12H2M22 12h-2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z",
+  bug: "M12 9v10M8 11l-2-2M16 11l2-2M8 15H5M19 15h-3M9 6c0-1.7 1.3-3 3-3s3 1.3 3 3M7 9h10v5a5 5 0 0 1-10 0V9Z",
+  panel: "M4 4h16v16H4V4Zm0 5.3h16M4 14.7h16M9.3 4v16M14.7 4v16",
+  snow: "M12 2v20M4.2 7l15.6 10M19.8 7 4.2 17M12 2 9 5M12 2l3 3M12 22l-3-3M12 22l3-3",
+  layers: "M12 3 3 8l9 5 9-5-9-5ZM3 12l9 5 9-5M3 16l9 5 9-5",
+};
+
 const sidingTypes = [
   {
     title: "Vinyl Siding",
-    text: "The most common siding material on Hamilton homes. Vinyl holds up well most of the year but gets brittle in cold temperatures, which is when impact cracks and cold-weather splits tend to show up. Repairs usually mean replacing the damaged panel or section and blending it with the surrounding colour and profile.",
+    icon: ICONS.panel,
+    text: "The most common siding material on Hamilton homes. It holds up well most of the year but gets brittle in cold temperatures, which is when impact cracks tend to show up. Repairs usually mean replacing the damaged panel and blending it with the surrounding colour and profile.",
   },
   {
     title: "Insulated Vinyl Siding",
-    text: "Vinyl siding with a foam backing for extra insulation. It repairs similarly to standard vinyl, but the foam layer means a damaged panel needs to be removed carefully to avoid disturbing the insulation behind it.",
+    icon: ICONS.snow,
+    text: "Vinyl siding with a foam backing for extra insulation. It repairs similarly to standard vinyl, but the foam layer means a damaged panel needs to come off carefully to avoid disturbing the insulation behind it.",
   },
   {
     title: "Composite & Engineered Siding",
-    text: "A more rigid, wood-look material used on some newer Hamilton builds and renovations. Composite siding resists impact better than vinyl but can suffer from moisture absorption at cut edges or fastener points if it wasn't sealed correctly during the original install.",
+    icon: ICONS.layers,
+    text: "A more rigid, wood-look material on some newer Hamilton builds. It resists impact better than vinyl but can absorb moisture at cut edges or fastener points if it wasn't sealed correctly during the original install.",
   },
 ];
 
 const problems = [
   {
     title: "Cracked or Split Panels",
-    text: "Vinyl siding becomes brittle below freezing, so a stray hockey puck, hail, or even a ladder leaned against the wall in winter can crack a panel that would have flexed fine in summer.",
+    icon: ICONS.crack,
+    text: "Vinyl becomes brittle below freezing, so a stray hockey puck, hail, or a ladder leaned against the wall in winter can crack a panel that would have flexed fine in summer.",
   },
   {
     title: "Warping & Buckling",
-    text: "Siding installed too tightly, with no room to expand and contract with temperature swings, can warp or buckle over time. Hamilton's wide seasonal temperature range makes this more likely on older installs.",
+    icon: ICONS.warp,
+    text: "Siding installed too tightly, with no room to expand and contract, can warp over time. Hamilton's wide seasonal swings make this more likely on older installs.",
   },
   {
     title: "Moisture Behind the Siding",
-    text: "Gaps around window and door trim, or siding that's come loose from its fastening strip, let water get behind the panel. Over time this can damage the sheathing underneath, not just the siding itself.",
+    icon: ICONS.water,
+    text: "Gaps around window and door trim, or a panel loose from its fastening strip, let water get behind it, risking the sheathing underneath, not just the siding itself.",
   },
   {
     title: "Loose or Detached Panels",
-    text: "Wind off Lake Ontario can work siding loose at the fastening strip over several seasons, especially on homes with more direct wind exposure.",
+    icon: ICONS.wind,
+    text: "Wind off Lake Ontario can work siding loose at the fastening strip over several seasons, especially on homes with more direct exposure.",
   },
   {
     title: "Faded or Discoloured Sections",
-    text: "South- and west-facing walls see more direct sun and tend to fade faster than the rest of the house, which can make a spot repair noticeably mismatched if the original colour has sun-faded.",
+    icon: ICONS.sun,
+    text: "South- and west-facing walls fade faster than the rest of the house, which can make a spot repair noticeably mismatched against sun-faded original siding.",
   },
   {
-    title: "Pest or Insect Entry Points",
-    text: "A gap where a panel has pulled loose or a seam has opened up is an easy entry point for insects, particularly around older homes with original trim detailing.",
+    title: "Pest Entry Points",
+    icon: ICONS.bug,
+    text: "A gap where a panel has pulled loose or a seam has opened is an easy entry point for insects, particularly around older homes with original trim detailing.",
   },
 ];
 
@@ -72,26 +101,54 @@ const signs = [
   "Panels that rattle or feel loose when pressed",
   "Soft spots or bubbling paint around seams and trim",
   "A noticeable gap or overlap where two panels meet",
-  "Water stains or discoloration on the wall just inside from the siding",
+  "Water stains or discoloration on the wall just inside the siding",
 ];
 
 const costFactors = [
   {
-    title: "How Much Siding Needs Attention",
-    text: "A single cracked panel is a small, contained repair. Damage spread across a full wall, or storm damage affecting multiple sides of the house, takes more time and material.",
+    title: "How much siding needs attention",
+    text: "A single cracked panel is a small, contained repair. Damage spread across a full wall takes more time and material.",
   },
   {
-    title: "Matching the Existing Siding",
-    text: "If your siding is an older colour or profile that's been discontinued, finding a close match (or sourcing a full replacement section) can add time and cost compared to a straightforward swap with current stock.",
+    title: "Matching the existing siding",
+    text: "An older, discontinued colour or profile can add time and cost compared to a straightforward swap with current stock.",
   },
   {
-    title: "What's Underneath",
-    text: "If moisture has gotten behind the siding and damaged the sheathing or framing underneath, that underlying repair adds to the scope beyond just the visible siding panel.",
+    title: "What's underneath",
+    text: "Moisture that's reached the sheathing or framing adds to the scope beyond the visible siding panel.",
   },
   {
-    title: "Access & Height",
-    text: "A repair at ground level on a bungalow is quicker and safer to access than one up near a roofline or dormer on a two-storey home, which affects labour time.",
+    title: "Access & height",
+    text: "A ground-level repair on a bungalow is quicker and safer to access than one near a roofline on a two-storey home.",
   },
+];
+
+const repairWhen = [
+  "The damage is limited to one panel or a small section",
+  "The rest of the siding is in good structural condition",
+  "A reasonably close colour or profile match is available",
+  "There's no significant moisture damage behind the siding",
+];
+
+const replaceWhen = [
+  "Damage is spread across multiple walls or elevations",
+  "The existing siding is old enough that matching isn't available",
+  "Moisture has already reached the sheathing or framing underneath",
+  "You're already planning an upgrade for look or insulation",
+];
+
+const atAGlance = [
+  { label: "Vinyl, Insulated & Composite", icon: ICONS.panel },
+  { label: "Photo-Based Quotes", icon: ICONS.water },
+  { label: "Local to Hamilton, ON", icon: ICONS.sun },
+];
+
+const quickNav = [
+  { href: "#problems", label: "Problems" },
+  { href: "#cost", label: "Cost & Repair vs. Replace" },
+  { href: "#types", label: "Siding Types" },
+  { href: "#recent-repairs", label: "Recent Repairs" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 const faqs = [
@@ -133,7 +190,7 @@ const faqs = [
   },
   {
     q: "What areas of Hamilton do you service for siding repair?",
-    a: `We repair siding throughout Hamilton, including ${neighbourhoodLine(area)} and the rest of the city, on both original century-home siding and newer installations.`,
+    a: "We repair siding throughout Hamilton, including Westdale, Kirkendall, Crown Point, and Waterdown, on both original century-home siding and newer installations.",
   },
 ];
 
@@ -185,61 +242,64 @@ export default function HamiltonSidingRepairPage() {
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
         title="Siding Repair in Hamilton, ON"
-        subtitle="Cracked, warped, loose, or storm-damaged siding repaired by our local crew. Send us photos for a fast, no-obligation quote, no need to wait for an in-person visit to get started."
+        subtitle="Cracked, warped, loose, or storm-damaged siding repaired by our local crew. Send us photos for a fast, no-obligation quote."
         showCta={false}
         formSlot={<ServiceQuoteCard title="Get Your Free Siding Repair Quote" source="siding-repair-hamilton" />}
       />
 
-      {/* Visible breadcrumb trail */}
-      <nav aria-label="Breadcrumb" className="border-b border-navy-900/5 bg-white">
-        <div className="container-max flex flex-wrap items-center gap-2 py-3 text-xs text-navy-900/50">
-          <Link href="/" className="hover:text-brand-blue">Home</Link>
-          {breadcrumbItems.map((item) => (
-            <span key={item.path} className="flex items-center gap-2">
-              <span aria-hidden="true">/</span>
-              <Link href={item.path} className="hover:text-brand-blue">{item.name}</Link>
-            </span>
-          ))}
+      {/* Breadcrumb + sticky quick nav */}
+      <div className="sticky top-[72px] z-40 border-b border-navy-900/5 bg-white/95 backdrop-blur-sm">
+        <div className="container-max">
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 pt-3 text-xs text-navy-900/40">
+            <Link href="/" className="hover:text-brand-blue">Home</Link>
+            {breadcrumbItems.map((item) => (
+              <span key={item.path} className="flex items-center gap-2">
+                <span aria-hidden="true">/</span>
+                <Link href={item.path} className="hover:text-brand-blue">{item.name}</Link>
+              </span>
+            ))}
+          </nav>
+          <div className="scrollbar-none flex gap-2 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {quickNav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="shrink-0 rounded-full border border-navy-900/10 px-4 py-1.5 text-xs font-semibold text-navy-900/70 transition hover:border-brand-blue hover:text-brand-blue"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
         </div>
-      </nav>
+      </div>
 
       <GoogleReviews />
 
-      {/* Intro, repair-focused */}
+      {/* Intro, repair-focused and tight */}
       <section className="bg-white pt-10">
         <div className="container-max max-w-3xl text-center">
           <p className="text-navy-900/70">
-            Hamilton&apos;s mix of century homes and newer builds means siding problems here come from both ends of
-            the spectrum, original or early-replacement siding that&apos;s reached the end of its life, and newer
-            vinyl that was never quite installed to handle the city&apos;s temperature swings. Most of the siding
-            calls we get aren&apos;t full tear-offs, they&apos;re a cracked panel, a section that&apos;s come loose,
-            or storm damage limited to one side of the house. We focus on fixing what&apos;s actually broken, and
-            we&apos;ll tell you plainly if your situation is one of the exceptions where replacement makes more
-            sense.
+            Most of the siding calls we get in Hamilton aren&apos;t full tear-offs, they&apos;re a cracked panel, a
+            section that&apos;s come loose, or storm damage limited to one side of the house. We focus on fixing
+            what&apos;s actually broken, and we&apos;ll tell you plainly if your home is one of the exceptions where
+            replacement makes more sense.
           </p>
-        </div>
-      </section>
-
-      {/* Types of siding we repair */}
-      <section className="section-y bg-[#f7f9fb]">
-        <div className="container-max">
-          <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Work With</p>
-            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Types of Siding We Repair</h2>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {sidingTypes.map((t) => (
-              <div key={t.title} className="rounded-[28px] border border-navy-900/10 bg-white p-7 shadow-sm">
-                <h3 className="text-lg font-bold text-navy-900">{t.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{t.text}</p>
-              </div>
+          <div className="mx-auto mt-8 flex flex-wrap justify-center gap-3">
+            {atAGlance.map((item) => (
+              <span
+                key={item.label}
+                className="inline-flex items-center gap-2 rounded-full bg-brand-blue/5 px-4 py-2 text-xs font-bold text-navy-900"
+              >
+                <Icon path={item.icon} className="h-4 w-4 text-brand-blue" />
+                {item.label}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Common problems */}
-      <section className="section-y bg-white">
+      {/* Common problems, carousel */}
+      <section id="problems" className="section-y scroll-mt-32 bg-[#f7f9fb]">
         <div className="container-max">
           <div className="mb-10 text-center">
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Fix</p>
@@ -247,19 +307,22 @@ export default function HamiltonSidingRepairPage() {
               Common Siding Problems in Hamilton
             </h2>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <CardCarousel>
             {problems.map((p) => (
-              <div key={p.title} className="h-full rounded-[28px] border border-navy-900/10 p-6 transition-shadow duration-300 hover:shadow-lg">
-                <h3 className="mb-2 text-base font-bold text-navy-900">{p.title}</h3>
+              <div key={p.title} className="h-full rounded-[28px] border border-navy-900/10 bg-white p-6 transition-shadow duration-300 hover:shadow-lg">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                  <Icon path={p.icon} />
+                </span>
+                <h3 className="mb-2 mt-4 text-base font-bold text-navy-900">{p.title}</h3>
                 <p className="text-sm leading-relaxed text-navy-900/65">{p.text}</p>
               </div>
             ))}
-          </div>
+          </CardCarousel>
         </div>
       </section>
 
-      {/* Signs */}
-      <section className="section-y bg-[#f7f9fb]">
+      {/* Signs, compact */}
+      <section className="section-y bg-white">
         <div className="container-max">
           <div className="mb-10 text-center">
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Know the Warning Signs</p>
@@ -267,10 +330,8 @@ export default function HamiltonSidingRepairPage() {
           </div>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             {signs.map((sign) => (
-              <div key={sign} className="flex items-start gap-3 rounded-2xl border border-navy-900/10 bg-white p-5">
-                <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" fill="none">
-                  <path d="M10 6v5M10 14h.01M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+              <div key={sign} className="flex items-start gap-3 rounded-2xl border border-navy-900/10 p-5">
+                <Icon path="M10 6v5M10 14h.01M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" />
                 <p className="text-sm text-navy-900/80">{sign}</p>
               </div>
             ))}
@@ -278,70 +339,87 @@ export default function HamiltonSidingRepairPage() {
         </div>
       </section>
 
-      {/* Siding Repair Cost in Hamilton */}
-      <section className="section-y bg-white">
-        <div className="container-max max-w-4xl">
+      {/* Cost + Repair vs Replace, merged two-column decision block */}
+      <section id="cost" className="section-y scroll-mt-32 bg-[#f7f9fb]">
+        <div className="container-max max-w-5xl">
           <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Pricing</p>
-            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Siding Repair Cost in Hamilton</h2>
+            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Making the Right Call</p>
+            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Cost & Repair vs. Replace</h2>
             <p className="mx-auto mt-4 max-w-2xl text-navy-900/70">
               Siding repair pricing varies enough from job to job that a flat number wouldn&apos;t be accurate.
-              A single damaged panel is generally one of our smaller repairs, while a repair involving multiple
-              sections, hard-to-match siding, or underlying moisture damage costs more. Here&apos;s what actually
-              drives the price:
+              Here&apos;s what drives the cost, and how to tell which category your home falls into.
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2">
-            {costFactors.map((c) => (
-              <div key={c.title} className="rounded-2xl border border-navy-900/10 bg-[#f7f9fb] p-6">
-                <h3 className="text-sm font-bold text-navy-900">{c.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{c.text}</p>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="rounded-[28px] border border-navy-900/10 bg-white p-7 shadow-sm">
+              <h3 className="text-lg font-bold text-navy-900">What Affects the Price</h3>
+              <dl className="mt-5 flex flex-col gap-4">
+                {costFactors.map((c) => (
+                  <div key={c.title}>
+                    <dt className="text-sm font-bold text-navy-900">{c.title}</dt>
+                    <dd className="mt-1 text-sm leading-relaxed text-navy-900/65">{c.text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div className="flex flex-col gap-6">
+              <div className="rounded-[28px] border border-brand-blue/20 bg-white p-7 shadow-sm">
+                <h3 className="text-base font-bold text-navy-900">Repair Usually Makes Sense When</h3>
+                <ul className="mt-3 flex flex-col gap-2 text-sm text-navy-900/70">
+                  {repairWhen.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <Icon path="M5 10.5l3.5 3.5 6.5-8" className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
+              <div className="rounded-[28px] border border-navy-900/10 bg-white p-7 shadow-sm">
+                <h3 className="text-base font-bold text-navy-900">Replacement Is Worth Considering When</h3>
+                <ul className="mt-3 flex flex-col gap-2 text-sm text-navy-900/70">
+                  {replaceWhen.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <Icon path="M12 9v4M12 17h.01M10.3 3.9 2.6 17a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" className="mt-0.5 h-4 w-4 shrink-0 text-navy-900/40" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
           <p className="mt-8 text-center text-sm text-navy-900/50">
-            For an accurate number, send us photos of the damage or request an on-site assessment, we&apos;ll give
-            you a clear, itemized quote before any work starts.
+            We&apos;ll always tell you honestly which category your home falls into, our goal is to fix what&apos;s
+            broken, not upsell a replacement you don&apos;t need. Send photos or request an on-site assessment for
+            an exact, itemized quote.
           </p>
         </div>
       </section>
 
-      {/* Repair vs Replace */}
-      <section className="section-y bg-[#f7f9fb]">
-        <div className="container-max max-w-4xl">
+      {/* Types of siding we repair */}
+      <section id="types" className="section-y scroll-mt-32 bg-white">
+        <div className="container-max">
           <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Making the Right Call</p>
-            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Repair vs. Replace Your Siding</h2>
+            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Work With</p>
+            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Types of Siding We Repair</h2>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div className="rounded-[28px] border border-navy-900/10 bg-white p-7 shadow-sm">
-              <h3 className="text-lg font-bold text-navy-900">Repair Usually Makes Sense When</h3>
-              <ul className="mt-4 flex flex-col gap-3 text-sm text-navy-900/70">
-                <li>• The damage is limited to one panel or a small section</li>
-                <li>• The rest of the siding is in good structural condition</li>
-                <li>• A reasonably close colour or profile match is available</li>
-                <li>• There&apos;s no significant moisture damage behind the siding</li>
-              </ul>
-            </div>
-            <div className="rounded-[28px] border border-navy-900/10 bg-white p-7 shadow-sm">
-              <h3 className="text-lg font-bold text-navy-900">Replacement Is Worth Considering When</h3>
-              <ul className="mt-4 flex flex-col gap-3 text-sm text-navy-900/70">
-                <li>• Damage is spread across multiple walls or elevations</li>
-                <li>• The existing siding is old enough that matching material isn&apos;t available</li>
-                <li>• Moisture has already reached the sheathing or framing underneath</li>
-                <li>• You&apos;re already planning an upgrade for appearance or insulation</li>
-              </ul>
-            </div>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {sidingTypes.map((t) => (
+              <div key={t.title} className="rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-7">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                  <Icon path={t.icon} />
+                </span>
+                <h3 className="mt-4 text-lg font-bold text-navy-900">{t.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{t.text}</p>
+              </div>
+            ))}
           </div>
-          <p className="mt-6 text-center text-sm text-navy-900/60">
-            We&apos;ll always tell you honestly which category your home falls into, our goal is to fix what&apos;s
-            broken, not to upsell a replacement you don&apos;t need.
-          </p>
         </div>
       </section>
 
       {/* Recent Siding Repairs in Hamilton */}
-      <section className="section-y bg-white">
+      <section id="recent-repairs" className="section-y scroll-mt-32 bg-[#f7f9fb]">
         <div className="container-max">
           <div className="mb-10 text-center">
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Real Results</p>
@@ -350,7 +428,7 @@ export default function HamiltonSidingRepairPage() {
           {projects.length > 0 ? (
             <div className="flex flex-col gap-10">
               {projects.map((project) => (
-                <div key={project.title} className="rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-6 sm:p-8">
+                <div key={project.title} className="rounded-[28px] border border-navy-900/10 bg-white p-6 sm:p-8">
                   <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
                     <div>
                       <h3 className="text-xl font-bold text-navy-900">{project.title}</h3>
@@ -375,7 +453,7 @@ export default function HamiltonSidingRepairPage() {
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       {project.photoPairs.map((pair, i) => (
-                        <div key={i} className="rounded-[20px] border border-navy-900/10 bg-white p-2 shadow-sm">
+                        <div key={i} className="rounded-[20px] border border-navy-900/10 bg-[#f7f9fb] p-2 shadow-sm">
                           <div className="grid grid-cols-2 gap-2">
                             <div className="relative overflow-hidden rounded-xl">
                               <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-4/5" />
@@ -398,7 +476,7 @@ export default function HamiltonSidingRepairPage() {
               ))}
             </div>
           ) : (
-            <div className="mx-auto max-w-xl rounded-[28px] border border-dashed border-navy-900/15 bg-[#f7f9fb] p-10 text-center">
+            <div className="mx-auto max-w-xl rounded-[28px] border border-dashed border-navy-900/15 bg-white p-10 text-center">
               <p className="text-sm text-navy-900/60">
                 We&apos;re adding real before-and-after photos from completed Hamilton siding repairs here soon.
                 Check back, or ask us for recent examples when you request your quote.
@@ -408,40 +486,53 @@ export default function HamiltonSidingRepairPage() {
         </div>
       </section>
 
-      {/* Local conditions */}
-      <section className="section-y bg-[#f7f9fb]">
-        <div className="container-max max-w-3xl">
-          <div className="mb-8 text-center">
+      {/* Local conditions, compact icon cards instead of long paragraphs */}
+      <section className="section-y bg-white">
+        <div className="container-max max-w-5xl">
+          <div className="mb-10 text-center">
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Local Conditions</p>
             <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
               Why Hamilton Siding Needs Different Care
             </h2>
           </div>
-          <div className="flex flex-col gap-5 text-navy-900/75">
-            <p>
-              Older homes around Westdale and Kirkendall often have original or early-replacement siding, and at
-              that age it&apos;s the fasteners, seams, and trim details that tend to fail first, not the siding
-              material itself. A targeted repair at these failure points usually restores the wall without
-              touching sections that are still performing fine.
-            </p>
-            <p>
-              Neighbourhoods closer to Crown Point see more foot traffic and activity right up against the house,
-              which is where we most often find impact cracks near grade level. Waterdown&apos;s newer builds, by
-              contrast, tend to show installation-related issues, panels hung too tight with no room to expand, or
-              trim that wasn&apos;t sealed properly around windows.
-            </p>
-            <p>
-              Hamilton&apos;s proximity to Lake Ontario adds humidity that can linger behind a loose panel longer
-              than it would in a drier inland location, and the city&apos;s wide swing between summer heat and
-              winter cold puts real stress on seams and fastening strips over time. Both are reasons we check the
-              full wall during a repair call, not just the spot you flagged.
-            </p>
+          <div className="grid gap-6 sm:grid-cols-3">
+            <div className="rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-7">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                <Icon path={ICONS.layers} />
+              </span>
+              <h3 className="mt-4 text-base font-bold text-navy-900">Century Homes & New Builds</h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-900/65">
+                Older homes around Westdale and Kirkendall often have original siding where fasteners, seams, and
+                trim fail before the material itself does. Waterdown&apos;s newer builds instead show
+                installation issues, panels hung too tight or trim sealed poorly around windows.
+              </p>
+            </div>
+            <div className="rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-7">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                <Icon path={ICONS.crack} />
+              </span>
+              <h3 className="mt-4 text-base font-bold text-navy-900">Impact Near Grade Level</h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-900/65">
+                Neighbourhoods closer to Crown Point see more activity right up against the house, which is where
+                we most often find impact cracks low on the wall.
+              </p>
+            </div>
+            <div className="rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-7">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
+                <Icon path={ICONS.water} />
+              </span>
+              <h3 className="mt-4 text-base font-bold text-navy-900">Lake Humidity & Freeze-Thaw</h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-900/65">
+                Proximity to Lake Ontario adds humidity that lingers behind a loose panel, and the city&apos;s wide
+                swing between summer and winter stresses seams and fastening strips over time.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="section-y bg-white">
+      <section id="faq" className="section-y scroll-mt-32 bg-[#f7f9fb]">
         <div className="container-max max-w-3xl">
           <h2 className="mb-8 text-center text-3xl font-extrabold text-navy-900">Frequently Asked Questions</h2>
           <FaqAccordion faqs={faqs} />
@@ -456,9 +547,9 @@ export default function HamiltonSidingRepairPage() {
             Send Us Photos for a Free Quote
           </h2>
           <p className="mt-4 text-brand-silver/80">
-            No need to schedule a visit just to get a starting number. Take a few clear photos of the damaged
-            siding, plus one wide shot showing where it is on the house, and email them to us. We&apos;ll follow up
-            with an initial assessment and, if needed, book an in-person visit to confirm.
+            Take a few clear photos of the damaged siding, plus one wide shot showing where it is on the house, and
+            email them to us. We&apos;ll follow up with an initial assessment, no need to book a visit just to get
+            a starting number.
           </p>
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <a
@@ -478,7 +569,7 @@ export default function HamiltonSidingRepairPage() {
       </section>
 
       {/* Related Hamilton services */}
-      <section className="section-y bg-[#f7f9fb]">
+      <section className="section-y bg-white">
         <div className="container-max">
           <h2 className="mb-6 text-center text-2xl font-extrabold text-navy-900">
             Related Services in Hamilton
