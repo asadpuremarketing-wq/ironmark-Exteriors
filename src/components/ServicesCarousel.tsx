@@ -14,6 +14,7 @@ const icons: Record<string, string> = {
   "gutter-installation": "M4 5h16v3H4V5zm2 3v9h2V8H6zm10 0v9h2V8h-2zm-7 11h6v2h-6v-2z",
   "downspout-repair": "M7 3v10a4 4 0 0 0 4 4h6M17 13l4 4-4 4",
   "gutter-guards": "M4 8h16v3H4V8zm1 3 1.5 10h11L19 11M9 8V6a3 3 0 0 1 6 0v2",
+  "soffit-fascia-repair": "M3 9h18M3 9v3a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V9M7 15v5h10v-5",
   windows: "M4 3h16v18H4V3zm8 0v18M4 12h16",
   painting: "M7 3h10l-1 6H8L7 3zM9 9h6l1 12H8L9 9z",
   "pressure-washing": "M5 12l4-9 4 9-2 9H7l-2-9zm10-6l3 6-1 4h-4",

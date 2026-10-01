@@ -170,6 +170,20 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "soffit-fascia-repair",
+    name: "Soffit & Fascia Repair",
+    shortDescription: "Rotted, damaged, or pest-vented soffit and fascia repaired or replaced.",
+    description:
+      "Ironmark Exteriors repairs and replaces damaged soffit and fascia boards, the trim that supports your gutters and ventilates your attic, closing off entry points for pests and moisture before they reach the roof deck or walls.",
+    bullets: [
+      "Rotted & water-damaged fascia board replacement",
+      "Soffit panel repair & replacement",
+      "Pest & rodent entry point sealing",
+      "Attic ventilation restoration",
+      "Free on-site assessments & quotes",
+    ],
+  },
+  {
     slug: "windows",
     name: "Window Cleaning",
     shortDescription: "Interior & exterior window cleaning starting at $149.",
@@ -522,6 +536,12 @@ export const serviceCityPages = [
     pathPrefix: "siding-repair",
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
+  {
+    slug: "soffit-fascia-repair",
+    label: "Soffit & Fascia Repair",
+    pathPrefix: "soffit-fascia-repair",
+    areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
+  },
 ] as const;
 
 export type GutterRepairProject = {
@@ -574,4 +594,14 @@ export type SidingRepairProject = {
 // Real completed siding repair job photos, keyed by city slug. Empty until
 // real project photos and details are provided.
 export const sidingRepairProjects: Record<string, SidingRepairProject[]> = {};
+
+export type SoffitFasciaRepairProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+};
+
+// Real completed soffit & fascia repair job photos, keyed by city slug.
+// Empty until real project photos and details are provided.
+export const soffitFasciaRepairProjects: Record<string, SoffitFasciaRepairProject[]> = {};
 
