@@ -8,18 +8,18 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import CardCarousel from "@/components/CardCarousel";
-import { business, serviceAreas, sidingProjects } from "@/lib/data";
+import { business, serviceAreas, sidingRepairProjects } from "@/lib/data";
 import { neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 import {
-  sidingCityContent,
-  sidingIntroFallback,
-  sidingFaqs,
-  sidingSigns,
-  sidingProblems,
-  sidingProcessSteps,
+  sidingRepairCityContent,
+  sidingRepairIntroFallback,
+  sidingRepairFaqs,
+  sidingRepairSigns,
+  sidingRepairProblems,
+  sidingRepairProcessSteps,
   getArchetype,
-} from "@/lib/sidingContent";
+} from "@/lib/sidingRepairContent";
 
 type Params = Promise<{ area: string }>;
 
@@ -33,13 +33,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { area: slug } = await params;
   const area = serviceAreas.find((a) => a.slug === slug);
   if (!area) return {};
-  const title = `Siding Repair & Installation in ${area.name}, ON`;
+  const title = `Siding Repair in ${area.name}, ON`;
   const description = `Siding repair, replacement, and installation in ${area.name}, ON, vinyl and fiber cement siding installed by licensed, insured crews. Free on-site estimates.`;
   return {
     title,
     description,
-    alternates: { canonical: `/siding/${area.slug}` },
-    openGraph: { title, description, url: `${business.siteUrl}/siding/${area.slug}` },
+    alternates: { canonical: `/siding-repair/${area.slug}` },
+    openGraph: { title, description, url: `${business.siteUrl}/siding-repair/${area.slug}` },
   };
 }
 
@@ -50,19 +50,19 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
 
   const index = areaSlugs.indexOf(slug);
   const archetype = getArchetype(index);
-  const cityContent = sidingCityContent[area.slug];
-  const intro = cityContent?.intro ?? sidingIntroFallback(area, index);
+  const cityContent = sidingRepairCityContent[area.slug];
+  const intro = cityContent?.intro ?? sidingRepairIntroFallback(area, index);
   const localConditions = cityContent?.localConditions ?? [];
-  const faqs = sidingFaqs(area, index);
-  const signs = sidingSigns(index);
-  const problems = sidingProblems(index, 6);
-  const projects = sidingProjects[area.slug] ?? [];
+  const faqs = sidingRepairFaqs(area, index);
+  const signs = sidingRepairSigns(index);
+  const problems = sidingRepairProblems(index, 6);
+  const projects = sidingRepairProjects[area.slug] ?? [];
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    serviceType: "Siding",
-    name: `Siding Repair & Installation Services in ${area.name}, ON`,
+    serviceType: "Siding Repair",
+    name: `Siding Repair Services in ${area.name}, ON`,
     description: `Siding repair, replacement, and installation for homes in ${area.name}, ON.`,
     provider: {
       "@type": "RoofingContractor",
@@ -84,8 +84,8 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
   };
 
   const breadcrumbSchemaData = breadcrumbSchema([
-    { name: "Siding", path: "/services/siding" },
-    { name: `Siding in ${area.name}`, path: `/siding/${area.slug}` },
+    { name: "Siding Repair", path: "/services/siding-repair" },
+    { name: `Siding Repair in ${area.name}`, path: `/siding-repair/${area.slug}` },
   ]);
 
   const introSection = (
@@ -102,7 +102,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
         <div className="mb-8 text-center">
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Local Conditions</p>
           <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
-            Siding in {area.name}
+            Siding Repair in {area.name}
           </h2>
         </div>
         <div className="flex flex-col gap-5 text-navy-900/75">
@@ -185,10 +185,10 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
       <div className="container-max">
         <div className="mb-10 text-center">
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How We Work</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Process</h2>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Repair Process</h2>
         </div>
         <CardCarousel>
-          {sidingProcessSteps.map((step) => (
+          {sidingRepairProcessSteps.map((step) => (
             <div key={step.number} className="h-full rounded-[28px] border border-navy-900/10 bg-white p-7 transition-shadow duration-300 hover:shadow-lg">
               <span className="font-heading text-4xl font-extrabold text-brand-blue/20">{step.number}</span>
               <h3 className="mt-3 text-lg font-bold text-navy-900">{step.title}</h3>
@@ -205,11 +205,11 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
       <div className="container-max max-w-2xl">
         <div className="mb-10 text-center">
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How We Work</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Process</h2>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Repair Process</h2>
         </div>
         <div className="relative flex flex-col gap-10 pl-10">
           <div className="absolute bottom-2 left-4 top-2 w-px bg-navy-900/10" aria-hidden="true" />
-          {sidingProcessSteps.map((step) => (
+          {sidingRepairProcessSteps.map((step) => (
             <div key={step.number} className="relative">
               <span className="absolute -left-10 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue text-xs font-bold text-white">
                 {step.number.replace("0", "")}
@@ -228,10 +228,10 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
       <div className="container-max">
         <div className="mb-10 text-center">
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How We Work</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Process</h2>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Repair Process</h2>
         </div>
         <div className="flex flex-wrap items-stretch justify-center gap-4">
-          {sidingProcessSteps.map((step) => (
+          {sidingRepairProcessSteps.map((step) => (
             <div key={step.number} className="flex w-full max-w-xs flex-col items-center gap-2 rounded-2xl bg-white p-5 text-center shadow-sm sm:w-[18%]">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-navy-950 text-sm font-bold text-white">
                 {step.number.replace("0", "")}
@@ -351,7 +351,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
   const nearbyAreasSection = (
     <section key="nearby" className="section-y bg-navy-950">
       <div className="container-max">
-        <h2 className="mb-4 text-center text-2xl font-extrabold text-white">Siding in Nearby Areas</h2>
+        <h2 className="mb-4 text-center text-2xl font-extrabold text-white">Siding Repair in Nearby Areas</h2>
         <div className="flex flex-wrap justify-center gap-3">
           {areaSlugs
             .filter((s) => s !== area.slug)
@@ -361,7 +361,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
               return (
                 <Link
                   key={s}
-                  href={`/siding/${s}`}
+                  href={`/siding-repair/${s}`}
                   className="rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-brand-silver transition hover:border-brand-blue hover:text-white"
                 >
                   {a.name}, {a.province}
@@ -415,10 +415,10 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
 
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
-        title={`Siding Repair & Installation in ${area.name}, ON`}
+        title={`Siding Repair in ${area.name}, ON`}
         subtitle={`Vinyl and fiber cement siding, repaired or installed by licensed, insured crews. Free on-site estimates for homeowners in ${area.name}.`}
         showCta={false}
-        formSlot={<ServiceQuoteCard title="Get Your Free Siding Estimate" source={`siding-${area.slug}`} />}
+        formSlot={<ServiceQuoteCard title="Get Your Free Siding Repair Estimate" source={`siding-repair-${area.slug}`} />}
       />
 
       <GoogleReviews />

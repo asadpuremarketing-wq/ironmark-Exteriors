@@ -2,17 +2,17 @@ import type { ServiceArea } from "./data";
 import { pickByIndex, neighbourhoodLine } from "./offerContent";
 
 /**
- * Content and structural-layout data for the /siding/[area] pages. Same
+ * Content and structural-layout data for the /siding-repair/[area] pages. Same
  * approach as the gutter-service content libs: hand-written per-city
  * content plus a structural archetype assigned by city index.
  */
 
-export type SidingCityContent = {
+export type SidingRepairCityContent = {
   intro: string;
   localConditions: string[];
 };
 
-export const sidingCityContent: Record<string, SidingCityContent> = {
+export const sidingRepairCityContent: Record<string, SidingRepairCityContent> = {
   hamilton: {
     intro:
       "Hamilton's mix of century homes and newer builds means siding work here ranges from matching original wood-look profiles on older houses to full re-sides on homes with siding well past its service life.",
@@ -194,33 +194,33 @@ const faqPool = (areaName: string) => [
   },
 ];
 
-export type SidingArchetype = 0 | 1 | 2;
+export type SidingRepairArchetype = 0 | 1 | 2;
 
-export function getArchetype(index: number): SidingArchetype {
-  return (index % 3) as SidingArchetype;
+export function getArchetype(index: number): SidingRepairArchetype {
+  return (index % 3) as SidingRepairArchetype;
 }
 
-export function sidingFaqs(area: ServiceArea, index: number, count = 7) {
+export function sidingRepairFaqs(area: ServiceArea, index: number, count = 7) {
   const pool = faqPool(area.name);
   const start = index % pool.length;
   const rotated = [...pool.slice(start), ...pool.slice(0, start)];
   return rotated.slice(0, count);
 }
 
-export function sidingSigns(index: number) {
+export function sidingRepairSigns(index: number) {
   const start = index % signsPool.length;
   return [...signsPool.slice(start), ...signsPool.slice(0, start)];
 }
 
-export function sidingProblems(index: number, count = 6) {
+export function sidingRepairProblems(index: number, count = 6) {
   const start = index % problemsPool.length;
   const rotated = [...problemsPool.slice(start), ...problemsPool.slice(0, start)];
   return rotated.slice(0, count);
 }
 
-export { processSteps as sidingProcessSteps };
+export { processSteps as sidingRepairProcessSteps };
 
-export function sidingIntroFallback(area: ServiceArea, index: number): string {
+export function sidingRepairIntroFallback(area: ServiceArea, index: number): string {
   const variants = [
     `${area.blurb} Our siding work in ${area.name} covers everything from targeted repairs to full home re-sides.`,
     `Homeowners across ${area.name}, including ${neighbourhoodLine(area)}, trust us for siding repair and installation that holds up through every season.`,

@@ -170,6 +170,20 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "siding-repair",
+    name: "Siding Repair",
+    shortDescription: "Warped, cracked, or storm-damaged siding repaired or replaced.",
+    description:
+      "Ironmark Exteriors repairs warped, cracked, and storm-damaged siding, matching existing panels where possible or replacing full sections, so your home's exterior keeps out moisture the way it should.",
+    bullets: [
+      "Cracked & impact-damaged panel repair",
+      "Warped or buckled siding replacement",
+      "Moisture damage assessment & repair",
+      "Colour & profile matching",
+      "Free on-site assessments & quotes",
+    ],
+  },
+  {
     slug: "windows",
     name: "Window Cleaning",
     shortDescription: "Interior & exterior window cleaning starting at $149.",
@@ -517,9 +531,9 @@ export const serviceCityPages = [
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
   {
-    slug: "siding",
-    label: "Siding",
-    pathPrefix: "siding",
+    slug: "siding-repair",
+    label: "Siding Repair",
+    pathPrefix: "siding-repair",
     areaSlugs: serviceAreas.map((a) => a.slug) as readonly string[],
   },
 ] as const;
@@ -565,13 +579,13 @@ export type GutterGuardsProject = {
 // Empty until real project photos and details are provided.
 export const gutterGuardsProjects: Record<string, GutterGuardsProject[]> = {};
 
-export type SidingProject = {
+export type SidingRepairProject = {
   title: string;
   description: string;
   photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
 };
 
-// Real completed siding job photos, keyed by city slug. Empty until real
-// project photos and details are provided.
-export const sidingProjects: Record<string, SidingProject[]> = {};
+// Real completed siding repair job photos, keyed by city slug. Empty until
+// real project photos and details are provided.
+export const sidingRepairProjects: Record<string, SidingRepairProject[]> = {};
 
