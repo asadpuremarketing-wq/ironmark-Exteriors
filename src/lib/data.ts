@@ -600,7 +600,44 @@ export type SidingRepairProject = {
 
 // Real completed siding repair job photos, keyed by city slug. Empty until
 // real project photos and details are provided.
-export const sidingRepairProjects: Record<string, SidingRepairProject[]> = {};
+export const sidingRepairProjects: Record<string, SidingRepairProject[]> = {
+  hamilton: [
+    {
+      title: "Window Trim & Siding Seam Repair",
+      location: "Hamilton, ON",
+      problem:
+        "Cracked, peeling caulking around a decorative window and a separated siding seam near the roofline were letting moisture in.",
+      solution:
+        "Resealed and recaulked the window trim and closed up the siding seam so the wall drains properly again.",
+      description:
+        "Cracked, peeling caulking around a decorative window and a separated siding seam near the roofline were letting moisture in. We resealed and recaulked the window trim and closed up the siding seam so the wall drains properly again.",
+      photoPairs: [
+        {
+          before: "/images/before-after/hamilton-siding-repair-1-before.jpg",
+          after: "/images/before-after/hamilton-siding-repair-1-after.jpg",
+          beforeAlt: "Cracked caulking and a separated siding seam around a window in Hamilton before repair",
+          afterAlt: "Resealed window trim and siding seam in Hamilton after repair",
+        },
+      ],
+    },
+    {
+      title: "Cracked & Mould-Stained Panel Replacement",
+      location: "Hamilton, ON",
+      problem: "A bent, cracked vinyl panel near a window had algae and mould staining spreading across the wall.",
+      solution: "Replaced the damaged panel and matched it to the surrounding siding.",
+      description:
+        "A bent, cracked vinyl panel near a window had algae and mould staining spreading across the wall. We replaced the damaged panel and matched it to the surrounding siding.",
+      photoPairs: [
+        {
+          before: "/images/before-after/hamilton-siding-repair-2-before.jpg",
+          after: "/images/before-after/hamilton-siding-repair-2-after.jpg",
+          beforeAlt: "Cracked, mould-stained vinyl siding panel near a window in Hamilton before repair",
+          afterAlt: "Replaced and matched vinyl siding panel near a window in Hamilton after repair",
+        },
+      ],
+    },
+  ],
+};
 
 export type SoffitFasciaRepairProject = {
   title: string;
