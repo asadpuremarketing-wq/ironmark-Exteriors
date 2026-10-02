@@ -48,17 +48,16 @@ const ICONS = {
   water: "M12 3s6 7.2 6 11.2a6 6 0 1 1-12 0C6 10.2 12 3 12 3Z",
 };
 
-// TODO: placeholder photos for visualization only, swap for real job
-// photos once available (same pattern as the siding-repair project photos).
-const placeholderPhoto = (seed: string) => `https://picsum.photos/seed/${seed}/600/450`;
-
+// Real photos go in public/images/siding-repair/ with these exact filenames.
+// Until a file exists, SmartImage automatically falls back to a styled
+// placeholder, so there's nothing else to wire up once the files are added.
 const whatWeRepair = [
-  { title: "Cracked Panels", icon: ICONS.crack, image: placeholderPhoto("cracked-panels"), text: "A single cracked panel, usually from cold-weather brittleness or impact, replaced and colour-matched." },
-  { title: "Loose Siding", icon: ICONS.loose, image: placeholderPhoto("loose-siding"), text: "Panels that have pulled away from the fastening strip, re-secured before wind or moisture make it worse." },
-  { title: "Wind Damage", icon: ICONS.wind, image: placeholderPhoto("wind-damage"), text: "Sections lifted, bent, or torn loose by wind off Lake Ontario, repaired and re-fastened properly." },
-  { title: "Missing Panels", icon: ICONS.missing, image: placeholderPhoto("missing-panels"), text: "Gaps left by a blown-off or removed panel, filled with a matching replacement." },
-  { title: "Warped Siding", icon: ICONS.warp, image: placeholderPhoto("warped-siding"), text: "Panels installed too tight that have buckled with temperature swings, replaced with proper expansion room." },
-  { title: "Small Section Replacement", icon: ICONS.section, image: placeholderPhoto("small-section"), text: "A contained area of damage replaced without re-siding the whole wall." },
+  { title: "Cracked Panels", icon: ICONS.crack, image: "/images/siding-repair/cracked-panels.jpg", text: "A single cracked panel, usually from cold-weather brittleness or impact, replaced and colour-matched." },
+  { title: "Loose Siding", icon: ICONS.loose, image: "/images/siding-repair/loose-siding.jpg", text: "Panels that have pulled away from the fastening strip, re-secured before wind or moisture make it worse." },
+  { title: "Wind Damage", icon: ICONS.wind, image: "/images/siding-repair/wind-damage.jpg", text: "Sections lifted, bent, or torn loose by wind off Lake Ontario, repaired and re-fastened properly." },
+  { title: "Missing Panels", icon: ICONS.missing, image: "/images/siding-repair/missing-panels.jpg", text: "Gaps left by a blown-off or removed panel, filled with a matching replacement." },
+  { title: "Warped Siding", icon: ICONS.warp, image: "/images/siding-repair/warped-siding.jpg", text: "Panels installed too tight that have buckled with temperature swings, replaced with proper expansion room." },
+  { title: "Small Section Replacement", icon: ICONS.section, image: "/images/siding-repair/small-section-replacement.jpg", text: "A contained area of damage replaced without re-siding the whole wall." },
 ];
 
 const repairWhen = ["Isolated panels", "Wind damage", "Cracks or small holes", "Small, contained areas"];
@@ -73,9 +72,9 @@ const costFactorChips = [
 ];
 
 const sidingTypes = [
-  { title: "Vinyl Siding", icon: ICONS.panel, image: placeholderPhoto("vinyl-siding"), text: "The most common siding on Hamilton homes, repaired by panel replacement and colour matching." },
-  { title: "Insulated Vinyl", icon: ICONS.snow, image: placeholderPhoto("insulated-vinyl"), text: "Foam-backed vinyl, repaired carefully so the insulation layer isn't disturbed." },
-  { title: "Composite & Engineered", icon: ICONS.layers, image: placeholderPhoto("composite-siding"), text: "Rigid, wood-look siding used on newer builds, repaired at damaged edges and fastener points." },
+  { title: "Vinyl Siding", icon: ICONS.panel, image: "/images/siding-repair/vinyl-siding.jpg", text: "The most common siding on Hamilton homes, repaired by panel replacement and colour matching." },
+  { title: "Insulated Vinyl", icon: ICONS.snow, image: "/images/siding-repair/insulated-vinyl.jpg", text: "Foam-backed vinyl, repaired carefully so the insulation layer isn't disturbed." },
+  { title: "Composite & Engineered", icon: ICONS.layers, image: "/images/siding-repair/composite-engineered.jpg", text: "Rigid, wood-look siding used on newer builds, repaired at damaged edges and fastener points." },
 ];
 
 const processSteps = [
@@ -214,8 +213,7 @@ export default function HamiltonSidingRepairPage() {
             {whatWeRepair.map((p) => (
               <div key={p.title} className="h-full overflow-hidden rounded-[24px] border border-navy-900/10 transition-shadow duration-300 hover:shadow-lg">
                 <div className="relative aspect-[4/3] overflow-hidden bg-navy-900/5">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  <SmartImage src={p.image} alt={p.title} fallbackLabel={p.title} className="absolute inset-0 h-full w-full" />
                   <span className="absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-xl bg-white/90 text-brand-blue shadow-sm backdrop-blur-sm">
                     <Icon path={p.icon} className="h-4 w-4" />
                   </span>
@@ -301,8 +299,7 @@ export default function HamiltonSidingRepairPage() {
             {sidingTypes.map((t) => (
               <div key={t.title} className="h-full overflow-hidden rounded-[24px] border border-navy-900/10 bg-white text-center">
                 <div className="relative aspect-[4/3] overflow-hidden bg-navy-900/5">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={t.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  <SmartImage src={t.image} alt={t.title} fallbackLabel={t.title} className="absolute inset-0 h-full w-full" />
                   <span className="absolute left-1/2 top-full flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl bg-white text-brand-blue shadow-md">
                     <Icon path={t.icon} />
                   </span>
