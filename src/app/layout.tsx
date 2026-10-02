@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -111,6 +112,19 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-full flex-col bg-white">
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-3L4ZDMHC2Y"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-3L4ZDMHC2Y');
+          `}
+        </Script>
         <ScrollProgress />
         <Header />
         <main className="flex-1">{children}</main>
