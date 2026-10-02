@@ -25,10 +25,11 @@ type Params = Promise<{ area: string }>;
 
 const areaSlugs = serviceAreas.map((a) => a.slug);
 
-// Hamilton has its own bespoke page (a static route, which Next.js
-// prioritizes over this dynamic one) with deeper, genuinely unique content,
-// so it's excluded here to avoid generating a duplicate/conflicting route.
-const templatedAreaSlugs = areaSlugs.filter((s) => s !== "hamilton");
+// Hamilton and Stoney Creek have their own bespoke pages (static routes,
+// which Next.js prioritizes over this dynamic one) with deeper, genuinely
+// unique content, so they're excluded here to avoid generating a
+// duplicate/conflicting route.
+const templatedAreaSlugs = areaSlugs.filter((s) => s !== "hamilton" && s !== "stoney-creek");
 
 function getArea(slug: string) {
   if (!templatedAreaSlugs.includes(slug)) return undefined;
