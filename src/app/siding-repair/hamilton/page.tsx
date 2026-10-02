@@ -73,8 +73,7 @@ const costFactorChips = [
 
 const sidingTypes = [
   { title: "Vinyl Siding", icon: ICONS.panel, image: "/images/siding-repair/vinyl-siding.jpg", text: "The most common siding on Hamilton homes, repaired by panel replacement and colour matching." },
-  { title: "Insulated Vinyl", icon: ICONS.snow, image: "/images/siding-repair/insulated-vinyl.jpg", text: "Foam-backed vinyl, repaired carefully so the insulation layer isn't disturbed." },
-  { title: "Composite & Engineered", icon: ICONS.layers, image: "/images/siding-repair/composite-engineered.jpg", text: "Rigid, wood-look siding used on newer builds, repaired at damaged edges and fastener points." },
+  { title: "Insulated Vinyl", icon: ICONS.snow, image: "/images/siding-repair/insulated-vinyl.png", text: "Foam-backed vinyl, repaired carefully so the insulation layer isn't disturbed." },
 ];
 
 const processSteps = [
