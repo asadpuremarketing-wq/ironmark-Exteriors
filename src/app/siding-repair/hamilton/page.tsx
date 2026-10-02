@@ -116,6 +116,10 @@ const faqs = [
     q: "Can I just send photos of the damage to get a quote?",
     a: "Yes, it's often the fastest way to get a starting estimate. Clear photos of the damage, plus a wide shot of where it is on the house, let us give you a realistic initial range before confirming anything in person.",
   },
+  {
+    q: "Is Ironmark Exteriors licensed and insured?",
+    a: "Yes. Ironmark Exteriors is licensed and insured for siding repair work in Hamilton and the surrounding area.",
+  },
 ];
 
 const serviceSchema = {
@@ -170,7 +174,7 @@ export default function HamiltonSidingRepairPage() {
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
         title="Siding Repair in Hamilton, ON"
-        subtitle="Cracked, loose, or storm-damaged siding, repaired fast by our local crew. Free on-site estimates."
+        subtitle="Cracked, loose, or storm-damaged siding, repaired fast by our licensed, insured local crew. Free on-site estimates."
         showCta={false}
         formSlot={<ServiceQuoteCard title="Get Your Free Siding Repair Quote" source="siding-repair-hamilton" />}
       />

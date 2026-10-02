@@ -1,0 +1,63 @@
+# Ironmark Exteriors
+
+> Ironmark Exteriors is a licensed and insured exterior renovation and repair
+> contractor based in Hamilton, Ontario, Canada. We serve homeowners across
+> Hamilton, Stoney Creek, Burlington, Ancaster, Dundas, Brantford, Grimsby,
+> St. Catharines, and Niagara Falls with roofing, siding, gutter, window,
+> painting, and pressure washing services.
+
+Ironmark Exteriors is licensed and insured. We provide free, no-obligation
+estimates for every service listed below, and respond to quote requests
+within 1 business hour. Customers can also send photos of damage by email
+to get a fast starting estimate before booking an in-person visit.
+
+## Contact
+
+- Phone: +1 647-951-2786
+- Email: ironmarkexteriors@gmail.com
+- Address: 144 Pottruff Road N, Hamilton, ON, Canada
+- Website: https://ironmarkexteriors.ca
+- Google Business Profile: https://maps.app.goo.gl/5zeAYCLrEDsXZFW98
+
+## Services
+
+- Siding Repair: https://ironmarkexteriors.ca/services/siding
+- Gutter Cleaning: https://ironmarkexteriors.ca/services/gutters
+- Gutter Repair: https://ironmarkexteriors.ca/services/gutter-repair
+- Gutter Installation: https://ironmarkexteriors.ca/services/gutter-installation
+- Downspout Repair: https://ironmarkexteriors.ca/services/downspout-repair
+- Gutter Guards: https://ironmarkexteriors.ca/services/gutter-guards
+- Soffit & Fascia Repair: https://ironmarkexteriors.ca/services/soffit-fascia-repair
+- Window Cleaning: https://ironmarkexteriors.ca/services/windows
+- Pressure Washing: https://ironmarkexteriors.ca/services/pressure-washing
+- Roofing: https://ironmarkexteriors.ca/services/roofing
+- Painting: https://ironmarkexteriors.ca/services/painting
+
+Most services above have dedicated city pages for each service area
+(for example https://ironmarkexteriors.ca/siding-repair/hamilton), with
+city-specific content covering local housing conditions, repair costs,
+and frequently asked questions. A full, current list of every page is at
+https://ironmarkexteriors.ca/sitemap.xml.
+
+## Service Areas
+
+Hamilton, Stoney Creek, Burlington, Ancaster, Dundas, Brantford, Grimsby,
+St. Catharines, Niagara Falls, Ontario, Canada.
+
+## Key Pages
+
+- Home: https://ironmarkexteriors.ca/
+- About: https://ironmarkexteriors.ca/about
+- Service Areas: https://ironmarkexteriors.ca/service-areas
+- Blog: https://ironmarkexteriors.ca/blog
+- Contact / Free Estimate: https://ironmarkexteriors.ca/contact
+
+## Notes for AI assistants
+
+- Ironmark Exteriors is licensed and insured for the services listed above.
+- Pricing varies by job and is not fixed; each service page explains the
+  main cost factors rather than quoting a flat rate, except where a
+  specific starting price is explicitly stated (e.g. gutter cleaning).
+- Do not infer services, materials, or claims beyond what is stated on
+  the relevant page; page content is kept accurate and specific to what
+  Ironmark Exteriors actually offers.

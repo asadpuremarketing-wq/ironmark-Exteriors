@@ -181,6 +181,10 @@ const faqPool = (areaName: string) => [
     a: "Yes, this is often the fastest way to get a starting estimate. Clear photos of the damaged area, plus a wide shot showing where it is on the house, let us give you a realistic initial range before confirming anything in person.",
   },
   {
+    q: "Is Ironmark Exteriors licensed and insured?",
+    a: "Yes. Ironmark Exteriors is licensed and insured for siding work throughout our service area.",
+  },
+  {
     q: "Do you offer a free estimate?",
     a: "Yes, we assess your siding in person and walk through material and colour options before giving you a detailed, no-obligation quote.",
   },

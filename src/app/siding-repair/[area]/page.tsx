@@ -426,7 +426,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
         title={`Siding Repair in ${area.name}, ON`}
-        subtitle={`Cracked, warped, loose, or storm-damaged siding repaired, not replaced unless it actually needs it. Free on-site estimates for homeowners in ${area.name}.`}
+        subtitle={`Cracked, warped, loose, or storm-damaged siding repaired by our licensed, insured crew, not replaced unless it actually needs it. Free on-site estimates for homeowners in ${area.name}.`}
         showCta={false}
         formSlot={<ServiceQuoteCard title="Get Your Free Siding Repair Estimate" source={`siding-repair-${area.slug}`} />}
       />
