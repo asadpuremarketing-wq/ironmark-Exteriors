@@ -15,9 +15,12 @@ import {
   sidingRepairCityContent,
   sidingRepairIntroFallback,
   sidingRepairFaqs,
-  sidingRepairSigns,
-  sidingRepairProblems,
-  sidingRepairProcessSteps,
+  sidingDamageCards,
+  sidingCostFactors,
+  sidingRepairWhen,
+  sidingReplaceWhen,
+  sidingMaterials,
+  sidingProcessSteps,
   getArchetype,
 } from "@/lib/sidingRepairContent";
 
@@ -44,8 +47,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { area: slug } = await params;
   const area = getArea(slug);
   if (!area) return {};
-  const title = `Siding Repair in ${area.name}, ON`;
-  const description = `Siding repair for cracked, warped, loose, and storm-damaged vinyl, insulated, and composite siding in ${area.name}, ON. Free on-site estimates, send photos to get started.`;
+  const title = `Siding Repair in ${area.name}, ON | Ironmark Exteriors`;
+  const description = `Siding repair for cracked, loose, warped, and wind-damaged vinyl and insulated siding in ${area.name}, ON. Isolated panel and section repairs, free on-site estimates.`;
   return {
     title,
     description,
@@ -53,6 +56,34 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     openGraph: { title, description, url: `${business.siteUrl}/siding-repair/${area.slug}` },
   };
 }
+
+function Icon({ path, className = "h-5 w-5" }: { path: string; className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none">
+      <path d={path} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const DAMAGE_ICONS: Record<string, string> = {
+  cracked: "M3 13l4-1 2-6 3 11 2-7 3 2 4-1",
+  loose: "M7 7l10 10M7 17 17 7",
+  wind: "M3 8h12.5a2.3 2.3 0 1 0-2.1-3.2M3 12.5h15.5a2.3 2.3 0 1 1-2.1 3.2M3 17h9",
+  missing: "M4 4h7v7H4zM13 13h7v7h-7z",
+  warped: "M3 14c2-4 4 4 6 0s4-4 6 0 4 4 6 0",
+  section: "M4 4h16v16H4V4Zm0 10.7h16M10.7 4v16",
+  seam: "M4 8h16M4 8v8M20 8v8M8 16h8",
+  faded: "M12 4V2M12 22v-2M4 12H2M22 12h-2M5 5 3.5 3.5M19 5l1.5-1.5M5 19l-1.5 1.5M19 19l1.5 1.5M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z",
+};
+
+const MATERIAL_ICONS: Record<string, string> = {
+  vinyl: "M4 4h16v16H4V4Zm0 5.3h16M4 14.7h16M9.3 4v16M14.7 4v16",
+  insulated: "M12 2v20M4.2 7l15.6 10M19.8 7 4.2 17M12 2 9 5M12 2l3 3M12 22l-3-3M12 22l3-3",
+  composite: "M12 3 3 8l9 5 9-5-9-5ZM3 12l9 5 9-5M3 16l9 5 9-5",
+};
+
+const CHECK_ICON = "M5 10.5l3.5 3.5 6.5-8";
+const FLAG_ICON = "M12 9v4M12 17h.01M10.3 3.9 2.6 17a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z";
 
 export default async function SidingAreaPage({ params }: { params: Params }) {
   const { area: slug } = await params;
@@ -63,10 +94,14 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
   const archetype = getArchetype(index);
   const cityContent = sidingRepairCityContent[area.slug];
   const intro = cityContent?.intro ?? sidingRepairIntroFallback(area, index);
+  const quickAnswer = cityContent?.quickAnswer ?? sidingRepairIntroFallback(area, index);
   const localConditions = cityContent?.localConditions ?? [];
   const faqs = sidingRepairFaqs(area, index);
-  const signs = sidingRepairSigns(index);
-  const problems = sidingRepairProblems(index, 6);
+  const damageCards = sidingDamageCards(index);
+  const costFactors = sidingCostFactors(index);
+  const repairWhen = sidingRepairWhen(index);
+  const replaceWhen = sidingReplaceWhen(index);
+  const processSteps = sidingProcessSteps(index);
   const projects = sidingRepairProjects[area.slug] ?? [];
 
   const serviceSchema = {
@@ -74,7 +109,7 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
     "@type": "Service",
     serviceType: "Siding Repair",
     name: `Siding Repair Services in ${area.name}, ON`,
-    description: `Siding repair, replacement, and installation for homes in ${area.name}, ON.`,
+    description: `Repair of cracked, loose, warped, and wind-damaged vinyl, insulated vinyl, and composite siding for homes in ${area.name}, ON.`,
     provider: {
       "@type": "RoofingContractor",
       name: business.name,
@@ -94,21 +129,65 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
     })),
   };
 
-  const breadcrumbSchemaData = breadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Siding Repair", path: "/services/siding" },
     { name: `Siding Repair in ${area.name}`, path: `/siding-repair/${area.slug}` },
-  ]);
+  ];
+  const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
-  const introSection = (
-    <section key="intro" className="bg-white pt-10">
-      <div className="container-max max-w-3xl text-center">
-        <p className="text-navy-900/70">{intro}</p>
+  const quickNav = [
+    { href: "#damage", label: "Damage We Repair" },
+    { href: "#local", label: "Local Conditions" },
+    { href: "#repairable", label: "Repair or Replace" },
+    { href: "#cost", label: "Cost" },
+    { href: "#process", label: "Process" },
+    { href: "#faq", label: "FAQ" },
+  ];
+
+  // ---- Reusable section blocks ----
+
+  const quickAnswerSection = (
+    <section key="quick-answer" className="bg-white pt-10">
+      <div className="container-max">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-brand-blue/15 bg-brand-blue/[0.04] p-6 sm:p-7">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">Quick Answer</p>
+          <p className="text-sm leading-relaxed text-navy-900/80">{quickAnswer}</p>
+        </div>
+      </div>
+    </section>
+  );
+
+  const damageSection = (
+    <section key="damage" id="damage" className="section-y scroll-mt-32 bg-white">
+      <div className="container-max">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Repair</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+            Siding Damage We Repair in {area.name}
+          </h2>
+        </div>
+        <CardCarousel cardWidthClassName="w-[260px] sm:w-[280px]">
+          {damageCards.map((d) => (
+            <div key={d.title} className="h-full overflow-hidden rounded-[24px] border border-navy-900/10 transition-shadow duration-300 hover:shadow-lg">
+              <div className="relative aspect-[4/3] overflow-hidden bg-navy-900/5">
+                <SmartImage src={d.image} alt={`${d.title} on a home in ${area.name}, ON`} fallbackLabel={d.title} className="absolute inset-0 h-full w-full" />
+                <span className="absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-xl bg-white/90 text-brand-blue shadow-sm backdrop-blur-sm">
+                  <Icon path={DAMAGE_ICONS[d.key]} className="h-4 w-4" />
+                </span>
+              </div>
+              <div className="p-5">
+                <h3 className="text-base font-bold text-navy-900">{d.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{d.text}</p>
+              </div>
+            </div>
+          ))}
+        </CardCarousel>
       </div>
     </section>
   );
 
   const localConditionsSection = localConditions.length > 0 && (
-    <section key="local" className="section-y bg-[#f7f9fb]">
+    <section key="local" id="local" className="section-y scroll-mt-32 bg-[#f7f9fb]">
       <div className="container-max max-w-3xl">
         <div className="mb-8 text-center">
           <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Local Conditions</p>
@@ -125,194 +204,122 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
     </section>
   );
 
-  const problemsGrid = (
-    <section key="problems" className="section-y bg-white">
-      <div className="container-max">
+  const repairableSection = (
+    <section key="repairable" id="repairable" className="section-y scroll-mt-32 bg-white">
+      <div className="container-max max-w-4xl">
         <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Fix</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Common Siding Problems</h2>
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Making the Right Call</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Can This Siding Be Repaired?</h2>
         </div>
-        <CardCarousel>
-          {problems.map((p) => (
-            <div key={p.title} className="h-full rounded-[28px] border border-navy-900/10 p-6 transition-shadow duration-300 hover:shadow-lg">
-              <h3 className="mb-2 text-base font-bold text-navy-900">{p.title}</h3>
-              <p className="text-sm leading-relaxed text-navy-900/65">{p.text}</p>
-            </div>
-          ))}
-        </CardCarousel>
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div className="rounded-[28px] border border-brand-blue/20 bg-[#f7f9fb] p-7">
+            <h3 className="text-base font-bold text-navy-900">Likely Repairable</h3>
+            <ul className="mt-4 flex flex-col gap-2.5 text-sm text-navy-900/75">
+              {repairWhen.map((item) => (
+                <li key={item} className="flex items-center gap-2.5">
+                  <Icon path={CHECK_ICON} className="h-4 w-4 shrink-0 text-brand-blue" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-7">
+            <h3 className="text-base font-bold text-navy-900">May Require Larger Replacement</h3>
+            <ul className="mt-4 flex flex-col gap-2.5 text-sm text-navy-900/75">
+              {replaceWhen.map((item) => (
+                <li key={item} className="flex items-center gap-2.5">
+                  <Icon path={FLAG_ICON} className="h-4 w-4 shrink-0 text-navy-900/40" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
 
-  const problemsCompactList = (
-    <section key="problems" className="section-y bg-[#f7f9fb]">
-      <div className="container-max max-w-3xl">
-        <div className="mb-8 text-center">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Fix</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Common Siding Problems</h2>
+  const costSection = (
+    <section key="cost" id="cost" className="section-y scroll-mt-32 bg-[#f7f9fb]">
+      <div className="container-max max-w-5xl">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Pricing</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+            Siding Repair Cost in {area.name}
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-navy-900/70">
+            Siding repair pricing depends on the specifics of the job. Here&apos;s what actually drives the cost:
+          </p>
         </div>
-        <div className="flex flex-col gap-3">
-          {problems.map((p) => (
-            <div key={p.title} className="flex items-start gap-4 rounded-2xl bg-white p-5 shadow-sm">
-              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
-                <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none">
-                  <path d="M10 2 3 5v5c0 5 3.4 8.7 7 9 3.6-.3 7-4 7-9V5l-7-3z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <div>
-                <h3 className="text-sm font-bold text-navy-900">{p.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-navy-900/65">{p.text}</p>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {costFactors.map((c) => (
+            <div key={c.title} className="rounded-2xl border border-navy-900/10 bg-white p-6">
+              <h3 className="text-sm font-bold text-navy-900">{c.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{c.text}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Link
+            href="/contact"
+            className="btn-shine inline-flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-dark bg-[length:150%_100%] bg-left px-8 py-4 text-sm font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-right"
+          >
+            Send Photos for a Quote
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+
+  const materialsSection = (
+    <section key="materials" className="section-y bg-white">
+      <div className="container-max">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Work With</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Siding Materials We Work With</h2>
+        </div>
+        <CardCarousel cardWidthClassName="w-[280px] sm:w-[320px]">
+          {sidingMaterials.map((m) => (
+            <div key={m.title} className="h-full overflow-hidden rounded-[24px] border border-navy-900/10 bg-white text-center">
+              <div className="relative aspect-[4/3] overflow-hidden bg-navy-900/5">
+                <SmartImage src={m.image} alt={m.title} fallbackLabel={m.title} className="absolute inset-0 h-full w-full" />
+                <span className="absolute left-1/2 top-full flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl bg-white text-brand-blue shadow-md">
+                  <Icon path={MATERIAL_ICONS[m.key]} />
+                </span>
+              </div>
+              <div className="px-6 pb-6 pt-8">
+                <h3 className="text-base font-bold text-navy-900">{m.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{m.text}</p>
               </div>
             </div>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  const problemsWideList = (
-    <section key="problems" className="section-y bg-white">
-      <div className="container-max max-w-4xl">
-        <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Fix</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
-            Common Siding Issues in {area.name}
-          </h2>
-        </div>
-        <div className="flex flex-col divide-y divide-navy-900/10 rounded-[28px] border border-navy-900/10">
-          {problems.map((p) => (
-            <div key={p.title} className="p-6 sm:p-7">
-              <h3 className="text-base font-bold text-navy-900">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{p.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  const processGrid = (
-    <section key="process" className="section-y bg-[#f7f9fb]">
-      <div className="container-max">
-        <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How We Work</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Repair Process</h2>
-        </div>
-        <CardCarousel>
-          {sidingRepairProcessSteps.map((step) => (
-            <div key={step.number} className="h-full rounded-[28px] border border-navy-900/10 bg-white p-7 transition-shadow duration-300 hover:shadow-lg">
-              <span className="font-heading text-4xl font-extrabold text-brand-blue/20">{step.number}</span>
-              <h3 className="mt-3 text-lg font-bold text-navy-900">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{step.text}</p>
-            </div>
-          ))}
         </CardCarousel>
       </div>
     </section>
   );
 
-  const processTimeline = (
-    <section key="process" className="section-y bg-white">
-      <div className="container-max max-w-2xl">
-        <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How We Work</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Repair Process</h2>
-        </div>
-        <div className="relative flex flex-col gap-10 pl-10">
-          <div className="absolute bottom-2 left-4 top-2 w-px bg-navy-900/10" aria-hidden="true" />
-          {sidingRepairProcessSteps.map((step) => (
-            <div key={step.number} className="relative">
-              <span className="absolute -left-10 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue text-xs font-bold text-white">
-                {step.number.replace("0", "")}
-              </span>
-              <h3 className="text-lg font-bold text-navy-900">{step.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-navy-900/65">{step.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  const processStepper = (
-    <section key="process" className="section-y bg-[#f7f9fb]">
+  const processSection = (
+    <section key="process" id="process" className="section-y scroll-mt-32 bg-[#f7f9fb]">
       <div className="container-max">
         <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How We Work</p>
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How It Works</p>
           <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Siding Repair Process</h2>
         </div>
-        <div className="flex flex-wrap items-stretch justify-center gap-4">
-          {sidingRepairProcessSteps.map((step) => (
-            <div key={step.number} className="flex w-full max-w-xs flex-col items-center gap-2 rounded-2xl bg-white p-5 text-center shadow-sm sm:w-[18%]">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-navy-950 text-sm font-bold text-white">
-                {step.number.replace("0", "")}
-              </span>
-              <h3 className="text-sm font-bold text-navy-900">{step.title}</h3>
-              <p className="text-xs leading-relaxed text-navy-900/60">{step.text}</p>
+        <CardCarousel cardWidthClassName="w-[220px] sm:w-[240px]">
+          {processSteps.map((step) => (
+            <div key={step.number} className="h-full rounded-[24px] border border-navy-900/10 bg-white p-6 text-center">
+              <span className="font-heading text-3xl font-extrabold text-brand-blue/25">{step.number}</span>
+              <h3 className="mt-2 text-sm font-bold text-navy-900">{step.title}</h3>
+              <p className="mt-1 text-xs leading-relaxed text-navy-900/60">{step.text}</p>
             </div>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  const signsCards = (
-    <section key="signs" className="section-y bg-white">
-      <div className="container-max">
-        <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Know the Warning Signs</p>
-          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Can Your Siding Be Repaired?</h2>
-        </div>
-        <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
-          {signs.map((sign) => (
-            <div key={sign} className="flex items-start gap-3 rounded-2xl border border-navy-900/10 p-5">
-              <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" fill="none">
-                <path d="M10 6v5M10 14h.01M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <p className="text-sm text-navy-900/80">{sign}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  const signsIconGrid = (
-    <section key="signs" className="relative overflow-hidden bg-navy-950 py-14 sm:py-20">
-      <div className="container-max relative">
-        <div className="mb-10 text-center">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue-light">Know the Warning Signs</p>
-          <h2 className="font-heading text-3xl font-extrabold text-white sm:text-4xl">Can Your Siding Be Repaired?</h2>
-        </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {signs.map((sign) => (
-            <div key={sign} className="glass-dark rounded-2xl p-5">
-              <p className="text-sm text-brand-silver/85">{sign}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-
-  const signsPillRow = (
-    <section key="signs" className="section-y bg-[#f7f9fb]">
-      <div className="container-max max-w-3xl text-center">
-        <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Know the Warning Signs</p>
-        <h2 className="mb-8 text-3xl font-extrabold text-navy-900 sm:text-4xl">Can Your Siding Be Repaired?</h2>
-        <div className="flex flex-wrap justify-center gap-3">
-          {signs.map((sign) => (
-            <span key={sign} className="rounded-full border border-navy-900/10 bg-white px-5 py-2.5 text-sm text-navy-900/80 shadow-sm">
-              {sign}
-            </span>
-          ))}
-        </div>
+        </CardCarousel>
       </div>
     </section>
   );
 
   const faqSection = (
-    <section key="faq" className="section-y bg-white">
+    <section key="faq" id="faq" className="section-y scroll-mt-32 bg-white">
       <div className="container-max max-w-3xl">
         <h2 className="mb-8 text-center text-3xl font-extrabold text-navy-900">Frequently Asked Questions</h2>
         <FaqAccordion faqs={faqs} />
@@ -320,43 +327,102 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
     </section>
   );
 
+  // Recent Siding Repairs: fully hidden (no section at all) until real
+  // project data exists for this city, rather than showing a placeholder.
   const projectsSection = projects.length > 0 && (
-    <>
-      {projects.map((project, projectIndex) => (
-        <section
-          key={project.title}
-          className={`section-y ${projectIndex % 2 === 0 ? "bg-[#f7f9fb]" : "bg-white"}`}
-        >
-          <div className="container-max">
-            <div className="mb-10 text-center">
-              <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Real Results</p>
-              <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">{project.title}</h2>
-              <p className="mx-auto mt-4 max-w-2xl text-navy-900/70">{project.description}</p>
-            </div>
-            <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+    <section key="projects" className="section-y bg-[#f7f9fb]">
+      <div className="container-max">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Project Proof</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+            Recent Siding Repairs in {area.name}
+          </h2>
+        </div>
+        <div className="flex flex-col gap-10">
+          {projects.map((project) => (
+            <div key={project.title} className="rounded-[28px] border border-navy-900/10 bg-white p-6 sm:p-8">
+              <h3 className="text-xl font-bold text-navy-900">{project.title}</h3>
+              {project.location && (
+                <p className="mt-1 text-xs font-bold uppercase tracking-wide text-brand-blue">{project.location}</p>
+              )}
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-navy-900/70">{project.description}</p>
+              <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-8">
+                {project.problem && (
+                  <p className="text-sm text-navy-900/70">
+                    <span className="font-bold text-navy-900">Problem: </span>
+                    {project.problem}
+                  </p>
+                )}
+                {project.solution && (
+                  <p className="text-sm text-navy-900/70">
+                    <span className="font-bold text-navy-900">Solution: </span>
+                    {project.solution}
+                  </p>
+                )}
+              </div>
               {project.photoPairs.map((pair, i) => (
-                <div key={i} className="rounded-[28px] border border-navy-900/10 bg-white p-2 shadow-sm">
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="relative overflow-hidden rounded-2xl">
-                      <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-4/5" />
-                      <span className="absolute left-2 top-2 rounded-full bg-navy-950/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
-                        Before
-                      </span>
-                    </div>
-                    <div className="relative overflow-hidden rounded-2xl">
-                      <SmartImage src={pair.after} alt={pair.afterAlt} fallbackLabel="After" className="aspect-4/5" />
-                      <span className="absolute left-2 top-2 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg">
-                        After
-                      </span>
-                    </div>
+                <div key={i} className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <div className="relative overflow-hidden rounded-[20px]">
+                    <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-4/3" />
+                    <span className="absolute left-3 top-3 rounded-full bg-navy-950/80 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                      Before
+                    </span>
+                  </div>
+                  <div className="relative overflow-hidden rounded-[20px]">
+                    <SmartImage src={pair.after} alt={pair.afterAlt} fallbackLabel="After" className="aspect-4/3" />
+                    <span className="absolute left-3 top-3 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
+                      After
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      ))}
-    </>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  const relatedServicesSection = (
+    <section key="related" className="section-y bg-white">
+      <div className="container-max">
+        <h2 className="mb-6 text-center text-2xl font-extrabold text-navy-900">
+          Related Services in {area.name}
+        </h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link
+            href={`/soffit-fascia-repair/${area.slug}`}
+            className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+          >
+            Soffit & Fascia Repair
+          </Link>
+          <Link
+            href={`/gutter-repair/${area.slug}`}
+            className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+          >
+            Gutter Repair
+          </Link>
+          <Link
+            href={`/gutter-installation/${area.slug}`}
+            className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+          >
+            Gutter Installation
+          </Link>
+          <Link
+            href={`/downspout-repair/${area.slug}`}
+            className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+          >
+            Downspout Repair
+          </Link>
+          <Link
+            href={`/service-areas/${area.slug}`}
+            className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/20 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:border-brand-blue hover:text-brand-blue"
+          >
+            All {area.name} Services
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 
   const nearbyAreasSection = (
@@ -384,38 +450,16 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
     </section>
   );
 
-  let sections: React.ReactNode[];
+  // ---- Assemble the page body per archetype, structural order varies ----
+
+  let middleSections: React.ReactNode[];
 
   if (archetype === 0) {
-    sections = [
-      introSection,
-      ...(projects.length > 0 ? [projectsSection] : []),
-      processGrid,
-      problemsGrid,
-      localConditionsSection,
-      signsPillRow,
-      faqSection,
-    ];
+    middleSections = [damageSection, localConditionsSection, repairableSection, costSection, materialsSection, processSection];
   } else if (archetype === 1) {
-    sections = [
-      signsIconGrid,
-      introSection,
-      localConditionsSection,
-      ...(projects.length > 0 ? [projectsSection] : []),
-      processTimeline,
-      problemsCompactList,
-      faqSection,
-    ];
+    middleSections = [localConditionsSection, damageSection, costSection, repairableSection, materialsSection, processSection];
   } else {
-    sections = [
-      problemsWideList,
-      processStepper,
-      introSection,
-      localConditionsSection,
-      ...(projects.length > 0 ? [projectsSection] : []),
-      signsCards,
-      faqSection,
-    ];
+    middleSections = [repairableSection, damageSection, localConditionsSection, costSection, materialsSection, processSection];
   }
 
   return (
@@ -427,14 +471,55 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
         title={`Siding Repair in ${area.name}, ON`}
-        subtitle={`Cracked, warped, loose, or storm-damaged siding repaired by our licensed, insured crew, not replaced unless it actually needs it. Free on-site estimates for homeowners in ${area.name}.`}
+        subtitle={`Cracked, loose, warped, or wind-damaged siding repaired by our licensed, insured crew. Free on-site estimates for homeowners in ${area.name}.`}
         showCta={false}
-        formSlot={<ServiceQuoteCard title="Get Your Free Siding Repair Estimate" source={`siding-repair-${area.slug}`} />}
+        formSlot={<ServiceQuoteCard title="Get Your Free Siding Repair Quote" source={`siding-repair-${area.slug}`} />}
       />
 
-      <GoogleReviews />
+      {/* Breadcrumb + sticky quick nav */}
+      <div className="sticky top-[72px] z-40 border-b border-navy-900/5 bg-white/95 backdrop-blur-sm">
+        <div className="container-max">
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 pt-3 text-xs text-navy-900/40">
+            <Link href="/" className="hover:text-brand-blue">Home</Link>
+            {breadcrumbItems.map((item) => (
+              <span key={item.path} className="flex items-center gap-2">
+                <span aria-hidden="true">/</span>
+                <Link href={item.path} className="hover:text-brand-blue">{item.name}</Link>
+              </span>
+            ))}
+          </nav>
+          <div className="flex gap-2 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {quickNav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="shrink-0 rounded-full border border-navy-900/10 px-4 py-1.5 text-xs font-semibold text-navy-900/70 transition hover:border-brand-blue hover:text-brand-blue"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
 
-      {sections}
+      {quickAnswerSection}
+
+      {/* Short, hand-written intro paragraph for this city */}
+      <section className="bg-white pb-2 pt-6">
+        <div className="container-max max-w-3xl text-center">
+          <p className="text-navy-900/70">{intro}</p>
+        </div>
+      </section>
+
+      <GoogleReviews heading="What Our Customers Say" />
+
+      {middleSections}
+
+      {projectsSection}
+
+      {faqSection}
+
+      {relatedServicesSection}
 
       <section className="pb-14 sm:pb-20">
         <div className="container-max max-w-2xl text-center">
@@ -450,3 +535,4 @@ export default async function SidingAreaPage({ params }: { params: Params }) {
     </>
   );
 }
+
