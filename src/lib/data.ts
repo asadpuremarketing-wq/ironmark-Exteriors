@@ -60,6 +60,24 @@ export const googleReviews: GoogleReview[] = [
     rating: 5,
     text: "Ironmark Exteriors installed a brand new downspout at our place, it's working perfectly. Their prices are very reasonable. I will definitely hire them again. Thank you for your service.",
   },
+  {
+    name: "John Istavos",
+    meta: "7 reviews",
+    timeAgo: "4 weeks ago",
+    isNew: false,
+    avatarColor: "#7b1fa2",
+    rating: 5,
+    text: "Good for gutter cleaning and exterior siding",
+  },
+  {
+    name: "Haroon Ahmad",
+    meta: "2 reviews",
+    timeAgo: "a month ago",
+    isNew: false,
+    avatarColor: "#c2185b",
+    rating: 5,
+    text: "Reasonable price",
+  },
 ];
 
 export type Service = {
