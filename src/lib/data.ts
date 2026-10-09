@@ -639,6 +639,32 @@ export const sidingRepairProjects: Record<string, SidingRepairProject[]> = {
   ],
 };
 
+export type RoofingProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+  location?: string;
+  problem?: string;
+  solution?: string;
+};
+
+// Real completed roofing job photos, keyed by city slug. Empty until real
+// project photos and details are provided.
+export const roofingProjects: Record<string, RoofingProject[]> = {};
+
+export type PaintingProject = {
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+  location?: string;
+  problem?: string;
+  solution?: string;
+};
+
+// Real completed painting job photos, keyed by city slug. Empty until real
+// project photos and details are provided.
+export const paintingProjects: Record<string, PaintingProject[]> = {};
+
 export type SoffitFasciaRepairProject = {
   title: string;
   description: string;
