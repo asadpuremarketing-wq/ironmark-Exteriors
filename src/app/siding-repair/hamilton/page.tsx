@@ -205,6 +205,21 @@ export default function HamiltonSidingRepairPage() {
         </div>
       </div>
 
+      {/* Quick Answer, concise AI-retrieval summary */}
+      <section className="bg-white pt-10">
+        <div className="container-max">
+          <div className="mx-auto max-w-3xl rounded-2xl border border-brand-blue/15 bg-brand-blue/[0.04] p-6 sm:p-7">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">Quick Answer</p>
+            <p className="text-sm leading-relaxed text-navy-900/80">
+              Ironmark Exteriors repairs damaged siding for homes in Hamilton, Ontario, including cracked, loose,
+              warped, and storm-damaged vinyl, insulated, and composite siding. Most repairs involve a single
+              panel or a contained section rather than the full wall. Homeowners can send photos of the damage for
+              a fast starting estimate before booking an in-person assessment.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* 2. What We Repair, 6 visual cards, immediately */}
       <section id="what-we-repair" className="section-y scroll-mt-32 bg-white">
         <div className="container-max">

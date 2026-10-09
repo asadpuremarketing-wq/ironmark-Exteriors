@@ -98,6 +98,21 @@ export default async function SoffitFasciaRepairAreaPage({ params }: { params: P
     </section>
   );
 
+  const quickAnswerSection = (
+    <section key="quick-answer" className="bg-white pt-10">
+      <div className="container-max">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-brand-blue/15 bg-brand-blue/[0.04] p-6 sm:p-7">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">Quick Answer</p>
+          <p className="text-sm leading-relaxed text-navy-900/80">
+            Ironmark Exteriors repairs and replaces damaged soffit and fascia for homes in {area.name}, Ontario,
+            including {problems[0].title.toLowerCase()} and {problems[1].title.toLowerCase()}. Free on-site
+            assessments and quotes are available throughout {area.name}.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+
   const localConditionsSection = localConditions.length > 0 && (
     <section key="local" className="section-y bg-[#f7f9fb]">
       <div className="container-max max-w-3xl">
@@ -387,6 +402,7 @@ export default async function SoffitFasciaRepairAreaPage({ params }: { params: P
     // A: Intro -> Process (grid) -> Problems (grid) -> Local Conditions -> Signs (pill row) -> FAQ
     sections = [
       introSection,
+      quickAnswerSection,
       ...(projects.length > 0 ? [projectsSection] : []),
       processGrid,
       problemsGrid,
@@ -399,6 +415,7 @@ export default async function SoffitFasciaRepairAreaPage({ params }: { params: P
     sections = [
       signsIconGrid,
       introSection,
+      quickAnswerSection,
       localConditionsSection,
       ...(projects.length > 0 ? [projectsSection] : []),
       processTimeline,
@@ -411,6 +428,7 @@ export default async function SoffitFasciaRepairAreaPage({ params }: { params: P
       problemsWideList,
       processStepper,
       introSection,
+      quickAnswerSection,
       localConditionsSection,
       ...(projects.length > 0 ? [projectsSection] : []),
       signsCards,

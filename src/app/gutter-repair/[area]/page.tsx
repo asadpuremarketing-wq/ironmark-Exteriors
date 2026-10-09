@@ -98,6 +98,22 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
     </section>
   );
 
+  const quickAnswerSection = (
+    <section key="quick-answer" className="bg-white pt-10">
+      <div className="container-max">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-brand-blue/15 bg-brand-blue/[0.04] p-6 sm:p-7">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">Quick Answer</p>
+          <p className="text-sm leading-relaxed text-navy-900/80">
+            Ironmark Exteriors provides gutter repair for homes in {area.name}, Ontario, including{" "}
+            {problems[0].title.toLowerCase()} and {problems[1].title.toLowerCase()}. Most repairs are limited to
+            the affected section of gutter rather than a full replacement. Free on-site estimates are available
+            throughout {area.name}.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+
   const localConditionsSection = localConditions.length > 0 && (
     <section key="local" className="section-y bg-[#f7f9fb]">
       <div className="container-max max-w-3xl">
@@ -387,6 +403,7 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
     // A: Intro -> Process (grid) -> Problems (grid) -> Local Conditions -> Signs (pill row) -> FAQ
     sections = [
       introSection,
+      quickAnswerSection,
       ...(projects.length > 0 ? [projectsSection] : []),
       processGrid,
       problemsGrid,
@@ -399,6 +416,7 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
     sections = [
       signsIconGrid,
       introSection,
+      quickAnswerSection,
       localConditionsSection,
       ...(projects.length > 0 ? [projectsSection] : []),
       processTimeline,
@@ -411,6 +429,7 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
       problemsWideList,
       processStepper,
       introSection,
+      quickAnswerSection,
       localConditionsSection,
       ...(projects.length > 0 ? [projectsSection] : []),
       signsCards,
