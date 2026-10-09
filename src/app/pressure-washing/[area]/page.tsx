@@ -8,9 +8,19 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
 import PriceCard from "@/components/PriceCard";
+import SmartImage from "@/components/SmartImage";
+import CardCarousel from "@/components/CardCarousel";
 import { business, serviceAreas, pressureWashingAreaSlugs, pressureWashingPricing } from "@/lib/data";
-import { whyChooseParagraph, bookingLine, rotateFaqs, neighbourhoodLine } from "@/lib/offerContent";
+import { neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
+import {
+  pressureWashingCityContent,
+  pressureWashingIntroFallback,
+  pressureWashingFaqs,
+  pressureWashingSurfaces,
+  pressureWashingProcessSteps,
+  getArchetype,
+} from "@/lib/pressureWashingContent";
 
 type Params = Promise<{ area: string }>;
 
@@ -27,8 +37,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { area: slug } = await params;
   const area = getArea(slug);
   if (!area) return {};
-  const title = `Pressure Washing ${area.name}, ON | Starting from $${pressureWashingPricing.startingFrom}`;
-  const description = `Professional pressure washing in ${area.name}, ON for driveways, patios, and walkways starting from $${pressureWashingPricing.startingFrom}. Free quotes, licensed & insured.`;
+  const title = `Pressure Washing in ${area.name}, ON | Starting from $${pressureWashingPricing.startingFrom}`;
+  const description = `Professional pressure washing in ${area.name}, ON for driveways, patios, and walkways starting from $${pressureWashingPricing.startingFrom}. Free quotes.`;
   return {
     title,
     description,
@@ -37,32 +47,21 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-const faqPool = (areaName: string) => [
-  {
-    q: `How much does pressure washing cost in ${areaName}?`,
-    a: `Pressure washing in ${areaName} starts from $${pressureWashingPricing.startingFrom}. The final price depends on the size, condition, and type of surface being cleaned, contact us for a free quote.`,
-  },
-  {
-    q: "What surfaces can you pressure wash?",
-    a: "Driveways, patios, walkways, house siding, decks, and fences. If you're not sure whether a surface is a good fit, send us a photo and we'll let you know.",
-  },
-  {
-    q: "Will pressure washing damage my driveway or patio?",
-    a: "No. We adjust pressure and technique based on the surface material, concrete, interlock, wood, or siding all get treated differently to clean effectively without causing damage.",
-  },
-  {
-    q: "How often should I pressure wash my property?",
-    a: "Most homeowners in the area get driveways and patios washed once a year, typically in spring, with siding done every 1 to 2 years depending on shade and tree cover.",
-  },
-  {
-    q: "Do I need to be home during the service?",
-    a: "Not necessarily, as long as we have clear access to the areas being cleaned and a water source. We'll confirm the details when you book.",
-  },
-  {
-    q: "Are you licensed and insured?",
-    a: "Yes. Ironmark Exteriors is fully licensed and insured, and every pressure washing job is completed by trained, experienced crews.",
-  },
-];
+function Icon({ path, className = "h-5 w-5" }: { path: string; className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none">
+      <path d={path} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const SURFACE_ICONS: Record<string, string> = {
+  driveways: "M4 4h16v16H4V4Zm0 5.3h16M4 14.7h16M9.3 4v16M14.7 4v16",
+  patios: "M3 16c2-3 4 3 6 0s4-3 6 0 4 3 6 0",
+  siding: "M4 4h16v16H4V4Zm0 5.3h16M4 14.7h16M9.3 4v16M14.7 4v16",
+  "deck-fence": "M12 3 3 8l9 5 9-5-9-5ZM3 12l9 5 9-5M3 16l9 5 9-5",
+  "pre-paint": "M5 10.5l3.5 3.5 6.5-8",
+};
 
 export default async function PressureWashingAreaPage({ params }: { params: Params }) {
   const { area: slug } = await params;
@@ -70,8 +69,14 @@ export default async function PressureWashingAreaPage({ params }: { params: Para
   if (!area) notFound();
 
   const index = pressureWashingAreaSlugs.indexOf(slug as (typeof pressureWashingAreaSlugs)[number]);
-  const areaFaqs = rotateFaqs(faqPool(area.name), index, 4);
-  const swapSections = index % 2 === 1;
+  const archetype = getArchetype(index);
+  const cityContent = pressureWashingCityContent[area.slug];
+  const intro = cityContent?.intro ?? pressureWashingIntroFallback(area, index);
+  const quickAnswer = cityContent?.quickAnswer ?? pressureWashingIntroFallback(area, index);
+  const localConditions = cityContent?.localConditions ?? [];
+  const areaFaqs = pressureWashingFaqs(area, index, pressureWashingPricing.startingFrom);
+  const surfaces = pressureWashingSurfaces(index);
+  const processSteps = pressureWashingProcessSteps(index);
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -111,51 +116,135 @@ export default async function PressureWashingAreaPage({ params }: { params: Para
     })),
   };
 
-  const breadcrumbSchemaData = breadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Pressure Washing", path: "/services/pressure-washing" },
     { name: `Pressure Washing in ${area.name}`, path: `/pressure-washing/${area.slug}` },
-  ]);
+  ];
+  const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
-  const includedSection = (
-    <section key="included" className="section-y bg-[#f7f9fb]">
-      <div className="container-max grid gap-6 md:grid-cols-2">
-        <div className="rounded-[28px] border border-navy-900/10 bg-white p-8 shadow-sm">
-          <h2 className="text-2xl font-extrabold text-navy-900">What We Clean</h2>
-          <ul className="mt-6 flex flex-col gap-3">
-            {[
-              "Driveways & walkways",
-              "Patios & pool decks",
-              "House & siding exteriors",
-              "Deck & fence washing",
-              "Pre-paint surface preparation",
-            ].map((b) => (
-              <li key={b} className="flex items-start gap-3 text-sm text-navy-900/80">
-                <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" fill="none">
-                  <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M6.5 10.3l2.2 2.2 4.8-4.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                {b}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="rounded-[28px] border border-navy-900/10 bg-white p-8 shadow-sm">
-          <h2 className="text-2xl font-extrabold text-navy-900">Why {area.name} Homeowners Choose Us</h2>
-          <p className="mt-4 text-navy-900/75">{whyChooseParagraph("pressure washing", area, index)}</p>
-          <p className="mt-4 text-navy-900/75">{bookingLine(index)}</p>
+  const quickNav = [
+    { href: "#surfaces", label: "Surfaces We Clean" },
+    { href: "#pricing", label: "Pricing" },
+    { href: "#local", label: "Local Conditions" },
+    { href: "#process", label: "Process" },
+    { href: "#faq", label: "FAQ" },
+  ];
+
+  const quickAnswerSection = (
+    <section key="quick-answer" className="bg-white pt-10">
+      <div className="container-max">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-brand-blue/15 bg-brand-blue/[0.04] p-6 sm:p-7">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">Quick Answer</p>
+          <p className="text-sm leading-relaxed text-navy-900/80">{quickAnswer}</p>
         </div>
       </div>
     </section>
   );
 
+  const surfacesSection = (
+    <section key="surfaces" id="surfaces" className="section-y scroll-mt-32 bg-white">
+      <div className="container-max">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">What We Clean</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Surfaces We Pressure Wash</h2>
+        </div>
+        <CardCarousel cardWidthClassName="w-[260px] sm:w-[280px]">
+          {surfaces.map((s) => (
+            <div key={s.title} className="h-full overflow-hidden rounded-[24px] border border-navy-900/10 transition-shadow duration-300 hover:shadow-lg">
+              <div className="relative aspect-[4/3] overflow-hidden bg-navy-900/5">
+                <SmartImage src={s.image} alt={s.title} fallbackLabel={s.title} className="absolute inset-0 h-full w-full" />
+                <span className="absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-xl bg-white/90 text-brand-blue shadow-sm backdrop-blur-sm">
+                  <Icon path={SURFACE_ICONS[s.key]} className="h-4 w-4" />
+                </span>
+              </div>
+              <div className="p-5">
+                <h3 className="text-base font-bold text-navy-900">{s.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-navy-900/65">{s.text}</p>
+              </div>
+            </div>
+          ))}
+        </CardCarousel>
+      </div>
+    </section>
+  );
+
+  const localConditionsSection = localConditions.length > 0 && (
+    <section key="local" id="local" className="section-y scroll-mt-32 bg-[#f7f9fb]">
+      <div className="container-max max-w-3xl">
+        <div className="mb-8 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Local Conditions</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Pressure Washing in {area.name}</h2>
+        </div>
+        <div className="flex flex-col gap-5 text-navy-900/75">
+          {localConditions.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  const pricingSection = (
+    <section key="pricing" id="pricing" className="section-y scroll-mt-32 bg-white">
+      <div className="container-max">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Simple, Upfront Pricing</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Pressure Washing Prices in {area.name}</h2>
+        </div>
+        <div className="mx-auto max-w-md">
+          <PriceCard
+            label="All Exterior Surfaces"
+            price={pressureWashingPricing.startingFrom}
+            priceLabel="Starting From"
+            note="Driveways, patios, walkways, decks, and more."
+            highlighted
+          />
+        </div>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-navy-900/50">
+          Pricing varies by surface size and condition. Contact Ironmark Exteriors for a free quote.
+        </p>
+      </div>
+    </section>
+  );
+
+  const processSection = (
+    <section key="process" id="process" className="section-y scroll-mt-32 bg-[#f7f9fb]">
+      <div className="container-max">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">How It Works</p>
+          <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">Our Pressure Washing Process</h2>
+        </div>
+        <CardCarousel cardWidthClassName="w-[220px] sm:w-[240px]">
+          {processSteps.map((step) => (
+            <div key={step.number} className="h-full rounded-[24px] border border-navy-900/10 bg-white p-6 text-center">
+              <span className="font-heading text-3xl font-extrabold text-brand-blue/25">{step.number}</span>
+              <h3 className="mt-2 text-sm font-bold text-navy-900">{step.title}</h3>
+              <p className="mt-1 text-xs leading-relaxed text-navy-900/60">{step.text}</p>
+            </div>
+          ))}
+        </CardCarousel>
+      </div>
+    </section>
+  );
+
   const faqSection = (
-    <section key="faq" className="section-y bg-white">
+    <section key="faq" id="faq" className="section-y scroll-mt-32 bg-white">
       <div className="container-max max-w-3xl">
         <h2 className="mb-8 text-center text-3xl font-extrabold text-navy-900">Frequently Asked Questions</h2>
         <FaqAccordion faqs={areaFaqs} />
       </div>
     </section>
   );
+
+  let middleSections: React.ReactNode[];
+
+  if (archetype === 0) {
+    middleSections = [surfacesSection, pricingSection, localConditionsSection, processSection];
+  } else if (archetype === 1) {
+    middleSections = [pricingSection, surfacesSection, processSection, localConditionsSection];
+  } else {
+    middleSections = [localConditionsSection, surfacesSection, pricingSection, processSection];
+  }
 
   return (
     <>
@@ -165,49 +254,64 @@ export default async function PressureWashingAreaPage({ params }: { params: Para
 
       <Hero
         eyebrow={`Serving ${area.name}, ${area.province}`}
-        title={`Pressure Washing in ${area.name}, ON, Starting from $${pressureWashingPricing.startingFrom}`}
-        subtitle={`Driveways, patios, walkways and more for homeowners in ${area.name}. Pricing varies by surface size and condition.`}
+        title={`Pressure Washing in ${area.name}, ON`}
+        subtitle={`Driveways, patios, walkways and more, starting from $${pressureWashingPricing.startingFrom}. Licensed & insured.`}
         showCta={false}
         formSlot={<PressureWashingQuoteCard source={`pressure-washing-${area.slug}`} />}
       />
 
-      <GoogleReviews />
-
-      {/* Pricing */}
-      <section className="section-y bg-white">
+      <div className="sticky top-[72px] z-40 border-b border-navy-900/5 bg-white/95 backdrop-blur-sm">
         <div className="container-max">
-          <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Simple, Upfront Pricing</p>
-            <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
-              Pressure Washing Prices in {area.name}
-            </h2>
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 pt-3 text-xs text-navy-900/40">
+            <Link href="/" className="hover:text-brand-blue">Home</Link>
+            {breadcrumbItems.map((item) => (
+              <span key={item.path} className="flex items-center gap-2">
+                <span aria-hidden="true">/</span>
+                <Link href={item.path} className="hover:text-brand-blue">{item.name}</Link>
+              </span>
+            ))}
+          </nav>
+          <div className="flex gap-2 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {quickNav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="shrink-0 rounded-full border border-navy-900/10 px-4 py-1.5 text-xs font-semibold text-navy-900/70 transition hover:border-brand-blue hover:text-brand-blue"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
-          <div className="mx-auto max-w-md">
-            <PriceCard
-              label="All Exterior Surfaces"
-              price={pressureWashingPricing.startingFrom}
-              priceLabel="Starting From"
-              note="Driveways, patios, walkways, decks, and more."
-              highlighted
-            />
-          </div>
-          <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-navy-900/50">
-            Pricing varies by surface size and condition. Contact Ironmark Exteriors for a free quote covering{" "}
-            {neighbourhoodLine(area)} and the rest of {area.name}.
+        </div>
+      </div>
+
+      {quickAnswerSection}
+
+      <section className="bg-white pb-2 pt-6">
+        <div className="container-max max-w-3xl text-center">
+          <p className="text-navy-900/70">{intro}</p>
+        </div>
+      </section>
+
+      <GoogleReviews heading="What Our Customers Say" />
+
+      {middleSections}
+
+      {faqSection}
+
+      <OtherOffersInCity currentSlug="pressure-washing" area={area} />
+
+      <section className="pb-14 sm:pb-20">
+        <div className="container-max max-w-2xl text-center">
+          <p className="text-sm text-navy-900/50">
+            Serving {neighbourhoodLine(area)} and the rest of {area.name}, {area.province}.
           </p>
         </div>
       </section>
 
-      {swapSections ? [faqSection, includedSection] : [includedSection, faqSection]}
-
-      <OtherOffersInCity currentSlug="pressure-washing" area={area} />
-
-      {/* Nearby areas */}
       <section className="section-y bg-navy-950">
         <div className="container-max">
-          <h2 className="mb-4 text-center text-2xl font-extrabold text-white">
-            Pressure Washing in Nearby Areas
-          </h2>
+          <h2 className="mb-4 text-center text-2xl font-extrabold text-white">Pressure Washing in Nearby Areas</h2>
           <div className="flex flex-wrap justify-center gap-3">
             {pressureWashingAreaSlugs
               .filter((s) => s !== area.slug)
