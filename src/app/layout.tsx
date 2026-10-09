@@ -36,14 +36,14 @@ export const metadata: Metadata = {
       "Licensed & insured exterior renovation company serving Hamilton, Stoney Creek, Burlington, Ancaster, and Dundas. Free estimates.",
     url: business.siteUrl,
     locale: "en_CA",
-    images: [{ url: "/images/logo.png", width: 1044, height: 280, alt: business.name }],
+    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: business.name }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Ironmark Exteriors | Roofing, Siding & Exterior Contractor",
     description:
       "Licensed & insured exterior renovation company serving Hamilton, ON and surrounding areas. Free estimates.",
-    images: ["/images/logo.png"],
+    images: ["/images/og-image.png"],
   },
   verification: {
     google: "cXng2Euq7r0hACxNmV1YOxmDmlSwCCzhrEDqiA0_6Q8",
