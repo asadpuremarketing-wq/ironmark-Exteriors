@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import GoogleReviews from "@/components/GoogleReviews";
-import { services, serviceAreas, serviceAreaNames, business, serviceCityPages } from "@/lib/data";
+import { services, serviceAreas, serviceAreaNames, business, serviceCityPages, serviceProjects } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 import GutterCleaningOffer, { gutterCleaningMeta } from "@/components/GutterCleaningOffer";
 import WindowCleaningOffer, { windowCleaningMeta } from "@/components/WindowCleaningOffer";
@@ -52,8 +52,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     };
   }
 
-  const title = `${service.name} in Hamilton, ON`;
-  const description = `${service.shortDescription} Serving ${serviceAreaNames} and surrounding areas. Licensed & insured, get a free estimate today.`;
+  const title = `${service.name} Services | Hamilton, Burlington, Niagara & More`;
+  const description = `${service.shortDescription} Serving homeowners across ${serviceAreaNames}. Free estimates.`;
   return {
     title,
     description,
@@ -80,6 +80,7 @@ export default async function ServicePage({ params }: { params: Params }) {
   }
 
   const cityPages = serviceCityPages.find((scp) => scp.slug === slug);
+  const recentProjects = serviceProjects(slug);
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -111,9 +112,9 @@ export default async function ServicePage({ params }: { params: Params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <Hero
-        eyebrow="Hamilton, ON & Surrounding Areas"
-        title={`${service.name} Services in Hamilton, ON`}
-        subtitle={service.shortDescription}
+        eyebrow={`Serving ${serviceAreas.length} Cities Across the Region`}
+        title={`${service.name} Services Across Our Service Area`}
+        subtitle={`${service.shortDescription} We serve homeowners throughout ${serviceAreaNames}, not just one city.`}
       />
 
       <GoogleReviews />
@@ -122,13 +123,15 @@ export default async function ServicePage({ params }: { params: Params }) {
         <div className="container-max grid items-start gap-12 md:grid-cols-2">
           <div>
             <h2 className="text-2xl font-extrabold text-navy-900">
-              About Our {service.name} Service in Hamilton, ON
+              About Our {service.name} Service
             </h2>
             <p className="mt-4 text-navy-900/75">{service.description}</p>
             <p className="mt-4 text-navy-900/75">
-              We proudly provide {service.name.toLowerCase()} services to
-              homeowners throughout {serviceAreaNames} and the surrounding
-              areas.
+              Ironmark Exteriors is based in Hamilton, but we&apos;re not a
+              Hamilton-only crew. We provide {service.name.toLowerCase()}{" "}
+              services to homeowners throughout {serviceAreaNames}, with the
+              same free estimates, pricing, and process no matter which of
+              these cities you&apos;re in.
             </p>
 
             <ul className="mt-8 flex flex-col gap-3">
@@ -149,40 +152,6 @@ export default async function ServicePage({ params }: { params: Params }) {
             fallbackLabel={`${service.name} Project Photo`}
             className="aspect-4/3 rounded-xl"
           />
-        </div>
-      </section>
-
-      <section className="section-y bg-[#f7f9fb]">
-        <div className="container-max">
-          <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
-              Recent Work
-            </p>
-            <h2 className="font-heading text-2xl font-extrabold text-navy-900 sm:text-3xl">
-              See Our {service.name} in Action
-            </h2>
-          </div>
-          <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-            {["project-1", "project-2"].map((slug) => (
-              <div
-                key={slug}
-                className="grid grid-cols-2 gap-1 overflow-hidden rounded-2xl border border-navy-900/10 shadow-sm"
-              >
-                <SmartImage
-                  src={`/images/before-after/${slug}-before.jpg`}
-                  alt={`${service.name} before`}
-                  fallbackLabel="Before"
-                  className="aspect-4/5"
-                />
-                <SmartImage
-                  src={`/images/before-after/${slug}-after.jpg`}
-                  alt={`${service.name} after`}
-                  fallbackLabel="After"
-                  className="aspect-4/5"
-                />
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -227,6 +196,50 @@ export default async function ServicePage({ params }: { params: Params }) {
           </div>
         </div>
       </section>
+
+      {recentProjects.length > 0 && (
+        <section className="section-y bg-[#f7f9fb]">
+          <div className="container-max">
+            <div className="mb-10 text-center">
+              <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
+                Recent Work
+              </p>
+              <h2 className="font-heading text-2xl font-extrabold text-navy-900 sm:text-3xl">
+                See Our {service.name} in Action
+              </h2>
+            </div>
+            <div className="mx-auto flex max-w-3xl flex-col gap-10">
+              {recentProjects.map((project) => (
+                <div key={project.title}>
+                  <h3 className="text-lg font-bold text-navy-900">{project.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-navy-900/70">{project.description}</p>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {project.photoPairs.map((pair, i) => (
+                      <div
+                        key={i}
+                        className="grid grid-cols-2 gap-1 overflow-hidden rounded-2xl border border-navy-900/10 shadow-sm"
+                      >
+                        <SmartImage
+                          src={pair.before}
+                          alt={pair.beforeAlt}
+                          fallbackLabel="Before"
+                          className="aspect-4/5"
+                        />
+                        <SmartImage
+                          src={pair.after}
+                          alt={pair.afterAlt}
+                          fallbackLabel="After"
+                          className="aspect-4/5"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <CTA />
     </>

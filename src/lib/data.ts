@@ -757,3 +757,36 @@ export function cityProjects(areaSlug: string): CityProjectSummary[] {
   );
 }
 
+// Maps a top-level `services` slug to its real completed-project record,
+// so the generic /services/[slug] hub page can show real photos for that
+// specific service instead of the same two generic placeholder photos on
+// every service page regardless of what the service actually is.
+const projectsByServiceSlug: Record<string, Record<string, { title: string; description: string; photoPairs: CityProjectSummary["photoPairs"] }[]>> = {
+  siding: sidingRepairProjects,
+  roofing: roofingProjects,
+  painting: paintingProjects,
+  "gutter-repair": gutterRepairProjects,
+  "gutter-installation": gutterInstallationProjects,
+  "downspout-repair": downspoutRepairProjects,
+  "gutter-guards": gutterGuardsProjects,
+  "soffit-fascia-repair": soffitFasciaRepairProjects,
+};
+
+export type ServiceProjectSummary = {
+  title: string;
+  description: string;
+  photoPairs: CityProjectSummary["photoPairs"];
+};
+
+// Flattens real completed-job records across every city for one service,
+// for the generic service hub page. Returns an empty array (hide the
+// section) rather than ever falling back to another service's photos.
+export function serviceProjects(serviceSlug: string, limit = 2): ServiceProjectSummary[] {
+  const record = projectsByServiceSlug[serviceSlug];
+  if (!record) return [];
+  return Object.values(record)
+    .flat()
+    .slice(0, limit)
+    .map((p) => ({ title: p.title, description: p.description, photoPairs: p.photoPairs }));
+}
+
