@@ -294,54 +294,55 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
         </div>
       </section>
 
-      {/* Real completed projects, only shown for cities with one or more on file */}
-      {projects?.map((project, projectIndex) => (
-        <section
-          key={project.title}
-          className={`section-y ${projectIndex % 2 === 0 ? "bg-[#f7f9fb]" : "bg-white"}`}
-        >
+      {/* Real completed projects, all shown in one section, not one per job */}
+      {projects && projects.length > 0 && (
+        <section className="section-y bg-[#f7f9fb]">
           <div className="container-max">
             <div className="mb-10 text-center">
               <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Real Results</p>
-              <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">{project.title}</h2>
-              <p className="mx-auto mt-4 max-w-2xl text-navy-900/70">{project.description}</p>
+              <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+                Recent Gutter Cleaning Projects in {area.name}
+              </h2>
             </div>
-            <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-              {project.photoPairs.map((pair, i) => (
-                <div
-                  key={i}
-                  className="rounded-[28px] border border-navy-900/10 bg-white p-2 shadow-sm transition-shadow duration-300 hover:shadow-lg"
-                >
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="relative overflow-hidden rounded-2xl">
-                      <SmartImage
-                        src={pair.before}
-                        alt={pair.beforeAlt}
-                        fallbackLabel="Before"
-                        className="aspect-4/5"
-                      />
-                      <span className="absolute left-2 top-2 rounded-full bg-navy-950/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
-                        Before
-                      </span>
-                    </div>
-                    <div className="relative overflow-hidden rounded-2xl">
-                      <SmartImage
-                        src={pair.after}
-                        alt={pair.afterAlt}
-                        fallbackLabel="After"
-                        className="aspect-4/5"
-                      />
-                      <span className="absolute left-2 top-2 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg">
-                        After
-                      </span>
-                    </div>
+            <div className="flex flex-col gap-10">
+              {projects.map((project) => (
+                <div key={project.title} className="rounded-[28px] border border-navy-900/10 bg-white p-6 sm:p-8">
+                  <h3 className="text-xl font-bold text-navy-900">{project.title}</h3>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-navy-900/70">{project.description}</p>
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    {project.photoPairs.map((pair, i) => (
+                      <div key={i} className="grid grid-cols-2 gap-2">
+                        <div className="relative overflow-hidden rounded-2xl">
+                          <SmartImage
+                            src={pair.before}
+                            alt={pair.beforeAlt}
+                            fallbackLabel="Before"
+                            className="aspect-4/5"
+                          />
+                          <span className="absolute left-2 top-2 rounded-full bg-navy-950/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                            Before
+                          </span>
+                        </div>
+                        <div className="relative overflow-hidden rounded-2xl">
+                          <SmartImage
+                            src={pair.after}
+                            alt={pair.afterAlt}
+                            fallbackLabel="After"
+                            className="aspect-4/5"
+                          />
+                          <span className="absolute left-2 top-2 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg">
+                            After
+                          </span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
-      ))}
+      )}
 
       {/* Signs your gutters need cleaning */}
       <section className="section-y bg-white">

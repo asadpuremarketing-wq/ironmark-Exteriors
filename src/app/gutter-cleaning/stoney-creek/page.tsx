@@ -152,38 +152,47 @@ export default function StoneyCreekGutterCleaningPage() {
 
       <GoogleReviews heading="What Our Customers Say" />
 
-      {/* Real project, shown as a large stacked before/after rather than the small side-by-side grid used elsewhere */}
-      {projects.map((project) => (
-        <section key={project.title} className="section-y bg-white">
+      {/* Real projects, all shown in one section, not one per job */}
+      {projects.length > 0 && (
+        <section className="section-y bg-white">
           <div className="container-max max-w-4xl">
             <div className="mb-10 text-center">
               <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
-                A Job We Just Finished
+                Jobs We&apos;ve Just Finished
               </p>
-              <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">{project.title}</h2>
-              <p className="mx-auto mt-4 max-w-2xl text-navy-900/70">{project.description}</p>
+              <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+                Recent Gutter Cleaning Projects in {area.name}
+              </h2>
             </div>
-            <div className="flex flex-col gap-10">
-              {project.photoPairs.map((pair, i) => (
-                <div key={i} className="grid gap-4 sm:grid-cols-2 sm:items-center">
-                  <div className="relative overflow-hidden rounded-[28px] border border-navy-900/10 shadow-sm">
-                    <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-square sm:aspect-4/5" />
-                    <span className="absolute left-3 top-3 rounded-full bg-navy-950/80 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
-                      Before
-                    </span>
-                  </div>
-                  <div className="relative overflow-hidden rounded-[28px] border border-navy-900/10 shadow-sm">
-                    <SmartImage src={pair.after} alt={pair.afterAlt} fallbackLabel="After" className="aspect-square sm:aspect-4/5" />
-                    <span className="absolute left-3 top-3 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
-                      After
-                    </span>
+            <div className="flex flex-col gap-14">
+              {projects.map((project) => (
+                <div key={project.title}>
+                  <h3 className="text-xl font-bold text-navy-900">{project.title}</h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-navy-900/70">{project.description}</p>
+                  <div className="mt-6 flex flex-col gap-10">
+                    {project.photoPairs.map((pair, i) => (
+                      <div key={i} className="grid gap-4 sm:grid-cols-2 sm:items-center">
+                        <div className="relative overflow-hidden rounded-[28px] border border-navy-900/10 shadow-sm">
+                          <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-square sm:aspect-4/5" />
+                          <span className="absolute left-3 top-3 rounded-full bg-navy-950/80 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                            Before
+                          </span>
+                        </div>
+                        <div className="relative overflow-hidden rounded-[28px] border border-navy-900/10 shadow-sm">
+                          <SmartImage src={pair.after} alt={pair.afterAlt} fallbackLabel="After" className="aspect-square sm:aspect-4/5" />
+                          <span className="absolute left-3 top-3 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
+                            After
+                          </span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
-      ))}
+      )}
 
       {/* How it works, a 3-step process not used on other city pages */}
       <section className="section-y bg-[#f7f9fb]">
