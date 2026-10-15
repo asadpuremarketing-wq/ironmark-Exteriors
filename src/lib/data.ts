@@ -421,6 +421,34 @@ export const gutterCleaningProjects: Record<string, GutterCleaningProject[]> = {
       ],
     },
   ],
+  burlington: [
+    {
+      title: "Gutter Cleaning Project in Burlington",
+      description:
+        "This Burlington home had a gutter packed with leaves, twigs, and compacted debris along the roofline. We cleared every section by hand, removed the buildup down to bare metal, and confirmed the system was draining properly before wrapping up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/burlington-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/burlington-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Gutter packed with leaves and debris before cleaning in Burlington",
+          afterAlt: "Gutter cleared down to bare metal after cleaning in Burlington",
+        },
+      ],
+    },
+    {
+      title: "Seasonal Gutter Touch-Up in Burlington",
+      description:
+        "A lighter seasonal cleaning on this Burlington home, clearing the gutter of early-fall leaves and confirming the downspout drain was clear and flowing before finishing up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/burlington-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/burlington-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Gutter with early seasonal leaf debris before cleaning in Burlington",
+          afterAlt: "Cleared gutter with open, flowing downspout drain after cleaning in Burlington",
+        },
+      ],
+    },
+  ],
 };
 
 // Cities where the Window Cleaning promotion is specifically marketed and
