@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
+import MobileCallButton from "@/components/MobileCallButton";
 import { business, serviceAreas, services, googleReviews } from "@/lib/data";
 
 const manrope = Manrope({
@@ -129,6 +130,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <MobileCallButton />
         {/* eslint-disable-next-line @next/next/no-img-element -- external tracking pixel, not an optimizable local asset */}
         <img
           src="https://tracker.metricool.com/c3po.jpg?hash=1e287b1b3508d79e328468af8d308e6"
