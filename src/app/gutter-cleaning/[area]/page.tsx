@@ -250,7 +250,22 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
         formSlot={<GutterCleaningQuoteCard source={`gutter-cleaning-${area.slug}`} />}
       />
 
-      <GoogleReviews />
+      {/* Quick Answer, concise AI-retrieval summary */}
+      <section className="bg-white pt-10">
+        <div className="container-max">
+          <div className="mx-auto max-w-3xl rounded-2xl border border-brand-blue/15 bg-brand-blue/[0.04] p-6 sm:p-7">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">Quick Answer</p>
+            <p className="text-sm leading-relaxed text-navy-900/80">
+              Ironmark Exteriors provides gutter cleaning for homes in {area.name}, Ontario, starting at $
+              {gutterCleaningPricing.oneStorey} for 1-storey homes and ${gutterCleaningPricing.twoStorey} for
+              2-storey homes. Service includes full debris removal, a downspout check, and a flush test. Free
+              estimates are available throughout {area.name}.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <GoogleReviews heading="What Our Customers Say" />
 
       {/* Our process */}
       <section className="section-y bg-white">
