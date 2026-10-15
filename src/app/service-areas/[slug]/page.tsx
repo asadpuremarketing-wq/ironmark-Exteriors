@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import GoogleReviews from "@/components/GoogleReviews";
-import { serviceAreas, services, business, areaOffers, serviceCityPages } from "@/lib/data";
+import SmartImage from "@/components/SmartImage";
+import { serviceAreas, services, business, areaOffers, serviceCityPages, cityProjects } from "@/lib/data";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 import { areaIntroParagraph, areaLocalNote, areaFaqs } from "@/lib/serviceAreaContent";
 import { neighbourhoodLine } from "@/lib/offerContent";
@@ -38,6 +39,7 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
   const index = serviceAreas.findIndex((a) => a.slug === area.slug);
   const swapSections = index % 2 === 1;
   const faqs = areaFaqs(area, index);
+  const projects = cityProjects(area.slug);
 
   const areaSchema = {
     "@context": "https://schema.org",
@@ -88,12 +90,12 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
         subtitle={area.blurb}
       />
 
-      <GoogleReviews />
+      <GoogleReviews heading="What Our Customers Say" />
 
       {/* Intro / local context, unique per city */}
       <section className="bg-white pt-10">
         <div className="container-max max-w-3xl text-center">
-          <p className="text-navy-900/70">{areaIntroParagraph(area, index)}</p>
+          <p className="text-navy-900/70">{areaIntroParagraph(area)}</p>
         </div>
       </section>
 
@@ -162,13 +164,60 @@ export default async function ServiceAreaPage({ params }: { params: Params }) {
                   Built for Homes Around {neighbourhoodLine(area)}
                 </h2>
               </div>
-              <p className="text-navy-900/75">{areaLocalNote(area, index)}</p>
+              <p className="text-navy-900/75">{areaLocalNote(area)}</p>
             </div>
           </section>
         );
 
         return swapSections ? [localNoteSection, offersSection] : [offersSection, localNoteSection];
       })()}
+
+      {projects.length > 0 && (
+        <section className="section-y bg-[#f7f9fb]">
+          <div className="container-max">
+            <div className="mb-10 text-center">
+              <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">Real Results</p>
+              <h2 className="text-3xl font-extrabold text-navy-900 sm:text-4xl">
+                Recent Projects in {area.name}
+              </h2>
+            </div>
+            <div className="flex flex-col gap-10">
+              {projects.map((project) => (
+                <div key={`${project.serviceLabel}-${project.title}`} className="rounded-[28px] border border-navy-900/10 bg-white p-6 sm:p-8">
+                  <p className="mb-1 text-xs font-bold uppercase tracking-wide text-brand-blue">{project.serviceLabel}</p>
+                  <h3 className="text-xl font-bold text-navy-900">{project.title}</h3>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-navy-900/70">{project.description}</p>
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    {project.photoPairs.slice(0, 1).flatMap((pair) => [
+                      <div key="before" className="relative overflow-hidden rounded-[20px]">
+                        <SmartImage src={pair.before} alt={pair.beforeAlt} fallbackLabel="Before" className="aspect-4/3" />
+                        <span className="absolute left-3 top-3 rounded-full bg-navy-950/80 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                          Before
+                        </span>
+                      </div>,
+                      <div key="after" className="relative overflow-hidden rounded-[20px]">
+                        <SmartImage src={pair.after} alt={pair.afterAlt} fallbackLabel="After" className="aspect-4/3" />
+                        <span className="absolute left-3 top-3 rounded-full bg-linear-to-r from-brand-blue to-brand-blue-light px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
+                          After
+                        </span>
+                      </div>,
+                    ])}
+                  </div>
+                  <Link
+                    href={project.serviceHref}
+                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-brand-blue hover:underline"
+                  >
+                    See all {project.serviceLabel} work in {area.name}
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+                      <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="section-y bg-white">
         <div className="container-max max-w-3xl">

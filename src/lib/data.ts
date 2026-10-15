@@ -693,3 +693,39 @@ export type SoffitFasciaRepairProject = {
 // Empty until real project photos and details are provided.
 export const soffitFasciaRepairProjects: Record<string, SoffitFasciaRepairProject[]> = {};
 
+export type CityProjectSummary = {
+  serviceLabel: string;
+  serviceHref: string;
+  title: string;
+  description: string;
+  photoPairs: { before: string; after: string; beforeAlt: string; afterAlt: string }[];
+};
+
+// Pulls every REAL completed-job record (across every service) for a given
+// city slug into one list, used by the /service-areas/[slug] hub page to
+// show genuine local project evidence instead of generic copy. A city with
+// no real projects yet simply returns an empty array, nothing is invented.
+export function cityProjects(areaSlug: string): CityProjectSummary[] {
+  const sources: { label: string; href: string; projects: Record<string, { title: string; description: string; photoPairs: CityProjectSummary["photoPairs"] }[]> }[] = [
+    { label: "Gutter Cleaning", href: "gutter-cleaning", projects: gutterCleaningProjects },
+    { label: "Siding Repair", href: "siding-repair", projects: sidingRepairProjects },
+    { label: "Gutter Repair", href: "gutter-repair", projects: gutterRepairProjects },
+    { label: "Gutter Installation", href: "gutter-installation", projects: gutterInstallationProjects },
+    { label: "Downspout Repair", href: "downspout-repair", projects: downspoutRepairProjects },
+    { label: "Gutter Guards", href: "gutter-guards", projects: gutterGuardsProjects },
+    { label: "Soffit & Fascia Repair", href: "soffit-fascia-repair", projects: soffitFasciaRepairProjects },
+    { label: "Roofing", href: "roofing", projects: roofingProjects },
+    { label: "Painting", href: "painting", projects: paintingProjects },
+  ];
+
+  return sources.flatMap(({ label, href, projects }) =>
+    (projects[areaSlug] ?? []).map((p) => ({
+      serviceLabel: label,
+      serviceHref: `/${href}/${areaSlug}`,
+      title: p.title,
+      description: p.description,
+      photoPairs: p.photoPairs,
+    }))
+  );
+}
+
