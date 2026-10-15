@@ -8,6 +8,8 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import CardCarousel from "@/components/CardCarousel";
+import Breadcrumb from "@/components/Breadcrumb";
+import ServiceHubLinks from "@/components/ServiceHubLinks";
 import { business, serviceAreas, soffitFasciaRepairProjects } from "@/lib/data";
 import { neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
@@ -83,10 +85,11 @@ export default async function SoffitFasciaRepairAreaPage({ params }: { params: P
     })),
   };
 
-  const breadcrumbSchemaData = breadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Soffit & Fascia Repair", path: "/services/soffit-fascia-repair" },
     { name: `Soffit & Fascia Repair in ${area.name}`, path: `/soffit-fascia-repair/${area.slug}` },
-  ]);
+  ];
+  const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
   // ---- Reusable section blocks, each with a visual style parameter ----
 
@@ -450,6 +453,8 @@ export default async function SoffitFasciaRepairAreaPage({ params }: { params: P
         formSlot={<ServiceQuoteCard title="Get Your Free Soffit & Fascia Assessment" source={`soffit-fascia-repair-${area.slug}`} />}
       />
 
+      <Breadcrumb items={breadcrumbItems} />
+
       <GoogleReviews />
 
       {sections}
@@ -463,6 +468,13 @@ export default async function SoffitFasciaRepairAreaPage({ params }: { params: P
       </section>
 
       {nearbyAreasSection}
+
+      <ServiceHubLinks
+        serviceHref="/services/soffit-fascia-repair"
+        serviceName="Soffit & Fascia Repair"
+        areaSlug={area.slug}
+        areaName={area.name}
+      />
 
       <CTA />
     </>

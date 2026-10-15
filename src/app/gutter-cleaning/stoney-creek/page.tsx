@@ -8,6 +8,8 @@ import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
 import SmartImage from "@/components/SmartImage";
 import CardCarousel from "@/components/CardCarousel";
+import Breadcrumb from "@/components/Breadcrumb";
+import ServiceHubLinks from "@/components/ServiceHubLinks";
 import {
   business,
   serviceAreas,
@@ -116,10 +118,11 @@ const faqSchema = {
   })),
 };
 
-const breadcrumbSchemaData = breadcrumbSchema([
+const breadcrumbItems = [
   { name: "Gutter Cleaning", path: "/services/gutters" },
   { name: `Gutter Cleaning in ${area.name}`, path: "/gutter-cleaning/stoney-creek" },
-]);
+];
+const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
 export default function StoneyCreekGutterCleaningPage() {
   return (
@@ -135,6 +138,8 @@ export default function StoneyCreekGutterCleaningPage() {
         showCta={false}
         formSlot={<GutterCleaningQuoteCard source="gutter-cleaning-stoney-creek" />}
       />
+
+      <Breadcrumb items={breadcrumbItems} />
 
       {/* Quick Answer, concise AI-retrieval summary */}
       <section className="bg-white pt-10">
@@ -297,6 +302,13 @@ export default function StoneyCreekGutterCleaningPage() {
           </div>
         </div>
       </section>
+
+      <ServiceHubLinks
+        serviceHref="/services/gutters"
+        serviceName="Gutter Cleaning"
+        areaSlug={area.slug}
+        areaName={area.name}
+      />
 
       <CTA />
     </>

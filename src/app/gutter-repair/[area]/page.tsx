@@ -8,6 +8,8 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import CardCarousel from "@/components/CardCarousel";
+import Breadcrumb from "@/components/Breadcrumb";
+import ServiceHubLinks from "@/components/ServiceHubLinks";
 import { business, serviceAreas, gutterRepairProjects } from "@/lib/data";
 import { neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
@@ -83,10 +85,11 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
     })),
   };
 
-  const breadcrumbSchemaData = breadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Gutter Repair", path: "/services/gutter-repair" },
     { name: `Gutter Repair in ${area.name}`, path: `/gutter-repair/${area.slug}` },
-  ]);
+  ];
+  const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
   // ---- Reusable section blocks, each with a visual style parameter ----
 
@@ -451,6 +454,8 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
         formSlot={<ServiceQuoteCard title="Get Your Free Gutter Repair Assessment" source={`gutter-repair-${area.slug}`} />}
       />
 
+      <Breadcrumb items={breadcrumbItems} />
+
       <GoogleReviews />
 
       {sections}
@@ -464,6 +469,13 @@ export default async function GutterRepairAreaPage({ params }: { params: Params 
       </section>
 
       {nearbyAreasSection}
+
+      <ServiceHubLinks
+        serviceHref="/services/gutter-repair"
+        serviceName="Gutter Repair"
+        areaSlug={area.slug}
+        areaName={area.name}
+      />
 
       <CTA />
     </>

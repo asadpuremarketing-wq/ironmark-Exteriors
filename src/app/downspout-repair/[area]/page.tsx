@@ -8,6 +8,8 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import CardCarousel from "@/components/CardCarousel";
+import Breadcrumb from "@/components/Breadcrumb";
+import ServiceHubLinks from "@/components/ServiceHubLinks";
 import { business, serviceAreas, downspoutRepairProjects } from "@/lib/data";
 import { neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
@@ -83,10 +85,11 @@ export default async function DownspoutRepairAreaPage({ params }: { params: Para
     })),
   };
 
-  const breadcrumbSchemaData = breadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Downspout Repair", path: "/services/downspout-repair" },
     { name: `Downspout Repair in ${area.name}`, path: `/downspout-repair/${area.slug}` },
-  ]);
+  ];
+  const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
   // ---- Reusable section blocks, each with a visual style parameter ----
 
@@ -446,6 +449,8 @@ export default async function DownspoutRepairAreaPage({ params }: { params: Para
         formSlot={<ServiceQuoteCard title="Get Your Free Downspout Assessment" source={`downspout-repair-${area.slug}`} />}
       />
 
+      <Breadcrumb items={breadcrumbItems} />
+
       <GoogleReviews />
 
       {sections}
@@ -459,6 +464,13 @@ export default async function DownspoutRepairAreaPage({ params }: { params: Para
       </section>
 
       {nearbyAreasSection}
+
+      <ServiceHubLinks
+        serviceHref="/services/downspout-repair"
+        serviceName="Downspout Repair"
+        areaSlug={area.slug}
+        areaName={area.name}
+      />
 
       <CTA />
     </>

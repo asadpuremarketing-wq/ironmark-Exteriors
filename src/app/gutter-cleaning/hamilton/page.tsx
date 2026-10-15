@@ -9,6 +9,8 @@ import OtherOffersInCity from "@/components/OtherOffersInCity";
 import SmartImage from "@/components/SmartImage";
 import PriceCard from "@/components/PriceCard";
 import CardCarousel from "@/components/CardCarousel";
+import Breadcrumb from "@/components/Breadcrumb";
+import ServiceHubLinks from "@/components/ServiceHubLinks";
 import {
   business,
   serviceAreas,
@@ -162,10 +164,11 @@ const faqSchema = {
   })),
 };
 
-const breadcrumbSchemaData = breadcrumbSchema([
+const breadcrumbItems = [
   { name: "Gutter Cleaning", path: "/services/gutters" },
   { name: `Gutter Cleaning in ${area.name}`, path: "/gutter-cleaning/hamilton" },
-]);
+];
+const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
 export default function HamiltonGutterCleaningPage() {
   const index = gutterCleaningAreaSlugs.indexOf("hamilton");
@@ -183,6 +186,8 @@ export default function HamiltonGutterCleaningPage() {
         showCta={false}
         formSlot={<GutterCleaningQuoteCard source="gutter-cleaning-hamilton" />}
       />
+
+      <Breadcrumb items={breadcrumbItems} />
 
       {/* Quick Answer, concise AI-retrieval summary */}
       <section className="bg-white pt-10">
@@ -485,6 +490,13 @@ export default function HamiltonGutterCleaningPage() {
           </div>
         </div>
       </section>
+
+      <ServiceHubLinks
+        serviceHref="/services/gutters"
+        serviceName="Gutter Cleaning"
+        areaSlug={area.slug}
+        areaName={area.name}
+      />
 
       <CTA />
     </>

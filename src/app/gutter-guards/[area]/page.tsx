@@ -8,6 +8,8 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import CardCarousel from "@/components/CardCarousel";
+import Breadcrumb from "@/components/Breadcrumb";
+import ServiceHubLinks from "@/components/ServiceHubLinks";
 import { business, serviceAreas, gutterGuardsProjects } from "@/lib/data";
 import { neighbourhoodLine } from "@/lib/offerContent";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
@@ -83,10 +85,11 @@ export default async function GutterGuardsAreaPage({ params }: { params: Params 
     })),
   };
 
-  const breadcrumbSchemaData = breadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Gutter Guards", path: "/services/gutter-guards" },
     { name: `Gutter Guards in ${area.name}`, path: `/gutter-guards/${area.slug}` },
-  ]);
+  ];
+  const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
   const introSection = (
     <section key="intro" className="bg-white pt-10">
@@ -439,6 +442,8 @@ export default async function GutterGuardsAreaPage({ params }: { params: Params 
         formSlot={<ServiceQuoteCard title="Get Your Free Gutter Guard Quote" source={`gutter-guards-${area.slug}`} />}
       />
 
+      <Breadcrumb items={breadcrumbItems} />
+
       <GoogleReviews />
 
       {sections}
@@ -452,6 +457,13 @@ export default async function GutterGuardsAreaPage({ params }: { params: Params 
       </section>
 
       {nearbyAreasSection}
+
+      <ServiceHubLinks
+        serviceHref="/services/gutter-guards"
+        serviceName="Gutter Guards"
+        areaSlug={area.slug}
+        areaName={area.name}
+      />
 
       <CTA />
     </>

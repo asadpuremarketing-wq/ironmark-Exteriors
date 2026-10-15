@@ -10,6 +10,8 @@ import OtherOffersInCity from "@/components/OtherOffersInCity";
 import SmartImage from "@/components/SmartImage";
 import PriceCard from "@/components/PriceCard";
 import CardCarousel from "@/components/CardCarousel";
+import Breadcrumb from "@/components/Breadcrumb";
+import ServiceHubLinks from "@/components/ServiceHubLinks";
 import {
   business,
   serviceAreas,
@@ -191,10 +193,11 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
     })),
   };
 
-  const breadcrumbSchemaData = breadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Gutter Cleaning", path: "/services/gutters" },
     { name: `Gutter Cleaning in ${area.name}`, path: `/gutter-cleaning/${area.slug}` },
-  ]);
+  ];
+  const breadcrumbSchemaData = breadcrumbSchema(breadcrumbItems);
 
   const includedSection = (
     <section key="included" className="section-y bg-[#f7f9fb]">
@@ -250,6 +253,8 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
         showCta={false}
         formSlot={<GutterCleaningQuoteCard source={`gutter-cleaning-${area.slug}`} />}
       />
+
+      <Breadcrumb items={breadcrumbItems} />
 
       {/* Quick Answer, concise AI-retrieval summary */}
       <section className="bg-white pt-10">
@@ -472,6 +477,13 @@ export default async function GutterCleaningAreaPage({ params }: { params: Param
           </div>
         </div>
       </section>
+
+      <ServiceHubLinks
+        serviceHref="/services/gutters"
+        serviceName="Gutter Cleaning"
+        areaSlug={area.slug}
+        areaName={area.name}
+      />
 
       <CTA />
     </>
