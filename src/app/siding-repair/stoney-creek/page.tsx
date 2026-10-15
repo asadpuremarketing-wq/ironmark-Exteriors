@@ -50,12 +50,12 @@ const ICONS = {
 };
 
 const damageWeRepair = [
-  { title: "Wind-Damaged Siding", icon: ICONS.wind, image: "/images/siding-repair/wind-damaged-siding.jpg", text: "Panels lifted, bent, or torn loose by strong wind, re-secured or replaced as needed." },
-  { title: "Loose Panels", icon: ICONS.loose, image: "/images/siding-repair/loose-panels.jpg", text: "Siding that has pulled away from its fastening strip, re-attached before the gap grows." },
-  { title: "Cracked Vinyl Siding", icon: ICONS.crack, image: "/images/siding-repair/cracked-vinyl-siding.jpg", text: "A split or cracked panel replaced and matched to the surrounding siding." },
-  { title: "Missing Panels", icon: ICONS.missing, image: "/images/siding-repair/missing-panels-stoney-creek.jpg", text: "A gap left by a blown-off panel filled with a matching replacement." },
-  { title: "Damaged Seams", icon: ICONS.seam, image: "/images/siding-repair/damaged-seams.jpg", text: "Separated or gapped seams resealed or refitted so water has nowhere to get in." },
-  { title: "Small-Area Siding Replacement", icon: ICONS.section, image: "/images/siding-repair/small-area-replacement.jpg", text: "A contained section repaired without touching the rest of the wall." },
+  { title: "Wind-Damaged Siding", icon: ICONS.wind, image: "/images/siding-repair/wind-damage.jpg", text: "Panels lifted, bent, or torn loose by strong wind, re-secured or replaced as needed." },
+  { title: "Loose Panels", icon: ICONS.loose, image: "/images/siding-repair/loose-siding.jpg", text: "Siding that has pulled away from its fastening strip, re-attached before the gap grows." },
+  { title: "Cracked Vinyl Siding", icon: ICONS.crack, image: "/images/siding-repair/cracked-panels.jpg", text: "A split or cracked panel replaced and matched to the surrounding siding." },
+  { title: "Missing Panels", icon: ICONS.missing, image: "/images/siding-repair/missing-panels.jpg", text: "A gap left by a blown-off panel filled with a matching replacement." },
+  { title: "Damaged Seams", icon: ICONS.seam, image: "/images/siding-repair/warped-siding.jpg", text: "Separated or gapped seams resealed or refitted so water has nowhere to get in." },
+  { title: "Small-Area Siding Replacement", icon: ICONS.section, image: "/images/siding-repair/small-section-replacement.jpg", text: "A contained section repaired without touching the rest of the wall." },
 ];
 
 const likelyRepairable = ["One or a few damaged panels", "Loose panels", "Isolated cracks", "Wind damage", "Small holes", "Damaged seams"];
