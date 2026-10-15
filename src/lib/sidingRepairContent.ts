@@ -97,6 +97,10 @@ export const sidingRepairCityContent: Record<string, SidingRepairCityContent> = 
 // site's standard placeholder until photos exist). Pooled so each city
 // shows a different 6-of-8 selection and order rather than the identical
 // list, while still only using photos that actually exist.
+// Limited to the 6 categories that have real photos (public/images/siding-repair/),
+// so every city shows all 6 real photos, just reordered, instead of risking a
+// placeholder or a duplicate-photo category filling in for one that has no
+// photo of its own.
 export const sidingDamagePool = [
   { title: "Cracked Panels", key: "cracked", image: "/images/siding-repair/cracked-panels.jpg", text: "A single cracked panel, usually from cold-weather brittleness or impact, replaced and colour-matched." },
   { title: "Loose Siding", key: "loose", image: "/images/siding-repair/loose-siding.jpg", text: "Panels that have pulled away from the fastening strip, re-secured before wind or moisture make it worse." },
@@ -104,8 +108,6 @@ export const sidingDamagePool = [
   { title: "Missing Panels", key: "missing", image: "/images/siding-repair/missing-panels.jpg", text: "Gaps left by a blown-off or removed panel, filled with a matching replacement." },
   { title: "Warped Siding", key: "warped", image: "/images/siding-repair/warped-siding.jpg", text: "Panels installed too tight that have buckled with temperature swings, replaced with proper expansion room." },
   { title: "Small Section Replacement", key: "section", image: "/images/siding-repair/small-section-replacement.jpg", text: "A contained area of damage replaced without re-siding the whole wall." },
-  { title: "Damaged Seams", key: "seam", image: "/images/siding-repair/damaged-seams.jpg", text: "Separated or gapped seams resealed or refitted so water has nowhere to get in." },
-  { title: "Faded or Discoloured Panels", key: "faded", image: "/images/siding-repair/faded-panels.jpg", text: "Sun-faded sections that stand out against the rest of the wall, addressed with the closest available colour match." },
 ];
 
 const costFactorPool = [
@@ -124,7 +126,6 @@ const replaceWhenPool = ["Widespread deterioration", "Substantial moisture or sh
 export const sidingMaterials = [
   { title: "Vinyl Siding", key: "vinyl", image: "/images/siding-repair/vinyl-siding.jpg", text: "The most common siding material in our service area, repaired by panel replacement and colour matching." },
   { title: "Insulated Vinyl", key: "insulated", image: "/images/siding-repair/insulated-vinyl.png", text: "Foam-backed vinyl, repaired carefully so the insulation layer stays intact." },
-  { title: "Composite & Engineered", key: "composite", image: "/images/siding-repair/composite-engineered.jpg", text: "Rigid, wood-look siding repaired at damaged edges and fastener points." },
 ];
 
 const processVariants = [

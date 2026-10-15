@@ -73,7 +73,6 @@ const costFactors = [
 const materials = [
   { title: "Vinyl Siding", icon: ICONS.panel, image: "/images/siding-repair/vinyl-siding.jpg", text: "The most common siding in Stoney Creek, repaired by panel replacement and colour matching." },
   { title: "Insulated Vinyl", icon: ICONS.snow, image: "/images/siding-repair/insulated-vinyl.png", text: "Foam-backed vinyl, repaired carefully so the insulation layer stays intact." },
-  { title: "Composite & Engineered", icon: ICONS.layers, image: "/images/siding-repair/composite-engineered.jpg", text: "Rigid, wood-look siding repaired at damaged edges and fastener points." },
 ];
 
 const processSteps = [
