@@ -404,7 +404,7 @@ export const gutterCleaningProjects: Record<string, GutterCleaningProject[]> = {
     {
       title: "Gutter Cleaning Project in Stoney Creek",
       description:
-        "This Stoney Creek home had gutters packed with leaves and built-up debris that were blocking normal water flow. We cleared every section by hand, flushed the downspouts, and confirmed the system was draining properly before wrapping up.",
+        "This Stoney Creek home had a gutter packed with leaves and built-up debris that was blocking normal water flow. We cleared the section by hand, flushed the downspout, and confirmed the system was draining properly before wrapping up.",
       photoPairs: [
         {
           before: "/images/before-after/stoney-creek-gutter-cleaning-1-before.jpg",
@@ -412,6 +412,13 @@ export const gutterCleaningProjects: Record<string, GutterCleaningProject[]> = {
           beforeAlt: "Leaves and debris blocking the gutter before cleaning in Stoney Creek",
           afterAlt: "Gutter cleared and flowing freely after cleaning in Stoney Creek",
         },
+      ],
+    },
+    {
+      title: "Gutter Cleaning Project in Stoney Creek",
+      description:
+        "This Stoney Creek home had a gutter overflowing with compacted debris along the roofline. We cleared it out completely and confirmed the system was draining properly before finishing up.",
+      photoPairs: [
         {
           before: "/images/before-after/stoney-creek-gutter-cleaning-2-before.jpg",
           after: "/images/before-after/stoney-creek-gutter-cleaning-2-after.jpg",
@@ -445,6 +452,174 @@ export const gutterCleaningProjects: Record<string, GutterCleaningProject[]> = {
           after: "/images/before-after/burlington-gutter-cleaning-2-after.jpg",
           beforeAlt: "Gutter with early seasonal leaf debris before cleaning in Burlington",
           afterAlt: "Cleared gutter with open, flowing downspout drain after cleaning in Burlington",
+        },
+      ],
+    },
+  ],
+  ancaster: [
+    {
+      title: "Gutter Cleaning Project in Ancaster",
+      description:
+        "This Ancaster rowhouse had a gutter packed with leaves, twigs, and vine debris along the roofline. We cleared the full run down to bare metal and confirmed proper drainage before finishing up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/ancaster-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/ancaster-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Gutter packed with leaves, twigs, and vine debris before cleaning in Ancaster",
+          afterAlt: "Gutter cleared down to bare metal after cleaning in Ancaster",
+        },
+      ],
+    },
+    {
+      title: "Gutter Cleaning Project in Ancaster",
+      description:
+        "This Ancaster home had leaves and standing water sitting in the gutter along the roofline. We cleared the debris, flushed the downspout, and confirmed the system was draining freely before wrapping up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/ancaster-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/ancaster-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Leaves and standing water sitting in the gutter before cleaning in Ancaster",
+          afterAlt: "Gutter cleared and flowing freely after cleaning in Ancaster",
+        },
+      ],
+    },
+  ],
+  dundas: [
+    {
+      title: "Gutter Cleaning Project in Dundas",
+      description:
+        "This Dundas home had a light buildup of leaf debris collecting in the gutter above a lower roof section. We cleared the run completely and confirmed proper drainage before finishing up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/dundas-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/dundas-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Leaf debris collecting in the gutter above a lower roof section before cleaning in Dundas",
+          afterAlt: "Gutter cleared of debris after cleaning in Dundas",
+        },
+      ],
+    },
+    {
+      title: "Gutter Cleaning Project in Dundas",
+      description:
+        "This Dundas home had a vine growing directly into the gutter, with roots and foliage blocking the channel. We removed the vine and all debris completely and confirmed the gutter was clear and draining before wrapping up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/dundas-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/dundas-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Vine growing directly into the gutter and blocking the channel before cleaning in Dundas",
+          afterAlt: "Gutter completely cleared of vine growth and debris after cleaning in Dundas",
+        },
+      ],
+    },
+  ],
+  brantford: [
+    {
+      title: "Gutter Cleaning Project in Brantford",
+      description:
+        "This Brantford home had a gutter filled with decomposed, compacted debris that had built up over time. We cleared it out by hand down to bare metal and confirmed the system was draining properly before finishing up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/brantford-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/brantford-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Gutter filled with decomposed, compacted debris before cleaning in Brantford",
+          afterAlt: "Gutter cleared down to bare metal after cleaning in Brantford",
+        },
+      ],
+    },
+    {
+      title: "Gutter Cleaning Project in Brantford",
+      description:
+        "This Brantford home had standing water and dark silt sitting in the gutter, a sign it wasn't draining properly. We cleared the buildup, flushed the system, and confirmed it was dry and flowing before wrapping up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/brantford-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/brantford-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Standing water and dark silt sitting in the gutter before cleaning in Brantford",
+          afterAlt: "Gutter cleared and dry after cleaning in Brantford",
+        },
+      ],
+    },
+  ],
+  grimsby: [
+    {
+      title: "Gutter Cleaning Project in Grimsby",
+      description:
+        "This Grimsby home had twigs and debris collecting in the gutter along the back of the property. We cleared the run completely and confirmed proper drainage before finishing up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/grimsby-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/grimsby-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Twigs and debris collecting in the gutter before cleaning in Grimsby",
+          afterAlt: "Gutter cleared down to bare metal after cleaning in Grimsby",
+        },
+      ],
+    },
+    {
+      title: "Gutter Cleaning Project in Grimsby",
+      description:
+        "This Grimsby home had leaves and loose debris built up in the gutter along the roofline. We cleared the section completely and confirmed the channel was clear and draining before wrapping up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/grimsby-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/grimsby-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Leaves and loose debris built up in the gutter before cleaning in Grimsby",
+          afterAlt: "Gutter cleared and draining freely after cleaning in Grimsby",
+        },
+      ],
+    },
+  ],
+  "st-catharines": [
+    {
+      title: "Gutter Cleaning Project in St. Catharines",
+      description:
+        "This St. Catharines home had a gutter packed with thick, compacted sludge and decomposed leaf debris. We cleared it out completely and confirmed the system was draining properly before finishing up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/st-catharines-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/st-catharines-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Gutter packed with thick, compacted sludge and leaf debris before cleaning in St. Catharines",
+          afterAlt: "Gutter cleared of sludge and debris after cleaning in St. Catharines",
+        },
+      ],
+    },
+    {
+      title: "Gutter Cleaning Project in St. Catharines",
+      description:
+        "This St. Catharines home had leaves and decomposed debris packed into the gutter along the back roofline. We cleared the full section and confirmed proper drainage before wrapping up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/st-catharines-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/st-catharines-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Leaves and decomposed debris packed into the gutter before cleaning in St. Catharines",
+          afterAlt: "Gutter cleared down to bare metal after cleaning in St. Catharines",
+        },
+      ],
+    },
+  ],
+  "niagara-falls": [
+    {
+      title: "Gutter Cleaning Project in Niagara Falls",
+      description:
+        "This Niagara Falls home had a gutter filled with dried leaves along the front roofline. We cleared it out completely and confirmed the system was draining properly before finishing up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/niagara-falls-gutter-cleaning-1-before.jpg",
+          after: "/images/before-after/niagara-falls-gutter-cleaning-1-after.jpg",
+          beforeAlt: "Gutter filled with dried leaves before cleaning in Niagara Falls",
+          afterAlt: "Gutter cleared of leaf debris after cleaning in Niagara Falls",
+        },
+      ],
+    },
+    {
+      title: "Gutter Cleaning Project in Niagara Falls",
+      description:
+        "This Niagara Falls home had leaves and twigs packed into the gutter along the roofline. We cleared the section completely and confirmed the channel was clear and draining before wrapping up.",
+      photoPairs: [
+        {
+          before: "/images/before-after/niagara-falls-gutter-cleaning-2-before.jpg",
+          after: "/images/before-after/niagara-falls-gutter-cleaning-2-after.jpg",
+          beforeAlt: "Leaves and twigs packed into the gutter before cleaning in Niagara Falls",
+          afterAlt: "Gutter cleared and draining freely after cleaning in Niagara Falls",
         },
       ],
     },
