@@ -6,6 +6,7 @@ import CTA from "@/components/CTA";
 import SmartImage from "@/components/SmartImage";
 import GoogleReviews from "@/components/GoogleReviews";
 import { services, serviceAreas, serviceAreaNames, business, serviceCityPages, serviceProjects } from "@/lib/data";
+import { blogPosts } from "@/lib/blog";
 import { breadcrumbSchema } from "@/lib/breadcrumb";
 import GutterCleaningOffer, { gutterCleaningMeta } from "@/components/GutterCleaningOffer";
 import WindowCleaningOffer, { windowCleaningMeta } from "@/components/WindowCleaningOffer";
@@ -81,6 +82,7 @@ export default async function ServicePage({ params }: { params: Params }) {
 
   const cityPages = serviceCityPages.find((scp) => scp.slug === slug);
   const recentProjects = serviceProjects(slug);
+  const relatedPosts = blogPosts.filter((p) => p.relatedService === slug);
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -241,7 +243,32 @@ export default async function ServicePage({ params }: { params: Params }) {
         </section>
       )}
 
-      <section className="section-y bg-white">
+      {relatedPosts.length > 0 && (
+        <section className="section-y bg-white">
+          <div className="container-max">
+            <h2 className="mb-8 text-center font-heading text-2xl font-extrabold text-navy-900">
+              From the Blog
+            </h2>
+            <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
+              {relatedPosts.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/blog/${p.slug}`}
+                  className="group rounded-2xl border border-navy-900/10 bg-[#f7f9fb] p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-blue/40 hover:shadow-lg"
+                >
+                  <span className="mb-2 inline-block text-xs font-bold uppercase tracking-wide text-brand-blue">
+                    {p.category}
+                  </span>
+                  <h3 className="font-heading text-base font-bold text-navy-900">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{p.excerpt}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="section-y bg-[#f7f9fb]">
         <div className="container-max">
           <h2 className="mb-6 text-center text-2xl font-extrabold text-navy-900">
             Other Services We Offer

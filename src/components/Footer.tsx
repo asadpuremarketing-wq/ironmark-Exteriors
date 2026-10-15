@@ -120,24 +120,26 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-max py-8">
           <h3 className="mb-3 text-xs font-bold uppercase tracking-[0.15em] text-brand-blue-light">
-            Popular Offers
+            Popular Offers By City
           </h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-brand-silver/50">
-            {areaOffers.flatMap((o) =>
-              o.areaSlugs.slice(0, 2).map((areaSlug) => {
-                const a = serviceAreas.find((sa) => sa.slug === areaSlug);
-                if (!a) return null;
-                return (
-                  <Link
-                    key={`${o.pathPrefix}-${areaSlug}`}
-                    href={`/${o.pathPrefix}/${areaSlug}`}
-                    className="transition hover:text-white"
-                  >
-                    {o.label} in {a.name}
-                  </Link>
-                );
-              })
-            )}
+          <div className="flex flex-col gap-3">
+            {areaOffers.map((o) => (
+              <div key={o.pathPrefix} className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-brand-silver/50">
+                {o.areaSlugs.map((areaSlug) => {
+                  const a = serviceAreas.find((sa) => sa.slug === areaSlug);
+                  if (!a) return null;
+                  return (
+                    <Link
+                      key={`${o.pathPrefix}-${areaSlug}`}
+                      href={`/${o.pathPrefix}/${areaSlug}`}
+                      className="transition hover:text-white"
+                    >
+                      {o.label} in {a.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </div>
       </div>
