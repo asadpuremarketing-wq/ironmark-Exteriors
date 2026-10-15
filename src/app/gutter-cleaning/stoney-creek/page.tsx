@@ -7,6 +7,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
 import SmartImage from "@/components/SmartImage";
+import CardCarousel from "@/components/CardCarousel";
 import {
   business,
   serviceAreas,
@@ -203,15 +204,15 @@ export default function StoneyCreekGutterCleaningPage() {
               Booking Gutter Cleaning in {area.name}
             </h2>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
+          <CardCarousel>
             {steps.map((step) => (
-              <div key={step.number} className="relative rounded-[28px] border border-navy-900/10 bg-white p-7 shadow-sm transition-shadow duration-300 hover:shadow-lg">
+              <div key={step.number} className="relative h-full rounded-[28px] border border-navy-900/10 bg-white p-7 shadow-sm transition-shadow duration-300 hover:shadow-lg">
                 <span className="font-heading text-4xl font-extrabold text-brand-blue/20">{step.number}</span>
                 <h3 className="mt-3 text-lg font-bold text-navy-900">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{step.text}</p>
               </div>
             ))}
-          </div>
+          </CardCarousel>
         </div>
       </section>
 

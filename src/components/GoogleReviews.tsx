@@ -38,7 +38,11 @@ export default function GoogleReviews({ heading = "Trusted by Homeowners Across 
     const el = scrollerRef.current;
     if (!el) return;
     const card = el.children[i] as HTMLElement | undefined;
-    card?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+    if (!card) return;
+    // Scroll only within the carousel track, scrollIntoView can also move
+    // the whole page's vertical scroll position, which is jarring here
+    // since this fires on an auto-rotate timer, not just a user click.
+    el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
   };
 
   const scroll = (dir: 1 | -1) => {

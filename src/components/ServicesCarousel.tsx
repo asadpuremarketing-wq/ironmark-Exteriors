@@ -34,7 +34,9 @@ export default function ServicesCarousel() {
     const el = scrollerRef.current;
     if (!el) return;
     const card = el.children[i] as HTMLElement | undefined;
-    card?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+    if (!card) return;
+    // Scroll only within the carousel track, never the page itself.
+    el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
   };
 
   const handleScroll = () => {

@@ -8,6 +8,7 @@ import CTA from "@/components/CTA";
 import OtherOffersInCity from "@/components/OtherOffersInCity";
 import SmartImage from "@/components/SmartImage";
 import PriceCard from "@/components/PriceCard";
+import CardCarousel from "@/components/CardCarousel";
 import {
   business,
   serviceAreas,
@@ -243,18 +244,18 @@ export default function HamiltonGutterCleaningPage() {
               </div>
             )}
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <CardCarousel>
             {processSteps.map((step) => (
               <div
                 key={step.number}
-                className="rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-7 transition-shadow duration-300 hover:shadow-lg"
+                className="h-full rounded-[28px] border border-navy-900/10 bg-[#f7f9fb] p-7 transition-shadow duration-300 hover:shadow-lg"
               >
                 <span className="font-heading text-4xl font-extrabold text-brand-blue/20">{step.number}</span>
                 <h3 className="mt-3 text-lg font-bold text-navy-900">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-navy-900/65">{step.text}</p>
               </div>
             ))}
-          </div>
+          </CardCarousel>
         </div>
       </section>
 
